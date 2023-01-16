@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SystemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts.master');
 });
-Route::get('/admin', function () {
-    return view('admin.index');
-});
+Route::get('/systems',[SystemController::class,'index'])->name('system.index');
+Route::get('/fetchall',[SystemController::class, 'fetchall'])->name('system.fetch');
