@@ -1,0 +1,24 @@
+body{
+    padding-top: 55px;
+}
+.body-container{
+    background: scroll;
+    background-color: #f7f7f7;
+    height: 100vh;
+    width: 98%;
+    max-width: 98%;
+    margin-right:auto;
+    margin-left:auto;
+}
+.navbar{
+    background-color: grey !important;
+    /* background: scroll;
+    background-color: #2b3035; */
+}
+/* .admin-body-container{
+    padding: 5px 10px;
+} */
+.btn-add{
+    float: right;
+    margin: 5px 5px;
+}
