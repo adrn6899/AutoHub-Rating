@@ -1,6 +1,71 @@
     (function(e){
         "use strict";
+
+        var search_type_filter = [];
+        var systemList = null;
+
+        function getDataTableData(){
+            var data    =   {};
+
+            return data;
+        }
+
         function initList(){
+            $('.txt_search').on("keyup",delay(function(e){
+                systemList.search($('.txt_search').val()).draw()
+            },500));
+
+            const search_type_default = "Name";
+            const search_types = ["ID", "Name"];
+
+            $.each(search_types, function (i, n) {
+                $(".system-search-type").append(
+                  `<li class="dropdown-item cursor-pointer py-0"><span class="text-sm">` +
+                    n +
+                    `</span></li>`
+                );
+            });
+
+            $(".system-search-type li").each(function () {
+                if ($(this).text() == search_type_default) {
+                  $(this).removeClass("active").addClass("active");
+                  var active_items_arr = [];
+                  active_items_arr.push(search_type_default);
+                  search_type_filter = JSON.stringify(active_items_arr);
+                }
+          
+                $(this).on("click", function () {
+                  //remove all selected menu
+                  $(".system-search-type")
+                    .find("li.active")
+                    .map(function () {
+                      $(this).removeClass("active");
+                    });
+          
+                  $(this).toggleClass("active");
+          
+                  var active_items = $(".system-search-type")
+                    .find("li.active")
+                    .map(function () {
+                      var item = {};
+                      // item.id = this.value;
+                      item.status = $(this).text();
+                      return item;
+                    });
+          
+                  var active_items_arr = [];
+                  $.each(active_items, function (i, n) {
+                    active_items_arr.push(n.status);
+                  });
+          
+                  search_type_filter = JSON.stringify(active_items_arr);
+                  //  refreshOrcrPlateTable();
+                  //  if ($('#txt_search').val() != '') {
+                  systemList.draw(false);
+                  //  }
+                });
+              });
+            
             var cols = [
                 {
                     title: "ID",
@@ -33,7 +98,7 @@
                 },
                 
             ];
-            $('#systemsTable').DataTable({
+            systemList = $('#systemsTable').DataTable({
                 order: [[0, "asc"]],
                 retrieve: true,
                 columns: cols,
@@ -49,11 +114,12 @@
                 serverSide: true,
                 ajax: {
                     url:'/systems/fetchall',
-                    // data: function (d){
-                    //     return $.extend({},d,{
-                            
-                    //     })
-                    // }
+                    data: function (d){
+                        return $.extend({},d,{
+                            search_type: search_type_filter,
+                            data: getDataTableData(),
+                        })
+                    }
                 },
                 sDom: "lrtip",
             });
