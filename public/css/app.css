@@ -1,11 +1,18 @@
+html,body{
+    height: 100%;
+}
 body{
-    padding-top: 55px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    /* padding-top: 55px; */
     background-color: #f7f7f7;
 }
 .body-container{
     background: scroll;
     background-color: #f7f7f7;
-    height: 100vh;
+    /* height: 100vh; */
+    /* max-height: 1251.02px; */
     width: 98%;
     max-width: 98%;
     margin-right:auto;
@@ -19,6 +26,9 @@ body{
 /* .admin-body-container{
     padding: 5px 10px;
 } */
+.system-index{
+    
+}
 .btn-add{
     float: right;
     margin: 5px 5px;

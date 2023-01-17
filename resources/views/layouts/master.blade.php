@@ -20,10 +20,9 @@
     @yield('css')
 </head>
 <body>
-    <header class="row">
+    <header>
         @include('navbar.sidenav')
     </header>
-
     <div class="body-container">
         @yield('content')
     </div>
