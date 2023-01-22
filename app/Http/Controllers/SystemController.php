@@ -72,7 +72,7 @@ class SystemController extends Controller
             // dd($row);
             $result['data'][] = array(
                 "id"    =>  $row->id,
-                "name"  =>  $row->system_name
+                "system_name"  =>  $row->system_name
             );
         }
         // dd($system);

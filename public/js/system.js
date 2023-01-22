@@ -70,14 +70,14 @@
                 {
                     title: "ID",
                     data: 'id',
-                    className: '',
+                    className: 'align-middle p-1 dt-left',
                     orderable: true,
                     width: "5%",
                 },
                 {
                     title: "Name",
-                    data: 'name',
-                    className: '',
+                    data: 'system_name',
+                    className: 'align-middle p-1 dt-left',
                     orderable: true,
                     width: "40%",
                 },
@@ -86,12 +86,12 @@
                     data: null,
                     orderable: false,
                     width: "20%",
-                    // className: "align-middle p-1 dt-center",
+                    className: "align-middle p-1 dt-center",
                     render: function (data, type, row, meta) {
                       return `
                                <div class="row justify-content-center">
-                                       <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-md btn-primary btn-icon" title="Edit">Edit</a> 
-                                       <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-md btn-danger btn-icon" title="Remove">Remove</a>
+                                       <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit">Edit</a> 
+                                       <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-danger btn-icon" title="Remove">Remove</a>
                                </div>
                                `;
                     },
@@ -105,13 +105,17 @@
                 paging: true,
                 lengthChange: false,
                 searching: true,
-                pageLength: 10,
+                pageLength: 5,
                 info: true,
                 autoWidth: true,
                 responsive: true,
                 processing: true,
-                fixedColumns: true,
                 serverSide: true,
+                autoWidth: true,
+                columnDefs: [
+                  { width: '20%', targets: 0 }
+                ],
+                fixedColumns: true,
                 ajax: {
                     url:'/systems/fetchall',
                     data: function (d){

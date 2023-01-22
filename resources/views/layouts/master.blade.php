@@ -20,15 +20,10 @@
     @yield('css')
 </head>
 <body>
-    <header>
-        @include('navbar.sidenav')
-    </header>
-    <div class="body-container">
+    @include('navbar.sidenav')
+    <div class="container-fluid w-100">
         @yield('content')
     </div>
     @yield('javascript')
-    <footer class="row">
-        
-    </footer>
 </body>
 </html>

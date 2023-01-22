@@ -1,38 +1,110 @@
 html,body{
     height: 100%;
 }
+.container{
+    margin: 0 !important;
+}
 body{
     display: flex;
     flex-wrap: wrap;
     margin: 0;
+    width: 100%;
     /* padding-top: 55px; */
     background-color: #f7f7f7;
 }
+.grid-margin {
+    margin-bottom: 25px;
+  }
+  
+  @media (min-width: 576px) {
+    .grid-margin-sm-0 {
+      margin-bottom: 0;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .grid-margin-md-0 {
+      margin-bottom: 0;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .grid-margin-lg-0 {
+      margin-bottom: 0;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .grid-margin-xl-0 {
+      margin-bottom: 0;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .grid-margin-md {
+      margin-bottom: 25px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .grid-margin-lg {
+      margin-bottom: 25px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .grid-margin-xl {
+      margin-bottom: 25px;
+    }
+  }
 .body-container{
-    background: scroll;
+    /* background: scroll; */
     background-color: #f7f7f7;
-    /* height: 100vh; */
+    height: 100vh;
     /* max-height: 1251.02px; */
-    width: 98%;
-    max-width: 98%;
-    margin-right:auto;
-    margin-left:auto;
+    /* width: 98%;
+    max-width: 98%; */
+    /* margin-right:auto;
+    margin-left:auto; */
 }
 .navbar{
     background-color: grey !important;
-    /* background: scroll;
-    background-color: #2b3035; */
+    background-color: blue;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    height: 70px;
+    margin-bottom: 10px;
 }
 /* .admin-body-container{
     padding: 5px 10px;
 } */
+.stretch-card{
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+.stretch-card > .card {
+    width: 100%;
+    min-width: 100%;
+  }
+
 .system-index{
     
 }
 .btn-add{
     float: right;
-    margin: 5px 5px;
+    margin: 10px;
+}
+.btn-add:nth-child(2){
+    margin-right: -5px;
+}
+.search_input{
+    margin: 10px;
 }
 #search{
     margin: 5px 5px;
+}
+.admin-body-container{
+    padding: 0 10px 10px;
 }
