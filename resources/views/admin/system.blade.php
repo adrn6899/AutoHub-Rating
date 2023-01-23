@@ -42,5 +42,5 @@
 @include('admin.system_create')
 @endsection
 @section('javascript')
-    <script src="{{asset('js/system.js')}}"></script>
+<script src="{{asset('js/system.js')}}"></script>
 @endsection

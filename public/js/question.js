@@ -2,7 +2,19 @@
     "use strict";
 
     var search_type_filter = [];
-    var systemList = null;
+    var questionList = null;
+    var id = null;
+
+    function initActionUpdate(){
+        $("[data-action-update]").each(function () {
+            $(this).on("click", function () {
+              var row = $(this).closest("tr");
+              id = questionList.row(row).data().id;
+      
+              alert(id);
+            });
+          });
+    }
 
     function getDataTableData(){
         var data    =   {};
@@ -12,7 +24,7 @@
 
     function initList(){
         $('.txt_search').on("keyup",delay(function(e){
-            systemList.search($('.txt_search').val()).draw()
+            questionList.search($('.txt_search').val()).draw()
         },500));
 
         const search_type_default = "Name";
@@ -61,7 +73,7 @@
               search_type_filter = JSON.stringify(active_items_arr);
               //  refreshOrcrPlateTable();
               //  if ($('#txt_search').val() != '') {
-              systemList.draw(false);
+                questionList.draw(false);
               //  }
             });
           });
@@ -98,7 +110,11 @@
             },
             
         ];
-        systemList = $('#questionsTable').DataTable({
+        questionList = $('#questionsTable').DataTable({
+            fnDrawCallback: function () {
+                // initActionRemove();
+                initActionUpdate();
+            },
             order: [[0, "asc"]],
             retrieve: true,
             columns: cols,

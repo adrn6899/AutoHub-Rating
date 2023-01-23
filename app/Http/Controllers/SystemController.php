@@ -127,9 +127,11 @@ class SystemController extends Controller
      * @param  \App\Models\System  $system
      * @return \Illuminate\Http\Response
      */
-    public function edit(System $system)
+    public function edit(Request $request)
     {
-        //
+        $result = System::findOrFail($request->id);
+
+        return response()->json($result);
     }
 
     /**
@@ -139,9 +141,14 @@ class SystemController extends Controller
      * @param  \App\Models\System  $system
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, System $system)
+    public function update(Request $request)
     {
-        //
+        $result = System::where('id',$request->id)
+        ->update([
+            'system_name'   =>  $request->name
+        ]);
+
+        return response()->json(["message"=>"success", "result"=>$result]);
     }
 
     /**
@@ -150,8 +157,8 @@ class SystemController extends Controller
      * @param  \App\Models\System  $system
      * @return \Illuminate\Http\Response
      */
-    public function destroy(System $system)
+    public function destroy(Request $request)
     {
-        //
+        dd($request->all());
     }
 }

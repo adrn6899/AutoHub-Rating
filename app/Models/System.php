@@ -15,6 +15,7 @@ class System extends Model
         FROM systems 
         WHERE 1
         AND `status` = 1
+        AND `active` = 1
         %s
         %s
         %s
