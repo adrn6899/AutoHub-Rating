@@ -20,7 +20,7 @@ class SystemController extends Controller
 
     public function index()
     {
-        return view('admin.system');
+        return view('admin.systems.system');
     }
 
     public function fetchall(Request $request){

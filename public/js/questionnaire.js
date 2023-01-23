@@ -2,7 +2,7 @@
     "use strict";
 
     var search_type_filter = [];
-    var questionList = null;
+    var questionnaireList = null;
     var id = null;
     var url = null;
 
@@ -193,7 +193,7 @@
             },
             
         ];
-        questionList = $('#questionsTable').DataTable({
+        questionnaireList = $('#questionnaireTable').DataTable({
             fnDrawCallback: function () {
                 initActionRemove();
                 initActionUpdate();
@@ -216,7 +216,7 @@
             ],
             fixedColumns: true,
             ajax: {
-                url:'/questions/fetchall',
+                url:'questionnaires/fetchall',
                 data: function (d){
                     return $.extend({},d,{
                         search_type: search_type_filter,

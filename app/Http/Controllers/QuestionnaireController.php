@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Questions;
+use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 
-class QuestionsController extends Controller
+class QuestionnaireController extends Controller
 {
-    protected $question;
+    protected $questionnaire;
 
     public function __construct(){
-        $this->question = new Questions();
+        $this->questionnaire = new Questionnaire();
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +20,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        return view('admin.questions.questions');
+        return view('admin.questionnaires.index');
     }
 
     public function fetchall(Request $request){
@@ -50,7 +51,7 @@ class QuestionsController extends Controller
                     $array_data['search'] = " AND id = {$array_data['search_keyword']} ";
                     break;
                 case "Name":
-                    $array_data['search'] = " AND title LIKE '%{$array_data['search_keyword']}%' ";
+                    $array_data['search'] = " AND system_name LIKE '%{$array_data['search_keyword']}%' ";
                     break;
             }
         }
@@ -63,21 +64,20 @@ class QuestionsController extends Controller
         if(!empty($data['active'])){
             $array_data['where'] .= " AND active =  {$data['active']} ";
         }
-
-        $results = $this->question->getQuestions($array_data);
+        $results = $this->questionnaire->getQuestionnaires($array_data);
         // dd($results);
         $result['data'] = array();
         foreach($results as $row){
             // dd($row);
             $result['data'][] = array(
                 "id"    =>  $row->id,
-                "title"  =>  $row->title
+                "system_name"  =>  $row->template_name
             );
         }
         // dd($system);
         $result['draw'] = $request->draw;
-        $result['recordsTotal'] =  $this->question->getQuestionsCount($array_data)[0]->Count;
-        $result['recordsFiltered'] =  $this->question->getQuestionsFilteredCount($array_data)[0]->FilteredCount;
+        $result['recordsTotal'] =  $this->questionnaire->getQuestionnairesCount($array_data)[0]->Count;
+        $result['recordsFiltered'] =  $this->questionnaire->getQuestionnairesFilteredCount($array_data)[0]->FilteredCount;
         // dd($result);
         return response()->json($result);
     }
@@ -99,72 +99,52 @@ class QuestionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {    
-        $result = $this->question;
-        $result->title = $request->title;
-        $result->active = 1;
-        $result->status = 1;
-        $result->save();
-
-        return response()->json(["message"=>"success","result"=>$result],200);
+    {
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Questions  $questions
+     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function show(Questions $questions)
+    public function show(Questionnaire $questionnaire)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Questions  $questions
+     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Questionnaire $questionnaire)
     {
-        $result = Questions::findOrFail($request->id);
-
-        return response()->json($result);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Questions  $questions
+     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Questionnaire $questionnaire)
     {
-        $result = Questions::where('id',$request->id)
-        ->update([
-            'title'   =>  $request->title
-        ]);
-
-        return response()->json(["message"=>"success", "result"=>$result]);
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Questions  $questions
+     * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Questionnaire $questionnaire)
     {
-        $result = Questions::where('id',$request->id)
-        ->update([
-            'active'   =>  null,
-            'status'    =>  null
-        ]);
-
-        return response()->json(["message"=>"success", "result"=>$result]);
+        //
     }
 }

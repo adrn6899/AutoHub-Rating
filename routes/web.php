@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,5 @@ Route::post('questions/store',[QuestionsController::class, 'store'])->name('ques
 Route::post('questions/get',[QuestionsController::class, 'edit'])->name('question.get');
 Route::post('questions/update',[QuestionsController::class, 'update'])->name('question.update');
 Route::post('questions/destroy',[QuestionsController::class,'destroy'])->name('question.destory');
+Route::get('questionnaires',[QuestionnaireController::class,'index'])->name('questionnaires.index');
+Route::get('questionnaires/fetchall',[QuestionnaireController::class,'fetchall'])->name('questionnaires.fetch');

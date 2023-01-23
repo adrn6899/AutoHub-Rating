@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-@include('admin.question_create')
+@include('admin.questions.question_create')
 @endsection
 @section('javascript')
     <script src="{{asset('js/question.js')}}"></script>
