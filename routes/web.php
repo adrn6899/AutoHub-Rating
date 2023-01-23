@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SystemController;
+use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +19,7 @@ Route::get('/', function () {
     return view('layouts.master');
 });
 Route::get('/systems',[SystemController::class,'index'])->name('system.index');
-Route::get('/fetchall',[SystemController::class, 'fetchall'])->name('system.fetch');
+Route::get('systems/fetchall',[SystemController::class, 'fetchall'])->name('system.fetch');
+Route::post('systems/store',[SystemController::class, 'store'])->name('system.store');
+Route::get('/questions',[QuestionsController::class, 'index'])->name('question.index');
+Route::get('questions/fetchall',[QuestionsController::class, 'fetchall'])->name('question.fetch');

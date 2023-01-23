@@ -3,6 +3,17 @@
 
         var search_type_filter = [];
         var systemList = null;
+        var id = null;
+
+        function actionUpdate(){
+          $("[action-update]").each(function(){
+            $(this).on("click", function(){
+              var row = $(this).closest("tr");
+              id = systemList.row(row).data().id;
+
+            });
+          });
+        }
 
         function getDataTableData(){
             var data    =   {};
@@ -90,7 +101,7 @@
                     render: function (data, type, row, meta) {
                       return `
                                <div class="row justify-content-center">
-                                       <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit">Edit</a> 
+                                       <a action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit">Edit</a> 
                                        <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-danger btn-icon" title="Remove">Remove</a>
                                </div>
                                `;
@@ -99,7 +110,10 @@
                 
             ];
             systemList = $('#systemsTable').DataTable({
-                order: [[0, "asc"]],
+                fnDrawCallBack: function(){
+                  actionUpdate();
+                },
+                order: [[0, "desc"]],
                 retrieve: true,
                 columns: cols,
                 paging: true,
@@ -112,9 +126,6 @@
                 processing: true,
                 serverSide: true,
                 autoWidth: true,
-                columnDefs: [
-                  { width: '20%', targets: 0 }
-                ],
                 fixedColumns: true,
                 ajax: {
                     url:'/systems/fetchall',
@@ -128,7 +139,37 @@
                 sDom: "lrtip",
             });
         }
+
+        function submitSystem(){
+          $('#system_save').on('click', function(e){
+            var formData = new FormData();
+            formData.append('name',$('#systemName').val());
+            $.ajax({
+              type: "POST",
+                url: "/systems/store",
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(result){
+                  $('#systemModal').modal('hide');
+                  systemList.draw(false);
+                },
+                error: function(error){
+
+                }
+            });
+          });
+        }
+
         $(function(){
             initList();
+            submitSystem();
+            $('#reload_list').on('click', function(e){
+              systemList.draw(false);
+            });
         });
     })();

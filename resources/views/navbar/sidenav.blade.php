@@ -22,8 +22,8 @@
                         Dropdown
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-white" href="#">Action</a></li>
-                            <li><a class="dropdown-item text-white" href="#">Another action</a></li>
+                            <li><a class="dropdown-item text-black" href="{{url('systems')}}">Systems</a></li>
+                            <li><a class="dropdown-item text-black" href="{{url('questions')}}">Questions</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

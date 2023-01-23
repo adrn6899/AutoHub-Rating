@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\System;
+use App\Models\Questions;
 use Illuminate\Http\Request;
 
-class SystemController extends Controller
+class QuestionsController extends Controller
 {
-    protected $system;
+    protected $question;
 
     public function __construct(){
-        $this->system = new System();
+        $this->question = new Questions();
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-        return view('admin.system');
+        return view('admin.questions');
     }
 
     public function fetchall(Request $request){
@@ -51,7 +50,7 @@ class SystemController extends Controller
                     $array_data['search'] = " AND id = {$array_data['search_keyword']} ";
                     break;
                 case "Name":
-                    $array_data['search'] = " AND system_name LIKE '%{$array_data['search_keyword']}%' ";
+                    $array_data['search'] = " AND title LIKE '%{$array_data['search_keyword']}%' ";
                     break;
             }
         }
@@ -65,20 +64,20 @@ class SystemController extends Controller
             $array_data['where'] .= " AND active =  {$data['active']} ";
         }
 
-        $results = $this->system->getSystems($array_data);
+        $results = $this->question->getQuestions($array_data);
         // dd($results);
         $result['data'] = array();
         foreach($results as $row){
             // dd($row);
             $result['data'][] = array(
                 "id"    =>  $row->id,
-                "system_name"  =>  $row->system_name
+                "title"  =>  $row->title
             );
         }
         // dd($system);
         $result['draw'] = $request->draw;
-        $result['recordsTotal'] =  $this->system->getSystemsCount($array_data)[0]->Count;
-        $result['recordsFiltered'] =  $this->system->getSystemsFilteredCount($array_data)[0]->FilteredCount;
+        $result['recordsTotal'] =  $this->question->getQuestionsCount($array_data)[0]->Count;
+        $result['recordsFiltered'] =  $this->question->getQuestionsFilteredCount($array_data)[0]->FilteredCount;
         // dd($result);
         return response()->json($result);
     }
@@ -101,22 +100,16 @@ class SystemController extends Controller
      */
     public function store(Request $request)
     {
-        $result = $this->system;
-        $result->system_name = $request->name;
-        $result->active = 1;
-        $result->status = 1;
-        $result->save();
-
-        return response()->json(["message"=>"success","result"=>$result],200);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\System  $system
+     * @param  \App\Models\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function show(System $system)
+    public function show(Questions $questions)
     {
         //
     }
@@ -124,10 +117,10 @@ class SystemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\System  $system
+     * @param  \App\Models\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function edit(System $system)
+    public function edit(Questions $questions)
     {
         //
     }
@@ -136,10 +129,10 @@ class SystemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\System  $system
+     * @param  \App\Models\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, System $system)
+    public function update(Request $request, Questions $questions)
     {
         //
     }
@@ -147,10 +140,10 @@ class SystemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\System  $system
+     * @param  \App\Models\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(System $system)
+    public function destroy(Questions $questions)
     {
         //
     }

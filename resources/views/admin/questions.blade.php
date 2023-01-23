@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
-            <div class="row">
+            <div class="row" style="height: 100%">
                 <div class="col" >
                     <div class="input-group search_input">
                         <div class="input-group-append cursor">
@@ -27,20 +27,20 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button class="btn btn-primary btn-add btn-md mt-3" id="reload_list"><i class="bi bi-arrow-clockwise" style="font-size: 1rem; font-weight:bolder;"></i> Reload</button>
+                    <button class="btn btn-primary btn-add btn-md mt-3" data-bs-toggle="modal" data-bs-target="#systemModal"><i class="bi bi-arrow-clockwise" style="font-size: 1rem; font-weight:bolder;"></i> Reload</button>
                     <button class="btn btn-primary btn-add btn-md mt-3" data-bs-toggle="modal" data-bs-target="#systemModal"><i class="bi bi-plus" style="font-size:1rem; font-weight:bolder;"></i> Create</button>
                 </div>
             </div>
             <div class="admin-body-container">
-                <table class="table table-bordered table-striped" id="systemsTable" style="width:100%">
+                <table class="table table-bordered table-striped" id="questionsTable" style="width:100%">
             
                 </table>
             </div>
         </div>
     </div>
 </div>
-@include('admin.system_create')
+{{-- @include('admin.question_create') --}}
 @endsection
 @section('javascript')
-    <script src="{{asset('js/system.js')}}"></script>
+    <script src="{{asset('js/question.js')}}"></script>
 @endsection

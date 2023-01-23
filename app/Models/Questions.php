@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class System extends Model
+class Questions extends Model
 {
     use HasFactory;
 
-    public function getSystemQuery(){
+    public function getQuestionsQuery(){
         return "SELECT %s
-        FROM systems 
+        FROM questions 
         WHERE 1
         AND `status` = 1
         %s
@@ -22,11 +22,11 @@ class System extends Model
         ";
     }
 
-    public function getSystems($array_data){
+    public function getQuestions($array_data){
         // dd($array_data);
         $fields = " * ";
         $query = sprintf(
-            $this->getSystemQuery(),
+            $this->getQuestionsQuery(),
             $fields,
             $array_data['search'],
             $array_data['where'],
@@ -37,10 +37,10 @@ class System extends Model
         return DB::select($query);
     }
 
-    public function getSystemsCount($array_data){
+    public function getQuestionsCount($array_data){
         $fields = " COUNT(1) as Count ";
         $query = sprintf(
-            $this->getSystemQuery(),
+            $this->getQuestionsQuery(),
             $fields,
             '',
             $array_data['where'],
@@ -50,10 +50,10 @@ class System extends Model
         return DB::select($query);
     }
 
-    public function getSystemsFilteredCount($array_data){
+    public function getQuestionsFilteredCount($array_data){
         $fields = " COUNT(1) as FilteredCount ";
         $query = sprintf(
-            $this->getSystemQuery(),
+            $this->getQuestionsQuery(),
             $fields,
             $array_data['search'],
             $array_data['where'],
@@ -62,5 +62,4 @@ class System extends Model
         );
         return DB::select($query);
     }
-
 }
