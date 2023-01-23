@@ -26,3 +26,7 @@ Route::post('systems/update',[SystemController::class, 'update'])->name('system.
 Route::post('systems/destroy',[SystemController::class,'destroy'])->name('system.destory');
 Route::get('/questions',[QuestionsController::class, 'index'])->name('question.index');
 Route::get('questions/fetchall',[QuestionsController::class, 'fetchall'])->name('question.fetch');
+Route::post('questions/store',[QuestionsController::class, 'store'])->name('question.store');
+Route::post('questions/get',[QuestionsController::class, 'edit'])->name('question.get');
+Route::post('questions/update',[QuestionsController::class, 'update'])->name('question.update');
+Route::post('questions/destroy',[QuestionsController::class,'destroy'])->name('question.destory');

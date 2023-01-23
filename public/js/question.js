@@ -4,6 +4,7 @@
     var search_type_filter = [];
     var questionList = null;
     var id = null;
+    var url = null;
 
     function initActionUpdate(){
         $("[data-action-update]").each(function () {
@@ -11,15 +12,97 @@
               var row = $(this).closest("tr");
               id = questionList.row(row).data().id;
       
-              alert(id);
+              var formData = new FormData();
+                formData.append("id",id);
+                $.ajax({
+                  type: "POST",
+                    url: "/questions/get",
+                    dataType: 'json',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(result){
+                      $('#questionName').val(result.title);
+                      $('#questionModal').append(`<input type="hidden" name="edit_id" value="`+result.id+`">`);
+                      $('#questionModalTitle').text("EDIT");
+                      $('#questionModal').modal('show');
+                    },
+                    error: function(error){
+      
+                    }
+                });
             });
           });
     }
+
+    function initActionRemove(){
+        $("[data-action-remove]").each(function () {
+          $(this).on("click", function () {
+            var row = $(this).closest("tr");
+            id = questionList.row(row).data().id;
+
+            // alert(id);
+            var formData = new FormData();
+            formData.append("id",id);
+            $.ajax({
+              type: "POST",
+                url: "/questions/destroy",
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(result){
+                  questionList.draw(false);
+                },
+                error: function(error){
+  
+                }
+            });
+          });
+        });
+      }
 
     function getDataTableData(){
         var data    =   {};
 
         return data;
+    }
+
+    function submitQuestion(){
+        $('#question_save').on('click', function(e){
+            var id = $('[name="edit_id"]').val();
+            var formData = new FormData();
+            url = "/questions/store";
+            if(id){            
+              formData.append('id',id);
+              url = "questions/update";
+            }
+            formData.append('title',$('#questionName').val());
+            $.ajax({
+              type: "POST",
+                url: url,
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(result){
+                  $('#questionModal').modal('hide');
+                  questionList.draw(false);
+                },
+                error: function(error){
+  
+                }
+            });
+          });
     }
 
     function initList(){
@@ -112,7 +195,7 @@
         ];
         questionList = $('#questionsTable').DataTable({
             fnDrawCallback: function () {
-                // initActionRemove();
+                initActionRemove();
                 initActionUpdate();
             },
             order: [[0, "asc"]],
@@ -146,5 +229,12 @@
     }
     $(function(){
         initList();
+        submitQuestion();
+
+        $('#questionModal').on('hidden.bs.modal', function(e){
+            $('#questionName').val(' ');
+            $('#questionModalTitle').text("CREATE");
+            $('[name="edit_id"]').remove();
+          });
     });
 })();

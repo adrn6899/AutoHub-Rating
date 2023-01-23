@@ -99,8 +99,14 @@ class QuestionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {    
+        $result = $this->question;
+        $result->title = $request->title;
+        $result->active = 1;
+        $result->status = 1;
+        $result->save();
+
+        return response()->json(["message"=>"success","result"=>$result],200);
     }
 
     /**
@@ -111,7 +117,7 @@ class QuestionsController extends Controller
      */
     public function show(Questions $questions)
     {
-        //
+
     }
 
     /**
@@ -120,9 +126,11 @@ class QuestionsController extends Controller
      * @param  \App\Models\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questions $questions)
+    public function edit(Request $request)
     {
-        //
+        $result = Questions::findOrFail($request->id);
+
+        return response()->json($result);
     }
 
     /**
@@ -132,9 +140,15 @@ class QuestionsController extends Controller
      * @param  \App\Models\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Questions $questions)
+    public function update(Request $request)
     {
-        //
+        $result = Questions::where('id',$request->id)
+        ->update([
+            'title'   =>  $request->title
+        ]);
+
+        return response()->json(["message"=>"success", "result"=>$result]);
+
     }
 
     /**
@@ -143,8 +157,14 @@ class QuestionsController extends Controller
      * @param  \App\Models\Questions  $questions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Questions $questions)
+    public function destroy(Request $request)
     {
-        //
+        $result = Questions::where('id',$request->id)
+        ->update([
+            'active'   =>  null,
+            'status'    =>  null
+        ]);
+
+        return response()->json(["message"=>"success", "result"=>$result]);
     }
 }

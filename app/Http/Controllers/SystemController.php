@@ -159,6 +159,12 @@ class SystemController extends Controller
      */
     public function destroy(Request $request)
     {
-        dd($request->all());
+        $result = System::where('id',$request->id)
+        ->update([
+            'active'   =>  null,
+            'status'    =>  null
+        ]);
+
+        return response()->json(["message"=>"success", "result"=>$result]);
     }
 }

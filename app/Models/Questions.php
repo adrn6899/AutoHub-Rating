@@ -15,6 +15,7 @@ class Questions extends Model
         FROM questions 
         WHERE 1
         AND `status` = 1
+        AND active = 1
         %s
         %s
         %s

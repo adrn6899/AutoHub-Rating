@@ -36,6 +36,34 @@
               });
             });
       }
+
+      function initActionRemove(){
+        $("[data-action-remove]").each(function () {
+          $(this).on("click", function () {
+            var row = $(this).closest("tr");
+            id = systemList.row(row).data().id;
+            var formData = new FormData();
+            formData.append("id",id);
+            $.ajax({
+              type: "POST",
+                url: "/systems/destroy",
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(result){
+                  systemList.draw(false);
+                },
+                error: function(error){
+  
+                }
+            });
+          });
+        });
+      }
   
       function getDataTableData(){
           var data    =   {};
@@ -164,7 +192,7 @@
           ];
           systemList = $('#systemsTable').DataTable({
               fnDrawCallback: function () {
-                  // initActionRemove();
+                  initActionRemove();
                   initActionUpdate();
               },
               order: [[0, "desc"]],
