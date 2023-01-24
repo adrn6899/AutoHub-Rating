@@ -3,6 +3,7 @@
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +34,6 @@ Route::post('questions/update',[QuestionsController::class, 'update'])->name('qu
 Route::post('questions/destroy',[QuestionsController::class,'destroy'])->name('question.destory');
 Route::get('questionnaires',[QuestionnaireController::class,'index'])->name('questionnaires.index');
 Route::get('questionnaires/fetchall',[QuestionnaireController::class,'fetchall'])->name('questionnaires.fetch');
+Route::get('questionnaires/create',[QuestionnaireController::class,'create'])->name('questionnaires.create');
+Route::post('questionnaires/store',[QuestionnaireController::class,'store'])->name('questionnaires.store');
+Route::get('templates/select2',[TemplateController::class,'select2fetchAll'])->name('templates.select2');

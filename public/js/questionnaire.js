@@ -6,112 +6,26 @@
     var id = null;
     var url = null;
 
-    function initActionUpdate(){
-        $("[data-action-update]").each(function () {
-            $(this).on("click", function () {
-              var row = $(this).closest("tr");
-              id = questionList.row(row).data().id;
-      
-              var formData = new FormData();
-                formData.append("id",id);
-                $.ajax({
-                  type: "POST",
-                    url: "/questions/get",
-                    dataType: 'json',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(result){
-                      $('#questionName').val(result.title);
-                      $('#questionModal').append(`<input type="hidden" name="edit_id" value="`+result.id+`">`);
-                      $('#questionModalTitle').text("EDIT");
-                      $('#questionModal').modal('show');
-                    },
-                    error: function(error){
-      
-                    }
-                });
-            });
-          });
-    }
-
-    function initActionRemove(){
-        $("[data-action-remove]").each(function () {
-          $(this).on("click", function () {
-            var row = $(this).closest("tr");
-            id = questionList.row(row).data().id;
-
-            // alert(id);
-            var formData = new FormData();
-            formData.append("id",id);
-            $.ajax({
-              type: "POST",
-                url: "/questions/destroy",
-                dataType: 'json',
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(result){
-                  questionList.draw(false);
-                },
-                error: function(error){
-  
-                }
-            });
-          });
-        });
-      }
-
     function getDataTableData(){
         var data    =   {};
 
         return data;
     }
 
-    function submitQuestion(){
-        $('#question_save').on('click', function(e){
-            var id = $('[name="edit_id"]').val();
-            var formData = new FormData();
-            url = "/questions/store";
-            if(id){            
-              formData.append('id',id);
-              url = "questions/update";
-            }
-            formData.append('title',$('#questionName').val());
-            $.ajax({
-              type: "POST",
-                url: url,
-                dataType: 'json',
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(result){
-                  $('#questionModal').modal('hide');
-                  questionList.draw(false);
-                },
-                error: function(error){
-  
-                }
-            });
-          });
+    function submitForm(){
+      $('.template-create').submit(function(e){
+        // e.preventDefault();
+        console.log("success");
+      });
     }
 
     function initList(){
         $('.txt_search').on("keyup",delay(function(e){
-            questionList.search($('.txt_search').val()).draw()
+            questionnaireList.search($('.txt_search').val()).draw()
         },500));
 
-        const search_type_default = "Name";
-        const search_types = ["ID", "Name"];
+        const search_type_default = "Title";
+        const search_types = ["ID", "Title"];
 
         $.each(search_types, function (i, n) {
             $(".system-search-type").append(
@@ -156,7 +70,7 @@
               search_type_filter = JSON.stringify(active_items_arr);
               //  refreshOrcrPlateTable();
               //  if ($('#txt_search').val() != '') {
-                questionList.draw(false);
+                questionnaireList.draw(false);
               //  }
             });
           });
@@ -170,7 +84,7 @@
                 width: "5%",
             },
             {
-                title: "Name",
+                title: "Title",
                 data: 'title',
                 className: 'align-middle p-1 dt-left',
                 orderable: true,
@@ -227,14 +141,10 @@
             sDom: "lrtip",
         });
     }
-    $(function(){
-        initList();
-        submitQuestion();
 
-        $('#questionModal').on('hidden.bs.modal', function(e){
-            $('#questionName').val(' ');
-            $('#questionModalTitle').text("CREATE");
-            $('[name="edit_id"]').remove();
-          });
+    $(function(){
+
+        initList();
+
     });
 })();

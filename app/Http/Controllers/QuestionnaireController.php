@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Questionnaire;
+use App\Models\Questions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestionnaireController extends Controller
 {
@@ -50,8 +52,8 @@ class QuestionnaireController extends Controller
                 case "ID":
                     $array_data['search'] = " AND id = {$array_data['search_keyword']} ";
                     break;
-                case "Name":
-                    $array_data['search'] = " AND system_name LIKE '%{$array_data['search_keyword']}%' ";
+                case "Title":
+                    $array_data['search'] = " AND template_name LIKE '%{$array_data['search_keyword']}%' ";
                     break;
             }
         }
@@ -71,7 +73,7 @@ class QuestionnaireController extends Controller
             // dd($row);
             $result['data'][] = array(
                 "id"    =>  $row->id,
-                "system_name"  =>  $row->template_name
+                "title"  =>  $row->template_name
             );
         }
         // dd($system);
@@ -89,7 +91,11 @@ class QuestionnaireController extends Controller
      */
     public function create()
     {
-        //
+        $questions = Questions::where([
+            ['active',"=",1],
+            ['status',"=",1]
+        ])->get();
+        return view('admin.questionnaires.create',compact('questions'));
     }
 
     /**
@@ -100,7 +106,20 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $data = $request->all();
+        dd($request->questionArr);
+        $questions = explode(",",$data['questionArr']);
+
+        foreach($questions as $item){
+            DB::table('questionnaires')
+            ->insert([
+                'q_id'  =>  $item,
+                'status'    =>  1,
+                'active'    =>  1
+            ]);
+        }
+
+        return response()->json(["message"=>"success"],200);
     }
 
     /**

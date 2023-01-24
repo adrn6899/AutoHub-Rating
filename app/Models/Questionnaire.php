@@ -11,6 +11,8 @@ class Questionnaire extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['q_id'];
+
     public function getQuestionnaireQuery(){
         return "SELECT %s
         FROM questionnaires 
