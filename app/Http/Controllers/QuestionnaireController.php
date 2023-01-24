@@ -106,13 +106,13 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        dd($request->questionArr);
+        $data = $request->all();
         $questions = explode(",",$data['questionArr']);
 
         foreach($questions as $item){
             DB::table('questionnaires')
             ->insert([
+                't_id'  =>  $data['template'],
                 'q_id'  =>  $item,
                 'status'    =>  1,
                 'active'    =>  1
