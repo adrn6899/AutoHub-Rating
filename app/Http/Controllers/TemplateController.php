@@ -169,8 +169,14 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Template $template)
+    public function destroy(Request $request)
     {
-        //
+        $result = Template::where('id', $request->id)
+        ->update([
+            'active'    =>  null,
+            'status'    =>  null
+        ]);
+
+        return response()->json(["message"=>"success", "result"=>$result]);
     }
 }

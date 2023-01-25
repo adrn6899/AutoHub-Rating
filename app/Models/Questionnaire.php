@@ -15,7 +15,7 @@ class Questionnaire extends Model
 
     public function getQuestionnaireQuery(){
         return "SELECT %s
-        FROM questionnaires 
+        FROM questionnaires qs
         WHERE 1
         AND `status` = 1
         AND `active` = 1
@@ -24,6 +24,7 @@ class Questionnaire extends Model
         %s
         %s
         ";
+        // SELECT `tmp`.`title`,`sys`.`system_name` FROM `templates` tmp INNER JOIN `questionnaires` qst on `tmp`.`id` = `qst`.`t_id` INNER JOIN `systems` sys on `qst`.`s_id` = `sys`.`id` WHERE 1 GROUP BY `tmp`.`id`;
     }
 
     public function getQuestionnaires($array_data){

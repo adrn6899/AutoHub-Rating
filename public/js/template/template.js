@@ -6,6 +6,42 @@
     var id = null;
     var url = null;
 
+    function toastRWithTime(message, type, btnType){
+    
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "slideDown",
+            "hideMethod": "slideUp"
+          }
+    
+          switch (type){
+            case 'success':
+                toastr.success(message)
+                break;
+            case 'info':
+                toastr.info(message)
+                break;
+            case 'warning':
+                toastr.warning(message)
+                break;
+            case 'error':
+                toastr.error(message)
+                break;
+            }  
+        }
+
     function initActionUpdate(){
         $("[data-action-update]").each(function () {
             $(this).on("click", function () {
@@ -56,6 +92,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               },
               success: function(result){
+                toastRWithTime("success","success");
                 templateList.draw(false);
               },
               error: function(error){
@@ -217,6 +254,7 @@
                   },
                   success: function(result){
                     $('#templateModal').modal('hide');
+                    toastRWithTime("success","success");
                     templateList.draw(false);
                   },
                   error: function(error){
