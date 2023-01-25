@@ -4,9 +4,9 @@
     function getQuestions(){
         $.ajax({
             type: "POST",
-            url: "/",
+            url: "/" + id,
             dataType: 'json',
-            data: formData,
+            data: null,
             processData: false,
             contentType: false,
             headers: {

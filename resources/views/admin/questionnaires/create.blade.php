@@ -13,11 +13,11 @@
                         <div class="col">
                             <h4>Please Select Template Name:</h4>
                             <div class="input-group input-group-lg mb-3">
-                                <select class="form-select form-select-lg" name="template_name" id="template_name" placeholder="Template Name"></select>
+                                <select class="form-select form-select-lg" name="t_id" id="template_name" placeholder="Template Name"></select>
                             </div>
                             <h4>Please Select System:</h4>
                             <div class="input-group input-group-lg">
-                                <select class="form-select form-select-lg" name="system_name" id="system_name" placeholder="System Name"></select>
+                                <select class="form-select form-select-lg" name="s_id" id="system_name" placeholder="System Name"></select>
                             </div>
                         </div>
                         <div class="col">

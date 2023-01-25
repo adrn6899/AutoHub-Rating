@@ -50,11 +50,11 @@
         $('input[type="checkbox"]:checked').each(function(){
             questionArr.push(this.value);
         });
-        console.log(questionArr);
+        // console.log(questionArr);
         var formData = new FormData();
         formData.append('questionArr',questionArr);
-        formData.append('template',$('#template_name').val());
-        formData.append('system',$('#system_name').val());
+        formData.append('t_id',$('#template_name').val());
+        formData.append('s_id',$('#system_name').val());
         $.ajax({
             type: "POST",
               url: "/questionnaires/store",

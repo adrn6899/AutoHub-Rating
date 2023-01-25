@@ -6,6 +6,7 @@ use App\Models\Questionnaire;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionnaireController extends Controller
 {
@@ -106,29 +107,39 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $questions = explode(",",$data['questionArr']);
 
-        $check = Questionnaire::where([
-            ['s_id',"=",$data['system']],
-            ['t_id',"=",$data['template']]
+        $validator = Validator::make($request->all(),[
+            's_id'  =>  'required',
+            't_id'  =>  'required'
         ]);
-        if($check){
-            return response()->json(["message"=>"template and system already in use. \n Please edit the template or create new one"],403);
+
+        $questions = explode(",",$request->questionArr);
+
+        $check = Questionnaire::select('id')
+        ->where('s_id',"=",$request->s_id)
+        ->where('t_id',"=",$request->t_id)
+        ->get();
+        // ->where([
+        //     ['s_id',"=",$data['system']],
+        //     ['t_id',"=",$data['template']]
+        // ])->get();
+        if(empty($check[0])){
+            foreach($questions as $item){
+                DB::table('questionnaires')
+                ->insert([
+                    's_id'  =>  $request->s_id,
+                    't_id'  =>  $request->t_id,
+                    'q_id'  =>  $item,
+                    'status'    =>  1,
+                    'active'    =>  1
+                ]);
+            }    
+            return response()->json(["message"=>"success"],200);
+        } else {
+            return response()->json(["message"=>"Either template or system is already in use. \n Please edit the template or create new one"],403);
         }
 
-        foreach($questions as $item){
-            DB::table('questionnaires')
-            ->insert([
-                't_id'  =>  $data['template'],
-                's_id'  =>  $data['system'],
-                'q_id'  =>  $item,
-                'status'    =>  1,
-                'active'    =>  1
-            ]);
-        }
 
-        return response()->json(["message"=>"success"],200);
     }
 
     /**
