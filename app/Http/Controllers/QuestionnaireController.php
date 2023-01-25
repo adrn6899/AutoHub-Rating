@@ -67,7 +67,7 @@ class QuestionnaireController extends Controller
             $array_data['where'] .= " AND active =  {$data['active']} ";
         }
         $results = $this->questionnaire->getQuestionnaires($array_data);
-        // dd($results);
+        dd($results);
         $result['data'] = array();
         foreach($results as $row){
             // dd($row);
@@ -109,10 +109,19 @@ class QuestionnaireController extends Controller
         $data = $request->all();
         $questions = explode(",",$data['questionArr']);
 
+        $check = Questionnaire::where([
+            ['s_id',"=",$data['system']],
+            ['t_id',"=",$data['template']]
+        ]);
+        if($check){
+            return response()->json(["message"=>"template and system already in use. \n Please edit the template or create new one"],403);
+        }
+
         foreach($questions as $item){
             DB::table('questionnaires')
             ->insert([
                 't_id'  =>  $data['template'],
+                's_id'  =>  $data['system'],
                 'q_id'  =>  $item,
                 'status'    =>  1,
                 'active'    =>  1
@@ -139,9 +148,14 @@ class QuestionnaireController extends Controller
      * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questionnaire $questionnaire)
-    {
-        //
+    public function edit($id)
+    {    
+        return view('admin.questionnaires.edit');
+    }
+
+    public function getQuestions($id){
+        $var = Questionnaire::findOrFail($id);
+
     }
 
     /**

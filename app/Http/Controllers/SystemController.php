@@ -83,6 +83,19 @@ class SystemController extends Controller
         return response()->json($result);
     }
 
+    public function select2fetchAll(){
+        $system = System::select('id','system_name')->get();
+        $data['results'] = [];
+            foreach($system as $row){
+                $data['results'][] = [
+                    "id"    =>  $row->id,
+                    "text"  =>  $row->system_name
+                ];
+            }
+
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

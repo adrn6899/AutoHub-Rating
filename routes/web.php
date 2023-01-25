@@ -26,6 +26,7 @@ Route::post('systems/store',[SystemController::class, 'store'])->name('system.st
 Route::post('systems/get',[SystemController::class, 'edit'])->name('system.get');
 Route::post('systems/update',[SystemController::class, 'update'])->name('system.update');
 Route::post('systems/destroy',[SystemController::class,'destroy'])->name('system.destory');
+Route::get('systems/select2',[SystemController::class,'select2fetchAll'])->name('system.select2');
 Route::get('/questions',[QuestionsController::class, 'index'])->name('question.index');
 Route::get('questions/fetchall',[QuestionsController::class, 'fetchall'])->name('question.fetch');
 Route::post('questions/store',[QuestionsController::class, 'store'])->name('question.store');
@@ -36,4 +37,6 @@ Route::get('questionnaires',[QuestionnaireController::class,'index'])->name('que
 Route::get('questionnaires/fetchall',[QuestionnaireController::class,'fetchall'])->name('questionnaires.fetch');
 Route::get('questionnaires/create',[QuestionnaireController::class,'create'])->name('questionnaires.create');
 Route::post('questionnaires/store',[QuestionnaireController::class,'store'])->name('questionnaires.store');
+Route::get('questionnaires/edit/{id}',[QuestionnaireController::class,'edit'])->name('questionnaires.edit');
+Route::post('questionnaires/getQuestions/{id}',[QuestionnaireController::class,'getQuestions'])->name('questionnaires.getQuestions');
 Route::get('templates/select2',[TemplateController::class,'select2fetchAll'])->name('templates.select2');
