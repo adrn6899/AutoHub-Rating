@@ -76,7 +76,7 @@ class QuestionnaireController extends Controller
         foreach($results as $row){
             // dd($row);
             $result['data'][] = array(
-                "count" =>  $count+=1,
+                // "count" =>  $count+=1,
                 "tmp_id"    =>  $row->tmp_id,
                 "title"  =>  $row->title,
                 "sys_id"    =>  $row->sys_id,
@@ -123,12 +123,8 @@ class QuestionnaireController extends Controller
 
         $check = Questionnaire::select('id')
         ->where('s_id',"=",$request->s_id)
-        ->where('t_id',"=",$request->t_id)
+        ->orWhere('t_id',"=",$request->t_id)
         ->get();
-        // ->where([
-        //     ['s_id',"=",$data['system']],
-        //     ['t_id',"=",$data['template']]
-        // ])->get();
         if(empty($check[0])){
             foreach($questions as $item){
                 DB::table('questionnaires')
@@ -144,8 +140,6 @@ class QuestionnaireController extends Controller
         } else {
             return response()->json(["message"=>"Either template or system is already in use. \n Please edit the template or create new one"],403);
         }
-
-
     }
 
     /**

@@ -86,19 +86,19 @@
             {
                 title: "ID",
                 data: 'tmp_id',
-                className: 'align-middle p-1 dt-left hidden',
+                className: 'align-middle p-1 dt-left',
                 orderable: true,
                 width: "5%",
-                visible: false
+                // visible: false
             },
-            {
-              title: "ID",
-              data: 'count',
-              className: 'align-middle p-1 dt-left',
-              orderable: true,
-              width: "5%",
+            // {
+            //   title: "ID",
+            //   data: 'count',
+            //   className: 'align-middle p-1 dt-left',
+            //   orderable: true,
+            //   width: "5%",
               
-            },
+            // },
             {
                 title: "Title",
                 data: 'title',
@@ -143,7 +143,7 @@
                 // initActionRemove();
                 initActionUpdate();
             },
-            order: [[0, "desc"]],
+            order: [[0, "asc"]],
             retrieve: true,
             columns: cols,
             paging: true,

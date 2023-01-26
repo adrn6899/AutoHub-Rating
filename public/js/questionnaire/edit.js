@@ -1,6 +1,8 @@
 (function(e){
     "use strict";
 
+    var questionArr = [];
+
     function getQuestions(){
         var type = "";
         // var idArr = [];
@@ -41,7 +43,24 @@
         });
     }
 
+    function submitEdit(){
+        $('.template-edit').submit(function(e){
+            e.preventDefault();
+            $('input[type="checkbox"]:checked').each(function(){
+                questionArr.push(this.value);
+            });
+
+            console.log(questionArr);
+
+        });
+    }
+
     $(function(){
         getQuestions();
+        submitEdit();
+
+        $('input[type="checkbox"]').change(function(){
+            questionArr = [];
+        });
     });
 })();

@@ -67,6 +67,7 @@
               },
               success: function(result){
                 toastRWithTime(result.message,"success");
+                window.location.href="/questionnaires";
               },
               error: function(error){
                 toastRWithTime(error.responseJSON['message'],'error');

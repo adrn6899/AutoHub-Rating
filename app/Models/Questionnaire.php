@@ -59,6 +59,7 @@ class Questionnaire extends Model
             '',
             ''
         );
+        // dd($query);
         return DB::select($query);
     }
 

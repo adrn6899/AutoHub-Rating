@@ -6,7 +6,7 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
-        <form action="#" class="template-create">
+        <form action="#" class="template-edit">
         <div class="card">
             <div class="card-body">
                     <div class="row">
