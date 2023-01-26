@@ -14,22 +14,29 @@ class Questionnaire extends Model
     protected $fillable = ['q_id'];
 
     public function getQuestionnaireQuery(){
-        return "SELECT %s
-        FROM questionnaires qs
-        WHERE 1
-        AND `status` = 1
-        AND `active` = 1
+        return " SELECT %s 
+        FROM `templates` `tmp`
+        INNER JOIN `questionnaires` `qst` ON
+            `tmp`.`id` = `qst`.`t_id`
+        INNER JOIN `systems` `sys` ON
+            `qst`.`s_id` = `sys`.`id`
+        WHERE
+            1 AND `qst`.`status` = 1 AND `qst`.`active` = 1
+        GROUP BY `tmp`.`id`
         %s
         %s
         %s
         %s
         ";
-        // SELECT `tmp`.`title`,`sys`.`system_name` FROM `templates` tmp INNER JOIN `questionnaires` qst on `tmp`.`id` = `qst`.`t_id` INNER JOIN `systems` sys on `qst`.`s_id` = `sys`.`id` WHERE 1 GROUP BY `tmp`.`id`;
     }
 
     public function getQuestionnaires($array_data){
         // dd($array_data);
-        $fields = " * ";
+        $fields = " `tmp`.`id` AS `tmp_id`,
+        `tmp`.`title`,
+        ANY_VALUE(`qst`.`id`),
+        ANY_VALUE(`sys`.`id`) AS `sys_id`,
+        ANY_VALUE(`sys`.`system_name`) AS `system_name` ";
         $query = sprintf(
             $this->getQuestionnaireQuery(),
             $fields,

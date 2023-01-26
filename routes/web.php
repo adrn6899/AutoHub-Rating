@@ -37,8 +37,8 @@ Route::get('questionnaires',[QuestionnaireController::class,'index'])->name('que
 Route::get('questionnaires/fetchall',[QuestionnaireController::class,'fetchall'])->name('questionnaires.fetch');
 Route::get('questionnaires/create',[QuestionnaireController::class,'create'])->name('questionnaires.create');
 Route::post('questionnaires/store',[QuestionnaireController::class,'store'])->name('questionnaires.store');
-Route::get('questionnaires/edit/{id}',[QuestionnaireController::class,'edit'])->name('questionnaires.edit');
-Route::post('questionnaires/getQuestions/{id}',[QuestionnaireController::class,'getQuestions'])->name('questionnaires.getQuestions');
+Route::get('questionnaires/edit/{tmp_id}/{sys_id}',[QuestionnaireController::class,'edit'])->name('questionnaires.edit');
+Route::post('questionnaires/getQuestions',[QuestionnaireController::class,'getQuestions'])->name('questionnaires.getQuestions');
 Route::get('/templates',[TemplateController::class,'index'])->name('templates.index');
 Route::get('templates/fetchall',[TemplateController::class,'fetchall'])->name('templates.fetch');
 Route::post('templates/store',[TemplateController::class,'store'])->name('templates.store');

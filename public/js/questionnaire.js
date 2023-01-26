@@ -12,10 +12,17 @@
         return data;
     }
 
-    function submitForm(){
-      $('.template-create').submit(function(e){
-        // e.preventDefault();
-        console.log("success");
+    function initActionUpdate(){
+      $("[data-action-update]").each(function () {
+        $(this).on("click", function () {
+          var row = $(this).closest("tr");
+          var sys_id;
+          id = questionnaireList.row(row).data().tmp_id;
+          sys_id = questionnaireList.row(row).data().sys_id;
+
+          window.location.href = "questionnaires/edit/" + id + "/" + sys_id;
+          console.log(sys_id);
+        });
       });
     }
 
@@ -78,14 +85,38 @@
         var cols = [
             {
                 title: "ID",
-                data: 'id',
-                className: 'align-middle p-1 dt-left',
+                data: 'tmp_id',
+                className: 'align-middle p-1 dt-left hidden',
                 orderable: true,
                 width: "5%",
+                visible: false
+            },
+            {
+              title: "ID",
+              data: 'count',
+              className: 'align-middle p-1 dt-left',
+              orderable: true,
+              width: "5%",
+              
             },
             {
                 title: "Title",
                 data: 'title',
+                className: 'align-middle p-1 dt-left',
+                orderable: true,
+                width: "40%",
+            },
+            {
+              title: "System",
+              data: 'sys_id',
+              className: 'align-middle p-1 dt-left',
+              orderable: true,
+              width: "40%",
+              visible: false
+            },
+            {
+                title: "System",
+                data: 'system',
                 className: 'align-middle p-1 dt-left',
                 orderable: true,
                 width: "40%",
@@ -109,7 +140,7 @@
         ];
         questionnaireList = $('#questionnaireTable').DataTable({
             fnDrawCallback: function () {
-                initActionRemove();
+                // initActionRemove();
                 initActionUpdate();
             },
             order: [[0, "desc"]],
@@ -145,6 +176,10 @@
     $(function(){
 
         initList();
+
+        $('#create_questionnaire').on('click', function(e){
+          window.location.href = "questionnaires/create";
+        });
 
     });
 })();

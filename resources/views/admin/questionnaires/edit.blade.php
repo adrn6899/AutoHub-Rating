@@ -13,11 +13,11 @@
                         <div class="col">
                             <h4>Template Name:</h4>
                             <div class="input-group input-group-lg mb-3">
-                                <input type="text" class="form-control form-control-lg" disabled>
+                                <input type="text" id="edit_template_name" class="form-control form-control-lg" disabled>
                             </div>
                             <h4>System Name:</h4>
                             <div class="input-group input-group-lg mb-3">
-                                <input type="text" class="form-control form-control-lg" disabled>
+                                <input type="text" id="edit_system_name" class="form-control form-control-lg" disabled>
                             </div>
                         </div>
                         <div class="col">
@@ -39,4 +39,8 @@
 @section('javascript')
     <script src="{{asset('js/questionnaire/edit.js')}}"></script>
     <script src="{{asset('js/select2.min.js')}}"></script>
+    <script>
+        var template_id = {!!json_encode($tmp_id,JSON_HEX_TAG)!!}
+        var system_id = {!!json_encode($sys_id,JSON_HEX_TAG)!!}
+    </script>
 @endsection

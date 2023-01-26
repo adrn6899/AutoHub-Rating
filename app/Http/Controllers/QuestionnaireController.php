@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Questionnaire;
 use App\Models\Questions;
+use App\Models\System;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -51,10 +53,10 @@ class QuestionnaireController extends Controller
         // } else {
             switch ($array_data['search_type']) {
                 case "ID":
-                    $array_data['search'] = " AND id = {$array_data['search_keyword']} ";
+                    $array_data['search'] = " AND tmp.id = {$array_data['search_keyword']} ";
                     break;
                 case "Title":
-                    $array_data['search'] = " AND template_name LIKE '%{$array_data['search_keyword']}%' ";
+                    $array_data['search'] = " AND `tmp`.`title` LIKE '%{$array_data['search_keyword']}%' ";
                     break;
             }
         }
@@ -68,13 +70,17 @@ class QuestionnaireController extends Controller
             $array_data['where'] .= " AND active =  {$data['active']} ";
         }
         $results = $this->questionnaire->getQuestionnaires($array_data);
-        dd($results);
+        // dd($results);
         $result['data'] = array();
+        $count = 0;
         foreach($results as $row){
             // dd($row);
             $result['data'][] = array(
-                "id"    =>  $row->id,
-                "title"  =>  $row->template_name
+                "count" =>  $count+=1,
+                "tmp_id"    =>  $row->tmp_id,
+                "title"  =>  $row->title,
+                "sys_id"    =>  $row->sys_id,
+                "system"    =>$row->system_name
             );
         }
         // dd($system);
@@ -159,14 +165,28 @@ class QuestionnaireController extends Controller
      * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {    
-        return view('admin.questionnaires.edit');
+    public function edit($tmp_id,$sys_id)
+    {   
+        return view('admin.questionnaires.edit',compact('tmp_id','sys_id'));
     }
 
-    public function getQuestions($id){
-        $var = Questionnaire::findOrFail($id);
+    public function getQuestions(Request $request){
+        $questions = Questions::get()->all();
+        $t_name = Template::select('title')
+        ->where('id',"=",$request->t_id)
+        ->get();
+        $s_name = System::select('system_name')
+        ->where('id',"=",$request->s_id)
+        ->get();
+        $result = Questionnaire::where([
+            ['t_id',"=",$request->t_id],
+            ['s_id',"=",$request->s_id],
+        ])->get();
 
+        return response()->json(["result"=>$result,
+        "questions"=>$questions,
+        "template"=>$t_name,
+        "system"=>$s_name]);
     }
 
     /**

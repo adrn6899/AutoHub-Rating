@@ -28,7 +28,7 @@
                 </div>
                 <div class="col">
                     <button class="btn btn-primary btn-add btn-md mt-3" id="reload_list"><i class="bi bi-arrow-clockwise" style="font-size: 1rem; font-weight:bolder;"></i> Reload</button>
-                    <button class="btn btn-primary btn-add btn-md mt-3" href="#"><i class="bi bi-plus" style="font-size:1rem; font-weight:bolder;"></i> Create</button>
+                    <button class="btn btn-primary btn-add btn-md mt-3" href="#" id="create_questionnaire"><i class="bi bi-plus" style="font-size:1rem; font-weight:bolder;"></i> Create</button>
                 </div>
             </div>
             <div class="admin-body-container">
