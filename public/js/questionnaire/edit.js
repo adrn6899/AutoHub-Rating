@@ -35,6 +35,11 @@
                     } else {
                         $('.questions-list').append(`<input type="checkbox" value="`+value.id+`" >\n<label style="font-size: 2rem">`+value.title+`</label></br>`);
                     }
+
+                });
+                $('input[type="checkbox"]').change(function(){
+                    questionArr = [];
+                    console.log("popping");
                 });
             },
             error: function(error){
@@ -50,8 +55,28 @@
                 questionArr.push(this.value);
             });
 
-            console.log(questionArr);
+            var formData = new FormData();
+            formData.append('t_id',template_id);
+            formData.append('s_id',system_id);    
+            formData.append('questionArr',questionArr);    
 
+            $.ajax({
+                type: "POST",
+                url: "/questionnaires/update",
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(e){
+
+                },
+                error: function(e){
+
+                }
+            });
         });
     }
 
@@ -61,6 +86,7 @@
 
         $('input[type="checkbox"]').change(function(){
             questionArr = [];
+            console.log("popping");
         });
     });
 })();

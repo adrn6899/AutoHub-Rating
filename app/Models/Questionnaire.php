@@ -37,6 +37,9 @@ class Questionnaire extends Model
         ANY_VALUE(`qst`.`id`),
         ANY_VALUE(`sys`.`id`) AS `sys_id`,
         ANY_VALUE(`sys`.`system_name`) AS `system_name` ";
+        // ANY_VALUE(`qst`.`id`),
+        // ANY_VALUE(`sys`.`id`) AS `sys_id`,
+        // ANY_VALUE(`sys`.`system_name`) AS `system_name` ";
         $query = sprintf(
             $this->getQuestionnaireQuery(),
             $fields,
@@ -45,12 +48,11 @@ class Questionnaire extends Model
             $array_data['sort'],
             $array_data['offset_limit']
         );
-
         return DB::select($query);
     }
 
     public function getQuestionnairesCount($array_data){
-        $fields = " COUNT(1) as Count ";
+        $fields = " tmp.id ";
         $query = sprintf(
             $this->getQuestionnaireQuery(),
             $fields,
@@ -59,12 +61,12 @@ class Questionnaire extends Model
             '',
             ''
         );
-        // dd($query);
-        return DB::select($query);
+        //dd($query);
+        return DB::select("SELECT COUNT(1) as Count FROM (".$query.") foo");
     }
 
     public function getQuestionnairesFilteredCount($array_data){
-        $fields = " COUNT(1) as FilteredCount ";
+        $fields = " tmp.id ";
         $query = sprintf(
             $this->getQuestionnaireQuery(),
             $fields,
@@ -73,6 +75,6 @@ class Questionnaire extends Model
             '',
             ''
         );
-        return DB::select($query);
+        return DB::select("SELECT COUNT(1) as FilteredCount FROM (".$query.") bar");
     }
 }

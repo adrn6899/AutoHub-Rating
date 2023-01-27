@@ -114,7 +114,7 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(),[
+        Validator::make($request->all(),[
             's_id'  =>  'required',
             't_id'  =>  'required'
         ]);
@@ -190,9 +190,20 @@ class QuestionnaireController extends Controller
      * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Questionnaire $questionnaire)
+    public function update(Request $request)
     {
-        //
+        // dd($request->all());
+        $question = explode(",",$request->questionArr);
+        $result = Questionnaire::where([
+            ['t_id',"=",$request->t_id],
+            ['s_id',"=",$request->s_id]
+            ])->get();
+        // dd($result);
+        foreach($question as $item){
+            // if($result[0]->q_id !== $item){
+            //     $result->
+            // }
+        }
     }
 
     /**

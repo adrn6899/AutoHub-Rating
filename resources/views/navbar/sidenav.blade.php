@@ -22,8 +22,10 @@
                         Dropdown
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-black" href="{{url('systems')}}">Systems</a></li>
+                            <li><a class="dropdown-item text-black" href="{{url('questionnaires')}}">Questionnaires</a></li>
                             <li><a class="dropdown-item text-black" href="{{url('questions')}}">Questions</a></li>
+                            <li><a class="dropdown-item text-black" href="{{url('systems')}}">Systems</a></li>
+                            <li><a class="dropdown-item text-black" href="{{url('templates')}}">Templates</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
