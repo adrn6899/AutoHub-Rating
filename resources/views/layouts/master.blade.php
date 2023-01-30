@@ -24,7 +24,9 @@
     @yield('css')
 </head>
 <body>
-    @include('navbar.sidenav')
+    @auth()        
+        @include('navbar.sidenav')
+    @endauth
     <div class="container-fluid w-100">
         @yield('content')
     </div>

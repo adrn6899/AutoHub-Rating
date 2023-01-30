@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\QuestionsController;
@@ -47,3 +48,5 @@ Route::post('templates/get',[TemplateController::class, 'edit'])->name('template
 Route::post('templates/update',[TemplateController::class, 'update'])->name('templates.update');
 Route::post('templates/destroy',[TemplateController::class, 'destroy'])->name('templates.destroy');
 Route::get('templates/select2',[TemplateController::class,'select2fetchAll'])->name('templates.select2');
+Route::get('signin',[AuthController::class,'index'])->name('auth.index');
+Route::post('login',[AuthController::class,'login'])->name('auth.login');
