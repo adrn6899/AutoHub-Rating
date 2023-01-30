@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 // use App\Models\Auth;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +16,8 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.login.index');
+    public function dashBoard(){
+        return view('index');
     }
 
     /**
@@ -96,5 +98,27 @@ class AuthController extends Controller
         }
 
         return redirect('signup')->withSuccess('Data not valid');
+    }
+
+    public function register(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'name'  =>  'required',
+            'email' =>  'required|email|unique:App\Models\User,email',
+            'password'  =>  'required|confirmed|min:8',
+        ]);
+
+        if ($validator->passes()) {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            Auth::login($user);
+            
+            return response()->json(["message"=>"success"],200);
+        }
+        return response()->json(["message"=>$validator->errors()],500);
     }
 }

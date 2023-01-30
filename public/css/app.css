@@ -108,4 +108,23 @@ body{
 .admin-body-container{
     padding: 0 10px 10px;
 }
+.card-registration{
+  width: 750px;
+}
+.card-registration .row{
+  width: 100%;
+}
+
+#register-btn{
+  margin-right: -5%;
+}
+
+/* .card-registration .col-label{
+  width: 10% !important;
+}
+
+.card-registration .col-input{
+  width: 70% !important;
+} */
+
 

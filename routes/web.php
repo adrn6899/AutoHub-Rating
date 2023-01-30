@@ -6,6 +6,7 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.master');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/dashboard',[AuthController::class,'dashBoard'])->name('admin.dashboard');
 Route::get('/systems',[SystemController::class,'index'])->name('system.index');
 Route::get('systems/fetchall',[SystemController::class, 'fetchall'])->name('system.fetch');
 Route::post('systems/store',[SystemController::class, 'store'])->name('system.store');
@@ -48,5 +50,20 @@ Route::post('templates/get',[TemplateController::class, 'edit'])->name('template
 Route::post('templates/update',[TemplateController::class, 'update'])->name('templates.update');
 Route::post('templates/destroy',[TemplateController::class, 'destroy'])->name('templates.destroy');
 Route::get('templates/select2',[TemplateController::class,'select2fetchAll'])->name('templates.select2');
-Route::get('signin',[AuthController::class,'index'])->name('auth.index');
+Route::get('signin',function(){
+    if(Auth::check()){
+        return redirect()->route('admin.dashboard');
+    } else {
+        return view('auth.index');
+    }
+})->name('auth.index');
+// Route::get('signup',[AuthController::class,'signup']);
+Route::get('signup', function(){
+    if(Auth::check()){
+        return redirect()->route('admin.dashboard');
+    } else {
+        return view('auth.registration');
+    }
+})->name('auth.signup');
 Route::post('login',[AuthController::class,'login'])->name('auth.login');
+Route::post('register',[AuthController::class,'register'])->name('auth.register');
