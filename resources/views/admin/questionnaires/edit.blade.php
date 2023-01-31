@@ -19,6 +19,11 @@
                             <div class="input-group input-group-lg mb-3">
                                 <input type="text" id="edit_system_name" class="form-control form-control-lg" disabled>
                             </div>
+                            <h4>Survey Link:</h4>
+                            <div class="input-group input-group-lg mb-3">
+                                <input type="text" id="edit_link" class="form-control form-control-lg" disabled>
+                                <button class="btn btn-outline-secondary" type="button" id="copy_link"><i class="bi bi-clipboard"></i></button>
+                            </div>
                         </div>
                         <div class="col">
                             <h3>Question List</h3>

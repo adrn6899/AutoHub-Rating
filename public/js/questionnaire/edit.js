@@ -24,6 +24,7 @@
                 // console.log(result.template[0].title);
                 $('#edit_template_name').val(result.template[0].title);
                 $('#edit_system_name').val(result.system[0].system_name);
+                $('#edit_link').val(result.link[0].link);
                 $.each(result.result, function(key,value){
                     idArr.push(value.q_id);
                 });
@@ -88,5 +89,29 @@
             questionArr = [];
             console.log("popping");
         });
+
+        $('#copy_link').on('click', function(){
+            var copyText = document.getElementById("edit_link").value;
+
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+
+            navigator.clipboard.writeText(copyText.value);
+
+        });
+
+    //     copyTextBtn = document.querySelector('#copyTextBtn');
+    //   copyTextBtn.addEventListener('click', function(event) {
+    //     let copyTextarea = document.querySelector('#copytextarea');
+    //     copyTextarea.focus();
+    //     copyTextarea.select();
+    //     try {
+    //       let successful = document.execCommand('copy');
+    //       let msg = successful ? 'successful' : 'unsuccessful';
+    //       alert('Copy text command was ' + msg);
+    //     } catch(err) {
+    //       alert('Unable to copy');
+    //     }
+    //   });
     });
 })();

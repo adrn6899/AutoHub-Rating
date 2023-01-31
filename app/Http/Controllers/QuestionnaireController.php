@@ -192,11 +192,16 @@ class QuestionnaireController extends Controller
             ['t_id',"=",$request->t_id],
             ['s_id',"=",$request->s_id],
         ])->get();
+        $link = Link::select('link')->where([
+            ['tmp_id',"=",$request->t_id],
+            ['sys_id',"=",$request->s_id],
+        ])->get();
 
         return response()->json(["result"=>$result,
         "questions"=>$questions,
         "template"=>$t_name,
-        "system"=>$s_name]);
+        "system"=>$s_name,
+        "link"=>$link]);
     }
 
     /**
