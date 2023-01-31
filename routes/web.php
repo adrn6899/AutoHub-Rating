@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/dashboard',[AuthController::class,'dashBoard'])->name('admin.dashboard');
 Route::get('/systems',[SystemController::class,'index'])->name('system.index');
 Route::get('systems/fetchall',[SystemController::class, 'fetchall'])->name('system.fetch');
@@ -41,6 +41,7 @@ Route::get('questionnaires/fetchall',[QuestionnaireController::class,'fetchall']
 Route::get('questionnaires/create',[QuestionnaireController::class,'create'])->name('questionnaires.create');
 Route::post('questionnaires/store',[QuestionnaireController::class,'store'])->name('questionnaires.store');
 Route::get('questionnaires/edit/{tmp_id}/{sys_id}',[QuestionnaireController::class,'edit'])->name('questionnaires.edit');
+Route::post('questionnaires/destroy',[QuestionnaireController::class,'destroy'])->name('questionnaires.destroy');
 Route::post('questionnaires/update',[QuestionnaireController::class,'update'])->name('questionnaires.update');
 Route::post('questionnaires/getQuestions',[QuestionnaireController::class,'getQuestions'])->name('questionnaires.getQuestions');
 Route::get('/templates',[TemplateController::class,'index'])->name('templates.index');
@@ -57,7 +58,6 @@ Route::get('signin',function(){
         return view('auth.index');
     }
 })->name('auth.index');
-// Route::get('signup',[AuthController::class,'signup']);
 Route::get('signup', function(){
     if(Auth::check()){
         return redirect()->route('admin.dashboard');

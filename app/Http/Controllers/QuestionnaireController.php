@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Link;
 use App\Models\Questionnaire;
 use App\Models\Questions;
 use App\Models\System;
@@ -113,6 +114,10 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
+        $url = $request->url();
+        $base_url = explode("/",$url);
+        // dd($base_url);
+        // dd($base_url[0]."//".$base_url[2]);
 
         Validator::make($request->all(),[
             's_id'  =>  'required',
@@ -125,7 +130,7 @@ class QuestionnaireController extends Controller
         ->where('s_id',"=",$request->s_id)
         ->orWhere('t_id',"=",$request->t_id)
         ->get();
-        if(empty($check[0])){
+        if(empty($check[0])){   
             foreach($questions as $item){
                 DB::table('questionnaires')
                 ->insert([
@@ -136,7 +141,18 @@ class QuestionnaireController extends Controller
                     'active'    =>  1
                 ]);
             }    
+            
+            $link = new Link;
+            $link->sys_id = $request->s_id;
+            $link->tmp_id = $request->t_id;
+            $link->link = "/search?s=".$request->s_id."&tid=".$request->t_id;
+            $link->active = 1;
+            $link->status = 1;
+            $link->save();
+
             return response()->json(["message"=>"success"],200);
+
+
         } else {
             return response()->json(["message"=>"Either template or system is already in use. \n Please edit the template or create new one"],403);
         }
@@ -197,13 +213,28 @@ class QuestionnaireController extends Controller
         $result = Questionnaire::where([
             ['t_id',"=",$request->t_id],
             ['s_id',"=",$request->s_id]
-            ])->get();
-        // dd($result);
-        foreach($question as $item){
-            // if($result[0]->q_id !== $item){
-            //     $result->
-            // }
+            ])->update([
+            'status'    =>  null,
+            'active'    =>  null
+            ]);
+        
+        // $res = Questionnaire::upsert([
+
+        // ]);
+        foreach($question as $row){
+            Questionnaire::upsert([
+                [
+                    't_id'  =>  $request->t_id,
+                    's_id'  =>  $request->s_id,
+                    'q_id'  =>  $row,
+                    'status'    =>  1,
+                    'active'    =>  1
+                ]
+            ],['t_id','s_id','q_id'],['status','active']);
         }
+
+        return response()->json(["message"=>"success"],200);
+
     }
 
     /**
@@ -212,8 +243,20 @@ class QuestionnaireController extends Controller
      * @param  \App\Models\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Questionnaire $questionnaire)
+    public function destroy(Request $request)
     {
-        //
+        // dd($request->all());
+        $result = Questionnaire::where([
+            ['t_id',"=",$request->tmp_id],
+            ['s_id',"=",$request->sys_id]
+            ])->update([
+            'status'    =>  null,
+            // 'active'    =>  null
+            ]);
+            // ->get();
+            // dd($result);
+            
+
+        return response()->json(["message"=>"success"],200);
     }
 }

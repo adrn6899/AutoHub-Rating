@@ -1,6 +1,42 @@
 (function(e){
     "use strict";
 
+    function toastRWithTime(message, type, btnType){
+    
+      toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "3000",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "slideDown",
+          "hideMethod": "slideUp"
+        }
+  
+        switch (type){
+          case 'success':
+              toastr.success(message)
+              break;
+          case 'info':
+              toastr.info(message)
+              break;
+          case 'warning':
+              toastr.warning(message)
+              break;
+          case 'error':
+              toastr.error(message)
+              break;
+          }  
+      }
+
     var search_type_filter = [];
     var questionnaireList = null;
     var id = null;
@@ -21,7 +57,44 @@
           sys_id = questionnaireList.row(row).data().sys_id;
 
           window.location.href = "questionnaires/edit/" + id + "/" + sys_id;
-          console.log(sys_id);
+          // console.log(sys_id);
+        });
+      });
+    }
+
+    function initActionRemove(){
+      $("[data-action-remove]").each(function () {
+        $(this).on("click", function () {
+          var row = $(this).closest("tr");
+          var sys_id;
+          id = questionnaireList.row(row).data().tmp_id;
+          sys_id = questionnaireList.row(row).data().sys_id;
+
+          var formData = new FormData();
+          formData.append('tmp_id',id);
+          formData.append('sys_id',sys_id);
+
+          $.ajax({
+            type: "POST",
+            url: "/questionnaires/destroy",
+            dataType: 'json',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(success){
+              toastRWithTime(success.message,"success");
+              questionnaireList.draw(false);
+            },
+            error: function(error){
+              console.log(error);
+              // toastRWithTime(error)
+            }
+          });
+          // window.location.href = "questionnaires/destroy/" + id + "/" + sys_id;
+          // console.log(sys_id);
         });
       });
     }
@@ -140,7 +213,7 @@
         ];
         questionnaireList = $('#questionnaireTable').DataTable({
             fnDrawCallback: function () {
-                // initActionRemove();
+                initActionRemove();
                 initActionUpdate();
             },
             order: [[0, "asc"]],

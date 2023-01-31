@@ -11,7 +11,7 @@ class Questionnaire extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['q_id'];
+    protected $fillable = ['s_id','t_id','q_id','status','active'];
 
     public function getQuestionnaireQuery(){
         return " SELECT %s 
@@ -21,7 +21,7 @@ class Questionnaire extends Model
         INNER JOIN `systems` `sys` ON
             `qst`.`s_id` = `sys`.`id`
         WHERE
-            1 AND `qst`.`status` = 1 AND `qst`.`active` = 1
+            1 AND `qst`.`status` = 1
         GROUP BY `tmp`.`id`
         %s
         %s
