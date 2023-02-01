@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\SystemController;
@@ -22,8 +23,10 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::group(['middleware'  =>  'auth'],function(){
+    Route::get('/systems',[SystemController::class,'index'])->name('system.index');
+});
 Route::get('/dashboard',[AuthController::class,'dashBoard'])->name('admin.dashboard');
-Route::get('/systems',[SystemController::class,'index'])->name('system.index');
 Route::get('systems/fetchall',[SystemController::class, 'fetchall'])->name('system.fetch');
 Route::post('systems/store',[SystemController::class, 'store'])->name('system.store');
 Route::post('systems/get',[SystemController::class, 'edit'])->name('system.get');
@@ -67,3 +70,4 @@ Route::get('signup', function(){
 })->name('auth.signup');
 Route::post('login',[AuthController::class,'login'])->name('auth.login');
 Route::post('register',[AuthController::class,'register'])->name('auth.register');
+Route::get('/search/s/{s}/tid/{tid}',[AnswerController::class,'verify'])->name('users.verify');

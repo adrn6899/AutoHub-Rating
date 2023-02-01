@@ -190,7 +190,7 @@ class QuestionnaireController extends Controller
         ->get();
         $result = Questionnaire::where([
             ['t_id',"=",$request->t_id],
-            ['s_id',"=",$request->s_id],
+            ['s_id',"=",$request->s_id]
         ])->get();
         $link = Link::select('link')->where([
             ['tmp_id',"=",$request->t_id],
