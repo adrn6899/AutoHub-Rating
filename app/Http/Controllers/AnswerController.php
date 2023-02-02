@@ -24,10 +24,15 @@ class AnswerController extends Controller
         ];
         $check = Link::where($conditions)->get();
         if(!empty($check[0])){
-            $questionnaire = Questionnaire::SELECT('q_id')->where($conditions2)->get();
+            $questionnaire = Questionnaire::SELECT('id','q_id')->where($conditions2)->get();
             foreach($questionnaire as $row){
+                // dd($row);
                 $questions = Questions::select('title')->where('id',$row->q_id)->get();
-                $questionsArr[] = $questions[0]->title;
+                $questionsArr['questions'][] = [
+                    'title' => $questions[0]->title,
+                    'qst_id'    =>  $row->id
+                ];
+                // $questionsArr['questions']['qst_id'] = $row->id;
             }
             return view('users.verify',compact('questionsArr'));
         }

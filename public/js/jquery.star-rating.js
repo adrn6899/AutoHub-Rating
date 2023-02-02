@@ -10,7 +10,6 @@
             stars: 5,
             showInfo: true,
             titles: ["very bad", "bad", "medium", "good", "very good"],
-            attributes: ["usability","speed","accuracy","design"],
             inputName: 'rating'
         }, setup || {});
 

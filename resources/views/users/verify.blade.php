@@ -22,7 +22,7 @@
 
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary" type="submit" style="float: right">Submit</button>
+                <button class="btn btn-primary" type="submit" style="float: right" id="submitReview">Submit</button>
             </div>
         </div>
     </div>

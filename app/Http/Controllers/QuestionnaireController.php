@@ -145,7 +145,7 @@ class QuestionnaireController extends Controller
             $link = new Link;
             $link->sys_id = $request->s_id;
             $link->tmp_id = $request->t_id;
-            $link->link = "/search?s=".$request->s_id."&tid=".$request->t_id;
+            $link->link = "/search/s/".$request->s_id."/tid/".$request->t_id;
             $link->active = 1;
             $link->status = 1;
             $link->save();
