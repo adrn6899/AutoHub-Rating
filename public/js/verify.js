@@ -2,41 +2,102 @@
     "use strict";
 
     var starsArr = [];
+    // var Arr = [];
+    var options = {
+        max_value: 5,
+        step_size: 1,
+    }
+
+    function toastRWithTime(message, type, btnType){
+    
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "slideDown",
+            "hideMethod": "slideUp"
+          }
+    
+          switch (type){
+            case 'success':
+                toastr.success(message)
+                break;
+            case 'info':
+                toastr.info(message)
+                break;
+            case 'warning':
+                toastr.warning(message)
+                break;
+            case 'error':
+                toastr.error(message)
+                break;
+            }  
+        }
+    
 
     function createAnswerField(){
         $.each(questions.questions, function(key,value){
             // console.log(value.qst_id);
             $('.answers-card', function(){
-                $('.card-body').append('<div class="rating-div" id="'+value.id+'"><label style="font-size:1.5rem;"  id="'+value.id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style=""></div></div>');
-                $('.rating-'+key+'').starRating(
-                    {
-                        starSize: 1.5,
-                        showInfo: false,
-                        hoverColor: 'salmon',
-                        callback: function(currentRating){
-                            console.log(currentRating);
-                        }     
+                $('.card-body').append('<div class="rating-div" id="'+value.id+'"><label style="font-size:1.5rem;"  id="'+value.id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style="font-size: 5rem;"></div></div><hr class="dashed">');
+                $('.rating-'+key+'').rate(options);
+                    $(this).on('change','.rating-'+key+'', function(e, data){
+                        // var Arr = [];
+                        var name = "Arr"+value.qst;
+                        name = [];
+                        // name.push(value.qst_id,data.to);
+                        starsArr.push(name = [
+                            value.qst_id,
+                            data.to
+                        ]);
+
                     });
-                // $.each('.rating-div', function(e){
-                //     var id = $(this).attr('id');
-                    $(this).on('change','.rating-'+key+'', function(e, stars, index){
-                        console.log(value.title,stars);
-                        var Arr = [];
-                        Arr.push(value.qst_id,stars);
-                        starsArr.push(Arr);
-                    });
-                // })
             });
         });
     }
 
     function SubmitReview(){
-        // $('.starsRating').each(function(e){
-        //     // console.log(this.val);
-        //     // starsArr.push(value);
-        //     // return starsArr;
-        // });
-        console.log(starsArr);
+        $('#submitReview').on('click', function(e){
+            e.preventDefault();
+            // console.log(starsArr);
+            // starsArr.filter(function(e){
+
+            // });
+            var formData = new FormData();
+
+            formData.append('t_id',t_id);
+            formData.append('stars',JSON.stringify(starsArr));
+
+            $.ajax({
+                type: "POST",
+                url: "/response",
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(success){
+                  toastRWithTime(success.message,"success");
+                  questionnaireList.draw(false);
+                },
+                error: function(error){
+                  console.log(error);
+                  // toastRWithTime(error)
+                }
+              });
+        });
     }
 
     $(function(){

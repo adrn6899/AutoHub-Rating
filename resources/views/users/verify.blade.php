@@ -10,13 +10,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <style>
+        hr.dashed {
+        border-top: 3px dashed #bbb;
+        }
+        .rate-hover-layer{
+            color: orange;
+        }
+        .rate-select-layer{
+            color: orange;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid w-100">
         <div class="card answers-card mt-3" style="max-width: max-content; margin: 0 auto;">
             <div class="card-header">
-                Rate Us
+                <h3>{{$system_title[0]->system_name}}</h3>
             </div>
             <div class="card-body overflow-y-scroll" style="height: 500px;">
 
@@ -29,8 +39,10 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script>
         var questions = {!!json_encode($questionsArr)!!};
+        var t_id = {!!json_encode($t_id)!!};
     </script>
-    <script src="{{asset('js/jquery.star-rating.js')}}"></script>
+    <script src="{{asset('js/rater.min.js')}}"></script>
+    {{-- <script src="{{asset('js/jquery.star-rating.js')}}"></script> --}}
     <script src="{{ asset('js/verify.js') }}"></script>
 </body>
 </html>

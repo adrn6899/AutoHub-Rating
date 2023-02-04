@@ -74,3 +74,8 @@ Route::get('signup', function(){
 Route::post('login',[AuthController::class,'login'])->name('auth.login');
 Route::post('register',[AuthController::class,'register'])->name('auth.register');
 Route::get('/search/s/{s}/tid/{tid}',[AnswerController::class,'verify'])->name('users.verify');
+Route::post('response',[AnswerController::class,'getAnswer'])->name('user.response');
+Route::get('userlogin',function(){
+    return view('users.login');
+})->name('users.login');
+Route::post('employeeLogin',[AnswerController::class,'employeeLogin'])->name('employee.login');

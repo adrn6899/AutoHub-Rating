@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Document</title>
+    <title>{{env('APP_NAME')}}</title>
     {{-- javascript --}}
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery.datatables.min.js') }}"></script>
