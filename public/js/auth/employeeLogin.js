@@ -8,7 +8,6 @@
             var formData = new FormData();
 
             formData.append('id',$('#user_name_login').val());
-            // formData.append('password',$('user_name_password').val());
 
             $.ajax({
                 type: "POST",
@@ -21,11 +20,10 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(success){
-                //   toastRWithTime(success.message,"success");
-                //   questionnaireList.draw(false);
+                    window.location.href = success;
                 },
                 error: function(error){
-                  console.log(error);
+                //   console.log(error);
                   // toastRWithTime(error)
                 }
             });

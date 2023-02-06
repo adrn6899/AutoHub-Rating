@@ -28,6 +28,7 @@
                       $('#systemModal').append(`<input type="hidden" name="edit_id" value="`+result.id+`">`);
                       $('#systemModalTitle').text("EDIT");
                       $('#systemModal').modal('show');
+                      $('#systemName').focus();
                     },
                     error: function(error){
       
@@ -230,6 +231,10 @@
 
           $('#reload_list').on('click', function(e){
             systemList.draw(false);
+          });
+
+          $('#systemModal').on('shown.bs.modal', function(e){
+            $('#systemName').focus();
           });
 
           $('#systemModal').on('hidden.bs.modal', function(e){

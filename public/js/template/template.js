@@ -272,6 +272,10 @@
             templateList.draw(false);
         });
 
+        $('#templateModal').on('shown.bs.modal', function(e){
+          $('#templateName').focus();
+        });
+
         $('#templateModal').on('hidden.bs.modal', function(e){
           $('#templateName').val(' ');
           $('#templateModalTitle').text("CREATE");

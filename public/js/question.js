@@ -231,6 +231,10 @@
         initList();
         submitQuestion();
 
+        $('#questionModal').on('shown.bs.modal', function(e){
+          $('#questionName').focus();
+        });
+
         $('#questionModal').on('hidden.bs.modal', function(e){
             $('#questionName').val(' ');
             $('#questionModalTitle').text("CREATE");

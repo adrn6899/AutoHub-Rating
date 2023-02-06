@@ -45,16 +45,18 @@
       }
 
     function submitForm(){
-      $('.template-create').submit(function(e){
+      $('#submitForm').on('click',function(e){
         e.preventDefault();
         $('input[type="checkbox"]:checked').each(function(){
             questionArr.push(this.value);
         });
-        // console.log(questionArr);
+        var t_id = $('#template_name').val();
+        var sys_id = $('#system_name').val();
+
         var formData = new FormData();
         formData.append('questionArr',questionArr);
-        formData.append('t_id',$('#template_name').val());
-        formData.append('s_id',$('#system_name').val());
+        formData.append('t_id',t_id);
+        formData.append('s_id',sys_id);
         $.ajax({
             type: "POST",
               url: "/questionnaires/store",
@@ -143,6 +145,13 @@
         });
         $('input[type="checkbox"]').change(function(){
             questionArr = [];
+        });
+        $('#clear_selection').on('click', function(e){
+          e.preventDefault();
+          $('input[type="checkbox"]').each(function(){
+            this.checked = false;
+          });
+          toastRWithTime("Selection Cleared","info");
         });
     });
 })();

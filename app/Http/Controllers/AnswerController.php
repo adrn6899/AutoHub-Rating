@@ -9,6 +9,7 @@ use App\Models\Answer;
 use App\Models\System;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Http\Request;
 
@@ -127,17 +128,16 @@ class AnswerController extends Controller
                     'name'  =>  $response['u_fname']." ".$response['u_lname'],
                     'email' =>  $response['email'],
                     'password'  =>  bcrypt($response['u_password']),
-                ],['password'],['name','email',]);
+                    'type'  =>  "ratee"
+                ],['password'],['name','email']);
+            // dd($user);
+            $login = User::findOrFail($user);
+            Auth::login($login);
+            $rdr = explode("/",session('url.intended'));
+            $link = "/".$rdr[3]."/".$rdr[4]."/".$rdr[5]."/".$rdr[6]."/".$rdr[7];
+            return response()->json($link);
 
-            
-        // $user = User::up
-            $credentials = $user->only('email','password');
-            if(Auth::attempt($credentials)){
-                $rdr = explode("/",session('url.intended'));
-                $link = "/".$rdr[3]."/".$rdr[4]."/".$rdr[5]."/".$rdr[6]."/".$rdr[7];
-                return redirect($link);
-            }
-            return response()->json(["message"=>"data not valid"],403);
         }
+        return response()->json(["message"=>"data not valid"],403);
     }
 }

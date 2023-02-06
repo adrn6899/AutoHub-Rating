@@ -114,48 +114,51 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->post());
         $url = $request->url();
         $base_url = explode("/",$url);
-        // dd($base_url);
-        // dd($base_url[0]."//".$base_url[2]);
-
-        Validator::make($request->all(),[
-            's_id'  =>  'required',
-            't_id'  =>  'required'
-        ]);
-
-        $questions = explode(",",$request->questionArr);
-
-        $check = Questionnaire::select('id')
-        ->where('s_id',"=",$request->s_id)
-        ->orWhere('t_id',"=",$request->t_id)
-        ->get();
-        if(empty($check[0])){   
-            foreach($questions as $item){
-                DB::table('questionnaires')
-                ->insert([
-                    's_id'  =>  $request->s_id,
-                    't_id'  =>  $request->t_id,
-                    'q_id'  =>  $item,
-                    'status'    =>  1,
-                    'active'    =>  1
-                ]);
-            }    
-            
-            $link = new Link;
-            $link->sys_id = $request->s_id;
-            $link->tmp_id = $request->t_id;
-            $link->link = "/search/s/".$request->s_id."/tid/".$request->t_id;
-            $link->active = 1;
-            $link->status = 1;
-            $link->save();
-
-            return response()->json(["message"=>"success"],200);
-
-
-        } else {
-            return response()->json(["message"=>"Either template or system is already in use. \n Please edit the template or create new one"],403);
+        
+        if($request->t_id == "null"){
+            return response()->json(["message"=>"Please choose a template"],402);
         }
+        if($request->s_id == "null"){
+            return response()->json(["message"=>"Please choose a system"],402);
+        }
+            
+            $questions = explode(",",$request->questionArr);
+    
+            $check = Questionnaire::select('id')
+            ->where('s_id',"=",$request->s_id)
+            ->orWhere('t_id',"=",$request->t_id)
+            ->get();
+            if(empty($check[0])){   
+                foreach($questions as $item){
+                    DB::table('questionnaires')
+                    ->insert([
+                        's_id'  =>  $request->s_id,
+                        't_id'  =>  $request->t_id,
+                        'q_id'  =>  $item,
+                        'status'    =>  1,
+                        'active'    =>  1
+                    ]);
+                }    
+                
+                $link = new Link;
+                $link->sys_id = $request->s_id;
+                $link->tmp_id = $request->t_id;
+                $link->link = "/search/s/".$request->s_id."/tid/".$request->t_id;
+                $link->active = 1;
+                $link->status = 1;
+                $link->save();
+    
+                return response()->json(["message"=>"success"],200);
+    
+    
+            } else {
+                return response()->json(["message"=>"Either template or system is already in use. \n Please edit the template or create new one"],403);
+            }
+
+
     }
 
     /**

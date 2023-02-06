@@ -11,9 +11,9 @@
                     <div style="width:40%">
 
                     </div>
-                    <div  style="width:60%">
-                        <div class="dropdown mt-1 align-content-end">
-                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;color:#ffff; margin-left: 50%;">
+                    <div  style="width:60%; float:right">
+                        <div class="dropdown mt-1 justify-content-end">
+                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;color:#ffff; margin-left: 20%;">
                                 Hi {{Auth::user()->name}}! &nbsp;<i class="bi bi-caret-down-fill" style="font-size:.5rem"></i>
                             </a>
                             <ul class="dropdown-menu">
