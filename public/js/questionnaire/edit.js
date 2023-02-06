@@ -3,6 +3,42 @@
 
     var questionArr = [];
 
+    function toastRWithTime(message, type, btnType){
+    
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "slideDown",
+            "hideMethod": "slideUp"
+          }
+    
+          switch (type){
+            case 'success':
+                toastr.success(message)
+                break;
+            case 'info':
+                toastr.info(message)
+                break;
+            case 'warning':
+                toastr.warning(message)
+                break;
+            case 'error':
+                toastr.error(message)
+                break;
+            }  
+        }
+
     function getQuestions(){
         var type = "";
         // var idArr = [];
@@ -30,7 +66,7 @@
                 });
                 // console.log(idArr);
                 $.each(result.questions, function(key, value){
-                    // console.log(value.id);
+                    console.log(value.id);
                     if($.inArray(value.id,idArr) >= 0){
                         $('.questions-list').append(`<input type="checkbox" value="`+value.id+`" checked="">\n<label style="font-size: 2rem">`+value.title+`</label></br>`);
                     } else {
@@ -72,7 +108,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(e){
-
+                    toastRWithTime("success",'success');
                 },
                 error: function(e){
 
@@ -90,15 +126,15 @@
             console.log("popping");
         });
 
-        $('#copy_link').on('click', function(){
-            var copyText = document.getElementById("edit_link").value;
+        // $('#copy_link').on('click', function(){
+        //     var copyText = document.getElementById("edit_link").value;
 
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
+        //     copyText.select();
+        //     copyText.setSelectionRange(0, 99999);
 
-            navigator.clipboard.writeText(copyText.value);
+        //     navigator.clipboard.writeText(copyText.value);
 
-        });
+        // });
 
     //     copyTextBtn = document.querySelector('#copyTextBtn');
     //   copyTextBtn.addEventListener('click', function(event) {
