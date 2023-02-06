@@ -27,7 +27,9 @@ class AnswerController extends Controller
             ];
             $conditions2 = [
                 ['s_id',$url[5]],
-                ['t_id',$url[7]]
+                ['t_id',$url[7]],
+                ['status',1],
+                ['active',1]
             ];
             $check = Link::where($conditions)->get();
             if(!empty($check[0])){

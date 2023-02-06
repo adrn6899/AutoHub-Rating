@@ -125,5 +125,9 @@ body{
 .card-registration .col-input{
   width: 70% !important;
 } */
+.questions_search{
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
 
 
