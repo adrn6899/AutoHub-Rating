@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\System;
+use App\Models\Answer;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -17,7 +20,23 @@ class AuthController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function dashBoard(){
-        return view('index');
+        
+        $conditions = [
+            ['status',"=",1],
+            ['active',"=",1]
+        ];
+        $systems = System::select('id')->where($conditions)->get();
+        foreach($systems as $row){
+            // $avg = Answer::
+            $answer = DB::table('answers')->where('qst_id',$row['id'])->avg('rating');
+            $rating['average'][] = [
+                'id'    =>  $row['id'],
+                'average'   =>  $answer
+            ];
+        }
+        // $rating = json_encode($rating);
+        // dd($rating);
+        return view('index')->with(['rating'=>$rating]);
     }
 
     /**

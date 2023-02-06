@@ -2,9 +2,11 @@
     <div class="container-fluid">
         <div class="row w-100">
             <div class="col-8">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                @if(Auth::user()->type == "admin")
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                @endif
             </div>
             <div class="col-4">
                 <div class="row" style="width: 100%">
