@@ -68,9 +68,9 @@
                 $.each(result.questions, function(key, value){
                     console.log(value.id);
                     if($.inArray(value.id,idArr) >= 0){
-                        $('.questions-list').append(`<input type="checkbox" value="`+value.id+`" checked="">\n<label style="font-size: 2rem">`+value.title+`</label></br>`);
+                        $('.questions-list').append(`<input class="form-check-input mt-1" type="checkbox" id="`+value.title+`" value="`+value.id+`" checked="">\n<label class="form-check-label" for="`+value.title+`" style="font-size: 1rem">`+value.title+`</label></br>`);
                     } else {
-                        $('.questions-list').append(`<input type="checkbox" value="`+value.id+`" >\n<label style="font-size: 2rem">`+value.title+`</label></br>`);
+                        $('.questions-list').append(`<input class="form-check-input mt-1" type="checkbox" id="`+value.title+`" value="`+value.id+`">\n<label class="form-check-label" for="`+value.title+`" style="font-size: 1rem">`+value.title+`</label></br>`);
                     }
 
                 });
@@ -126,28 +126,21 @@
             console.log("popping");
         });
 
-        // $('#copy_link').on('click', function(){
-        //     var copyText = document.getElementById("edit_link").value;
+        $('#copy_link').on('click', function(e){
+            e.preventDefault();
 
-        //     copyText.select();
-        //     copyText.setSelectionRange(0, 99999);
+            var copyText = document.getElementById("edit_link");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard
+            .writeText(copyText.value)
+            .then(() => {
+                alert("successfully copied");
+            })
+            .catch(() => {
+                alert("something went wrong");
+            });
+        });
 
-        //     navigator.clipboard.writeText(copyText.value);
-
-        // });
-
-    //     copyTextBtn = document.querySelector('#copyTextBtn');
-    //   copyTextBtn.addEventListener('click', function(event) {
-    //     let copyTextarea = document.querySelector('#copytextarea');
-    //     copyTextarea.focus();
-    //     copyTextarea.select();
-    //     try {
-    //       let successful = document.execCommand('copy');
-    //       let msg = successful ? 'successful' : 'unsuccessful';
-    //       alert('Copy text command was ' + msg);
-    //     } catch(err) {
-    //       alert('Unable to copy');
-    //     }
-    //   });
     });
 })();
