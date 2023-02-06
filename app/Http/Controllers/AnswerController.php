@@ -44,8 +44,9 @@ class AnswerController extends Controller
                     ];
                     // $questionsArr['questions']['qst_id'] = $row->id;
                 }
+                $s_id = $url[5];
                 $t_id = $url[7];
-                return view('users.verify',compact('questionsArr','t_id','system_title'));
+                return view('users.verify',compact('questionsArr','t_id','s_id','system_title'));
             }
             else {
                 abort(404);
