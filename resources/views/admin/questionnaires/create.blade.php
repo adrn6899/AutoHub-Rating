@@ -41,6 +41,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <button type="button" class="btn btn-danger btn-lg float-start" id="cancel_action">Cancel</button>
                     <button type="submit" class="btn btn-success btn-lg float-end" id="submitForm">Submit</button>
                 </div>
             </div>

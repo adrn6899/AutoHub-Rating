@@ -34,7 +34,14 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success btn-lg float-end" id="submitForm">Submit</button>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-danger btn-lg float-start" id="cancelAction">Cancel</button>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-success btn-lg float-end" id="submitForm">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

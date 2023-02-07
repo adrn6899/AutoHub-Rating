@@ -231,6 +231,10 @@
         initList();
         submitQuestion();
 
+        $('#reload_list').on('click', function(e){
+          questionList.draw(false);
+        });
+
         $('#questionModal').on('shown.bs.modal', function(e){
           $('#questionName').focus();
         });

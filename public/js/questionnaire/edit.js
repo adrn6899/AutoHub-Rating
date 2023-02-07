@@ -98,11 +98,15 @@
             navigator.clipboard
             .writeText(copyText.value)
             .then(() => {
-                alert("successfully copied");
+                toastRWithTime("text successfully copied","success");
             })
             .catch(() => {
-                alert("something went wrong");
+                toastRWithTime("something went wrong","error");
             });
+        });
+
+        $('#cancelAction').on('click', function(e){
+            window.location.href = "/questionnaires";
         });
 
     });
