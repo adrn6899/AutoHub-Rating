@@ -49,6 +49,11 @@
 
         submitForm();
 
+        $('#cancel_action').on('click', function(e){
+          window.location.reload();
+          // replace('questionnaires');
+        });
+
         $('#template_name').select2({
             // theme: 'classic',
             allowClear: true,
@@ -119,6 +124,10 @@
             this.checked = false;
           });
           toastRWithTime("Selection Cleared","info");
+        });
+
+        $('#cancel_action').on('click', function(e){
+          window.location.href = "/questionnaires";
         });
     });
 })();

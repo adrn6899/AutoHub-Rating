@@ -26,7 +26,14 @@
                             </div>
                         </div>
                         <div class="col">
-                            <h3>Question List</h3>
+                            <div class="row">
+                                <div class="col"><h3>Question List</h3></div>
+                                <div class="col">
+                                    <button class="btn btn-sm btn-danger" id="clear_selection" style="float: right">
+                                        Clear Selection
+                                    </button>
+                                </div>
+                            </div>
                             <div class="questions-list overflow-y-scroll" style="height: 350px">
                                
                             </div>
@@ -34,7 +41,14 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success btn-lg float-end" id="submitForm">Submit</button>
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-danger btn-lg float-start" id="cancelAction">Cancel</button>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-success btn-lg float-end" id="submitForm">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

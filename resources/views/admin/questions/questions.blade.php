@@ -11,7 +11,7 @@
                                 <div class="tooltip-me" title="Filter by category">
                                     <button type="button" class="btn btn-sm dropdown-toggle"
                                         data-bs-toggle="dropdown" id="questions_search">
-                                        <i class="fas fa-search"></i>
+                                        <i class="bi bi-search"></i>
                                         <u>Search</u>
                                     </button>
                                     <ul class="dropdown-filter system-search-type dropdown-menu cursor">

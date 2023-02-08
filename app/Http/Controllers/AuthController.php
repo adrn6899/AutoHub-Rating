@@ -10,17 +10,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\System;
 use App\Models\Answer;
+use App\Models\Auth as ModelsAuth;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
+    private $auth;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->auth = new ModelsAuth;
+    }
+
     public function dashBoard(){
         
+        $questions = $this->auth->getQuestions();
+        $templates = $this->auth->getTemplates();
+        $system = $this->auth->getSystems();
+        
+
         $conditions = [
             ['status',"=",1],
             ['active',"=",1]
@@ -29,6 +41,7 @@ class AuthController extends Controller
         foreach($systems as $row){
             // $avg = Answer::
             $answer = DB::table('answers')->where('qst_id',$row['id'])->avg('rating');
+            // $answer = DB::table('answers')->select('s_id')->where('qst_id',$row['id'])->get();
             $rating['average'][] = [
                 'id'    =>  $row['id'],
                 'average'   =>  $answer
@@ -36,7 +49,7 @@ class AuthController extends Controller
         }
         // $rating = json_encode($rating);
         // dd($rating);
-        return view('index')->with(['rating'=>$rating]);
+        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system]);
     }
 
     /**

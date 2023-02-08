@@ -7,11 +7,11 @@
                 <div class="col" >
                     <div class="input-group search_input">
                         <div class="input-group-append cursor">
-                            <div class="input-group-text  px-1 border  form-control-sm">
+                            <div class="input-group-text  px-1 border  form-control-sm questions_search">
                                 <div class="tooltip-me" title="Filter by category">
                                     <button type="button" class="btn btn-sm dropdown-toggle"
                                         data-bs-toggle="dropdown">
-                                        <i class="fas fa-search"></i>
+                                        <i class="bi bi-search"></i>
                                         <u>Search</u>
                                     </button>
                                     <ul class="dropdown-filter system-search-type dropdown-menu cursor">

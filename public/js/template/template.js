@@ -6,42 +6,6 @@
     var id = null;
     var url = null;
 
-    function toastRWithTime(message, type, btnType){
-    
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "3000",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "slideDown",
-            "hideMethod": "slideUp"
-          }
-    
-          switch (type){
-            case 'success':
-                toastr.success(message)
-                break;
-            case 'info':
-                toastr.info(message)
-                break;
-            case 'warning':
-                toastr.warning(message)
-                break;
-            case 'error':
-                toastr.error(message)
-                break;
-            }  
-        }
-
     function initActionUpdate(){
         $("[data-action-update]").each(function () {
             $(this).on("click", function () {
@@ -189,8 +153,8 @@
                 render: function (data, type, row, meta) {
                   return `
                            <div class="row justify-content-center">
-                                   <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit">Edit</a> 
-                                   <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-danger btn-icon" title="Remove">Remove</a>
+                                   <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit"><i class="bi bi-pencil"></i>&nbsp;Edit</a> 
+                                   <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-danger btn-icon" title="Remove"><i class="bi bi-trash"></i>&nbsp;Remove</a>
                            </div>
                            `;
                 },

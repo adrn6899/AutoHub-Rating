@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.index');
 });
 Route::group(['middleware'  =>  'auth'],function(){
     Route::get('/systems',[SystemController::class,'index'])->name('system.index');

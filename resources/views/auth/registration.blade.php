@@ -45,4 +45,5 @@
 @endsection
 @section('javascript')
 <script src="{{asset('js/auth/registration.js')}}"></script>
+{{-- <script src="{{asset('js/toastRWithTime.js')}}"></script> --}}
 @endsection
