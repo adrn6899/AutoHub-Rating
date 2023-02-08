@@ -11,7 +11,7 @@
                                 <div class="tooltip-me" title="Filter by category">
                                     <button type="button" class="btn btn-sm dropdown-toggle"
                                         data-bs-toggle="dropdown" style="border-end-end-radius: 0">
-                                        <i class="fas fa-search"></i>
+                                        <i class="bi bi-search"></i>
                                         <u>Search</u>
                                     </button>
                                     <ul class="dropdown-filter system-search-type dropdown-menu cursor">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col">
                     <button class="btn btn-primary btn-add btn-md mt-3" id="reload_list"><i class="bi bi-arrow-clockwise" style="font-size: 1rem; font-weight:bolder;"></i> Reload</button>
-                    <button class="btn btn-primary btn-add btn-md mt-3" href="#" id="create_questionnaire"><i class="bi bi-plus" style="font-size:1rem; font-weight:bolder;"></i> Create</button>
+                    <button class="btn btn-primary btn-add btn-md mt-3" href="#" id="create_questionnaire"><i class="bi bi-plus-lg"></i> Create</button>
                 </div>
             </div>
             <div class="admin-body-container">

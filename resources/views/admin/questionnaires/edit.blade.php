@@ -26,7 +26,14 @@
                             </div>
                         </div>
                         <div class="col">
-                            <h3>Question List</h3>
+                            <div class="row">
+                                <div class="col"><h3>Question List</h3></div>
+                                <div class="col">
+                                    <button class="btn btn-sm btn-danger" id="clear_selection" style="float: right">
+                                        Clear Selection
+                                    </button>
+                                </div>
+                            </div>
                             <div class="questions-list overflow-y-scroll" style="height: 350px">
                                
                             </div>

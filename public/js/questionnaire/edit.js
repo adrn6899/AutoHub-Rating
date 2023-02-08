@@ -109,5 +109,12 @@
             window.location.href = "/questionnaires";
         });
 
+        $('#clear_selection').on('click', function(e){
+            e.preventDefault();
+            $('input[type="checkbox"]').each(function(){
+              this.checked = false;
+            });
+            toastRWithTime("Selection Cleared","info");
+          });
     });
 })();
