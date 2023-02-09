@@ -42,7 +42,7 @@
                         <a class="nav-link text-white" aria-current="page" href="#"><i class="bi bi-house-door" style="font-size: 1.5rem"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  text-white" href="#"><i class="bi bi-folder2" style="font-size: 1.5rem"></i> Reports</a>
+                        <a class="nav-link  text-white" href="{{url('reports')}}"><i class="bi bi-folder2" style="font-size: 1.5rem"></i> Reports</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="{{url('questionnaires')}}"><i class="bi bi-chat-left-text" style="font-size: 1.5rem"></i> Questionnaires</a>

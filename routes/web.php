@@ -53,6 +53,11 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::post('templates/update',[TemplateController::class, 'update'])->name('templates.update');
     Route::post('templates/destroy',[TemplateController::class, 'destroy'])->name('templates.destroy');
     Route::get('templates/select2',[TemplateController::class,'select2fetchAll'])->name('templates.select2');
+    Route::get('reports', function(){
+        return view('admin.reports.index');
+    });
+    Route::get('blank',[AuthController::class, 'reportDashboard'])->name('dashboard.blank');
+    Route::get('questionnaires_masterfille',[AuthController::class, 'qstDashboard'])->name('dashboard.qst');
 });
 
 Route::get('signin',function(){
