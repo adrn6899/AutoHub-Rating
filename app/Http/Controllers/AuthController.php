@@ -154,4 +154,12 @@ class AuthController extends Controller
         }
         return response()->json(["message"=>$validator->errors()],500);
     }
+
+    public function reportDashboard(){
+        return view('admin.reports.blank');
+    }
+
+    public function qstDashboard(){
+        return view('admin.reports.qst_masterfile');
+    }
 }

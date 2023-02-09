@@ -71,7 +71,7 @@ class QuestionnaireController extends Controller
             $array_data['where'] .= " AND active =  {$data['active']} ";
         }
         $results = $this->questionnaire->getQuestionnaires($array_data);
-        dd($results);
+        // dd($results);
         $result['data'] = array();
         $count = 0;
         foreach($results as $row){
