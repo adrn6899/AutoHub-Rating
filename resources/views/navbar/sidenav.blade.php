@@ -39,10 +39,22 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav font-justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="#">Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="#"><i class="bi bi-house-door" style="font-size: 1.5rem"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  text-white" href="#">Link</a>
+                        <a class="nav-link  text-white" href="#"><i class="bi bi-folder2" style="font-size: 1.5rem"></i> Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white" href="{{url('questionnaires')}}"><i class="bi bi-chat-left-text" style="font-size: 1.5rem"></i> Questionnaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white" href="{{url('questions')}}"><i class="bi bi-question-square" style="font-size: 1.5rem"></i> Questions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white" href="{{url('systems')}}"><i class="bi bi-gear" style="font-size: 1.5rem"></i> Systems</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white" href="{{url('templates')}}"><i class="bi bi-list-nested" style="font-size: 1.5rem"></i> Templates</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle  text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
