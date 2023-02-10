@@ -24,4 +24,8 @@ class Auth extends Model
     public function getQuestionnaires(){
         
     }
+
+    public function reports($array_data){
+
+    }
 }

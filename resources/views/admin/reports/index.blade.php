@@ -13,17 +13,17 @@
                 </li>
                 <li>Questions
                     <ul>
-                        <li>Masterfile</li>
+                        <li value="/questions_masterfille">Masterfile</li>
                     </ul>
                 </li>
                 <li>Systems
                     <ul>
-                        <li>Masterfile</li>
+                        <li value="/systems_masterfille">Masterfile</li>
                     </ul>
                 </li>
                 <li>Templates
                     <ul>
-                        <li>Masterfile</li>
+                        <li value="/templates_masterfille">Masterfile</li>
                     </ul>
                 </li>
             </ul>
