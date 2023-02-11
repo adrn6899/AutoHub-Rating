@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\System;
 use App\Models\Answer;
 use App\Models\Auth as ModelsAuth;
+use App\Models\Questions;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
+use PDF;
 
 class AuthController extends Controller
 {
-    private $auth;
+    private $auth,$quest;
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +28,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->auth = new ModelsAuth;
+        $this->quest = new Questions;
     }
 
     public function dashBoard(){
@@ -161,5 +166,76 @@ class AuthController extends Controller
 
     public function qstDashboard(){
         return view('admin.reports.qst_masterfile');
+    }
+
+    public function qstnDashboard(){
+        return view('admin.reports.qstn_masterfile');
+    }
+
+    public function sysDashboard(){
+        return view('admin.reports.sys_masterfile');
+    }
+
+    public function tmpDashboard(){
+        return view('admin.reports.tmp_masterfile');
+    }
+
+    public function qstReport(Request $request){
+
+        $array_data['search'] = "";
+        $array_data['where'] = "";
+
+    }
+    public function qstnReport(Request $request){
+
+        // dd($request->all());
+        
+        $array_data['type'] = $request->type;
+        $array_data['search'] = "";
+        $array_data['where'] = "";
+        
+        if(!empty($from) && !empty($to)){
+            $from = Carbon::parse($request->from_date);
+            $to = Carbon::parse($request->to_date);
+            $fromdate = $from->toDateString();
+            $todate = $to->toDateString();
+            $array_data['where'] .= " AND DATE(`created_at`) BETWEEN '$fromdate' AND '$todate' ";
+        }
+
+        $results = $this->quest->reports($array_data);
+
+        // dd($results);
+
+        switch($array_data['type']){
+            case('view'):
+                $response = $this->quest->pdf($results,'view');
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadView('layouts.reports.questions',$response);
+                return $pdf->stream();
+                break;
+            case('pdf'):
+                $response = $this->quest->pdf($results,'view');
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadView('layouts.reports.questions',$response);
+                return $pdf->download("questions-masterfile.pdf");
+                break;
+            case('csv'):
+                $this->quest->csv($results,'csv');
+                break;
+        }
+
+    }
+
+    public function sysReport(Request $request){
+
+        $array_data['search'] = "";
+        $array_data['where'] = "";
+
+    }
+    public function tmpReport(Request $request){
+
+        $array_data['search'] = "";
+        $array_data['where'] = "";
+
     }
 }
