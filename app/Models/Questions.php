@@ -90,13 +90,8 @@ class Questions extends Model
 
     public function pdf($results,$type){
 
-        // $pdf = App::make('dompdf.wrapper');
-        // $pdf->loadHTML('<h1>Test</h1>');
-        // return $pdf->stream();
-        // // dd($results);
             $data = [];
 
-        // foreach($results as $row){
             $grpData = new \stdClass();
 
             $grpData->list = $results;
@@ -114,5 +109,35 @@ class Questions extends Model
             ];
 
             return $reportData;
+    }
+
+    public function csv($results){
+        // dd($results);
+        $questions = [];
+        $questions[] = ['No.','Title'];
+        $inc = 0;
+        foreach ($results as $row) {
+            // dd($row->title);
+            $questions[] = [
+                $inc+=1,
+                $row->title
+            ];
+        }
+        $filename = "Questions Masterfile" . date('Y-m-d H-i-sA').'.csv';
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        
+        $f = fopen('php://output', 'wb');
+        
+        if ($f === false) {
+            die('Error opening the file ' .$filename);
+        }
+        
+        foreach ($questions as $row) {
+            fputcsv($f, $row, ',');
+        }
+        
+        fclose($f);
     }
 }

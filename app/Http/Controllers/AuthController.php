@@ -220,7 +220,7 @@ class AuthController extends Controller
                 return $pdf->download("questions-masterfile.pdf");
                 break;
             case('csv'):
-                $this->quest->csv($results,'csv');
+                $this->quest->csv($results);
                 break;
         }
 
