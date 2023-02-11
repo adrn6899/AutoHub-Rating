@@ -12,6 +12,7 @@ use App\Models\System;
 use App\Models\Answer;
 use App\Models\Auth as ModelsAuth;
 use App\Models\Questions;
+use App\Models\Template;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
@@ -19,7 +20,7 @@ use PDF;
 
 class AuthController extends Controller
 {
-    private $auth,$quest;
+    private $auth,$quest,$tmp,$sys;
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +30,7 @@ class AuthController extends Controller
     {
         $this->auth = new ModelsAuth;
         $this->quest = new Questions;
+        $this->tmp = new Template;
     }
 
     public function dashBoard(){
@@ -187,9 +189,6 @@ class AuthController extends Controller
 
     }
     public function qstnReport(Request $request){
-
-        // dd($request->all());
-        
         $array_data['type'] = $request->type;
         $array_data['search'] = "";
         $array_data['where'] = "";
@@ -204,23 +203,19 @@ class AuthController extends Controller
 
         $results = $this->quest->reports($array_data);
 
-        // dd($results);
+        $response = $this->quest->pdf($results,'view');
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('layouts.reports.questions',$response);
 
         switch($array_data['type']){
             case('view'):
-                $response = $this->quest->pdf($results,'view');
-                $pdf = App::make('dompdf.wrapper');
-                $pdf->loadView('layouts.reports.questions',$response);
                 return $pdf->stream();
                 break;
             case('pdf'):
-                $response = $this->quest->pdf($results,'view');
-                $pdf = App::make('dompdf.wrapper');
-                $pdf->loadView('layouts.reports.questions',$response);
                 return $pdf->download("questions-masterfile.pdf");
                 break;
             case('csv'):
-                $this->quest->csv($results,'csv');
+                $this->quest->csv($results);
                 break;
         }
 
@@ -233,9 +228,35 @@ class AuthController extends Controller
 
     }
     public function tmpReport(Request $request){
-
+        // dd($request->all());
+        $array_data['type'] = $request->type;
         $array_data['search'] = "";
         $array_data['where'] = "";
 
+        if(!empty($from) && !empty($to)){
+            $from = Carbon::parse($request->from_date);
+            $to = Carbon::parse($request->to_date);
+            $fromdate = $from->toDateString();
+            $todate = $to->toDateString();
+            $array_data['where'] .= " AND DATE(`created_at`) BETWEEN '$fromdate' AND '$todate' ";
+        }
+
+        $results = $this->tmp->reports($array_data);
+
+        $response = $this->tmp->pdf($results);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('layouts.reports.templates',$response);
+
+        switch($array_data['type']){
+            case('view'):
+                return $pdf->stream();
+                break;
+            case('pdf'):
+                return $pdf->download("questions-masterfile.pdf");
+                break;
+            case('csv'):
+                $this->quest->csv($results);
+                break;
+        }
     }
 }

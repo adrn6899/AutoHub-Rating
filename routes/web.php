@@ -61,6 +61,8 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::get('get/questionnaires_masterfile',[AuthController::class, 'qstReport'])->name('report.qst');
     Route::get('questions_masterfile',[AuthController::class, 'qstnDashboard'])->name('dashboard.qstn');
     Route::get('get/questions_masterfile',[AuthController::class, 'qstnReport'])->name('report.qstn');
+    Route::get('template_masterfile',[AuthController::class, 'tmpDashboard'])->name('dashboard.tmp');
+    Route::get('get/template_masterfile',[AuthController::class, 'tmpReport'])->name('report.tmp');
 
 });
 
