@@ -62,4 +62,47 @@ class Template extends Model
         );
         return DB::select($query);
     }
+
+    public function getTemplatesReportQuery(){
+        return "SELECT %s
+        FROM templates 
+        WHERE 1
+        AND `status` = 1
+        AND active = 1
+        %s
+        ";  
+    }
+
+    public function reports($array_data){
+        $fields = " * ";
+        $query = sprintf(
+            $this->getTemplatesReportQuery(),
+            $fields,
+            $array_data['where']
+        );
+
+        return DB::select($query);
+    }
+
+    public function pdf($results){
+        $data = [];
+
+        $grpData = new \stdClass();
+
+        $grpData->list = $results;
+        $grpData->total = sizeOf($results);
+        array_push($data,$grpData);
+
+        $report_title = "Templates Masterfile";
+
+        $reportData = [
+            'data'  =>  $data,
+            'webpage_title' =>  "Templates Report",
+            'report_title'  =>  $report_title,
+            'table_headers'  =>  ['No.', 'Title'],
+            'table_body'    =>  ['title']
+        ];
+
+        return $reportData;
+    }
 }

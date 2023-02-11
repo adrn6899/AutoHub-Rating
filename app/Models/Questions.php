@@ -117,7 +117,6 @@ class Questions extends Model
         $questions[] = ['No.','Title'];
         $inc = 0;
         foreach ($results as $row) {
-            // dd($row->title);
             $questions[] = [
                 $inc+=1,
                 $row->title
