@@ -8,22 +8,22 @@
             <ul>
                 <li>Questionnaires
                     <ul>
-                        <li value="/questionnaires_masterfille">Masterfile</li>
+                        <li value="/questionnaires_masterfile">Masterfile</li>
                     </ul>
                 </li>
                 <li>Questions
                     <ul>
-                        <li value="/questions_masterfille">Masterfile</li>
+                        <li value="/questions_masterfile">Masterfile</li>
                     </ul>
                 </li>
                 <li>Systems
                     <ul>
-                        <li value="/systems_masterfille">Masterfile</li>
+                        <li value="/systems_masterfile">Masterfile</li>
                     </ul>
                 </li>
                 <li>Templates
                     <ul>
-                        <li value="/templates_masterfille">Masterfile</li>
+                        <li value="/templates_masterfile">Masterfile</li>
                     </ul>
                 </li>
             </ul>

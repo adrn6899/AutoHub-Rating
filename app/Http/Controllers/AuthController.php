@@ -14,6 +14,8 @@ use App\Models\Auth as ModelsAuth;
 use App\Models\Questions;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
+use PDF;
 
 class AuthController extends Controller
 {
@@ -187,16 +189,16 @@ class AuthController extends Controller
     public function qstnReport(Request $request){
 
         // dd($request->all());
-        $from = Carbon::parse($request->from_date);
-        $to = Carbon::parse($request->to_date);
-        $fromdate = $from->toDateString();
-        $todate = $to->toDateString();
-
+        
         $array_data['type'] = $request->type;
         $array_data['search'] = "";
         $array_data['where'] = "";
-
+        
         if(!empty($from) && !empty($to)){
+            $from = Carbon::parse($request->from_date);
+            $to = Carbon::parse($request->to_date);
+            $fromdate = $from->toDateString();
+            $todate = $to->toDateString();
             $array_data['where'] .= " AND DATE(`created_at`) BETWEEN '$fromdate' AND '$todate' ";
         }
 
@@ -206,10 +208,16 @@ class AuthController extends Controller
 
         switch($array_data['type']){
             case('view'):
-                $this->quest->pdf($results,'view');
+                $response = $this->quest->pdf($results,'view');
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadView('layouts.reports.questions',$response);
+                return $pdf->stream();
                 break;
             case('pdf'):
-                $this->quest->pdf($results,'pdf');
+                $response = $this->quest->pdf($results,'view');
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadView('layouts.reports.questions',$response);
+                return $pdf->download("questions-masterfile.pdf");
                 break;
             case('csv'):
                 $this->quest->csv($results,'csv');

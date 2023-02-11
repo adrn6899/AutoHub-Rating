@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use PDF;
-use Dompdf;
+// use Dompdf;
+use Illuminate\Support\Facades\App;
 
 class Questions extends Model
 {
@@ -83,23 +84,35 @@ class Questions extends Model
             $fields,
             $array_data['where'],
         );
-
+        // dd($query);
         return DB::select($query);
     }
 
     public function pdf($results,$type){
 
-        $data = [
-            'title' => 'Welcome to Tutsmake.com',
-            'date' => date('m/d/Y')
-        ];
+        // $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadHTML('<h1>Test</h1>');
+        // return $pdf->stream();
+        // // dd($results);
+            $data = [];
 
-        $pdf = PDF::loadHtml('<h1>Test</h1>');
-        $pdf->setPaper('A4', 'landscape');
+        // foreach($results as $row){
+            $grpData = new \stdClass();
 
-        // Render the HTML as PDF
-        // $pdf->render();
-        // dd($pdf);
-        return $pdf->download('test.pdf');
+            $grpData->list = $results;
+            $grpData->total = sizeOf($results);
+            array_push($data, $grpData);
+
+            $report_title = "Questions Masterfile";
+
+            $reportData = [
+                'data'  =>  $data,
+                'webpage_title' =>  "Questions Report",
+                'report_title'  =>  $report_title,
+                'table_headers' =>  ['No.','Title'],
+                'table_body'    =>  ['title']
+            ];
+
+            return $reportData;
     }
 }

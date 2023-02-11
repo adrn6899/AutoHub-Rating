@@ -57,10 +57,10 @@ Route::group(['middleware'  =>  'auth'],function(){
         return view('admin.reports.index');
     });
     Route::get('blank',[AuthController::class, 'reportDashboard'])->name('dashboard.blank');
-    Route::get('questionnaires_masterfille',[AuthController::class, 'qstDashboard'])->name('dashboard.qst');
-    Route::get('get/questionnaires_masterfille',[AuthController::class, 'qstReport'])->name('report.qst');
-    Route::get('questions_masterfille',[AuthController::class, 'qstnDashboard'])->name('dashboard.qstn');
-    Route::get('get/questions_masterfille',[AuthController::class, 'qstnReport'])->name('report.qstn');
+    Route::get('questionnaires_masterfile',[AuthController::class, 'qstDashboard'])->name('dashboard.qst');
+    Route::get('get/questionnaires_masterfile',[AuthController::class, 'qstReport'])->name('report.qst');
+    Route::get('questions_masterfile',[AuthController::class, 'qstnDashboard'])->name('dashboard.qstn');
+    Route::get('get/questions_masterfile',[AuthController::class, 'qstnReport'])->name('report.qstn');
 
 });
 
