@@ -105,4 +105,32 @@ class Template extends Model
 
         return $reportData;
     }
+
+    public function csv($results){
+        $templates = [];
+        $templates[] = ['No.','Title'];
+        $inc = 0;
+        foreach($results as $row){
+            $templates[] = [
+                $inc+=1,
+                $row->title
+            ];
+        }
+        $filename = "Templates Masterfile" . date('Y-m-d H-i-sA').'.csv';
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        
+        $f = fopen('php://output', 'wb');
+        
+        if ($f === false) {
+            die('Error opening the file ' .$filename);
+        }
+        
+        foreach ($templates as $row) {
+            fputcsv($f, $row, ',');
+        }
+        
+        fclose($f);
+    }
 }
