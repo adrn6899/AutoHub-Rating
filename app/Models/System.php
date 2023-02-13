@@ -64,4 +64,47 @@ class System extends Model
         return DB::select($query);
     }
 
+    public function getSystemsReportQuery(){
+        return "SELECT %s
+        FROM systems 
+        WHERE 1
+        AND `status` = 1
+        AND active = 1
+        %s
+        ";
+    }
+
+    public function reports($array_data){
+        $fields = " * ";
+        $query = sprintf(
+            $this->getSystemsReportQuery(),
+            $fields,
+            $array_data['where'],
+        );
+        // dd($query);
+        return DB::select($query);
+    }
+
+    public function pdf($results){
+        $data = [];
+
+        $grpData = new \stdClass();
+
+        $grpData->list = $results;
+        $grpData->total = sizeOf($results);
+        array_push($data, $grpData);
+
+        $report_title = "Systems Masterfile";
+
+        $reportData = [
+            'data'  =>  $data,
+            'webpage_title' =>  "Systems Report",
+            'report_title'  =>  $report_title,
+            'table_headers' =>  ['No.','Title'],
+            'table_body'    =>  ['system_name']
+        ];
+
+        return $reportData;
+    }
+
 }

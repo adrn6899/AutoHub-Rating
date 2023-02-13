@@ -2,7 +2,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <div class="tmp_masterfile" style="width: 98%; padding:10px">
-    <form class="qstForm" target="_blank" action="{{url('get/template_masterfile')}}">
+    <form class="qstForm" target="_blank" action="{{url('get/templates_masterfile')}}">
         <div class="row ml-3">
             <div class="col">
                 <div class="row mb-3">

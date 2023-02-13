@@ -31,6 +31,7 @@ class AuthController extends Controller
         $this->auth = new ModelsAuth;
         $this->quest = new Questions;
         $this->tmp = new Template;
+        $this->sys = new System;
     }
 
     public function dashBoard(){
@@ -223,8 +224,35 @@ class AuthController extends Controller
 
     public function sysReport(Request $request){
 
+        $array_data['type'] = $request->type;
         $array_data['search'] = "";
         $array_data['where'] = "";
+
+        if(!empty($from) && !empty($to)){
+            $from = Carbon::parse($request->from_date);
+            $to = Carbon::parse($request->to_date);
+            $fromdate = $from->toDateString();
+            $todate = $to->toDateString();
+            $array_data['where'] .= " AND DATE(`created_at`) BETWEEN '$fromdate' AND '$todate' ";
+        }
+
+        $results = $this->sys->reports($array_data);
+
+        $response = $this->sys->pdf($results);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('layouts.reports.systems',$response);
+
+        switch($array_data['type']){
+            case('view'):
+                return $pdf->stream();
+                break;
+            case('pdf'):
+                return $pdf->download("systems-masterfile.pdf");
+                break;
+            case('csv'):
+                $this->sys->csv($results);
+                break;
+        }
 
     }
     public function tmpReport(Request $request){
@@ -255,7 +283,7 @@ class AuthController extends Controller
                 return $pdf->download("questions-masterfile.pdf");
                 break;
             case('csv'):
-                $this->quest->csv($results);
+                $this->tmp->csv($results);
                 break;
         }
     }
