@@ -40,6 +40,7 @@ class AuthController extends Controller
         $templates = $this->auth->getTemplates();
         $system = $this->auth->getSystems();
         
+        $rating = [];
 
         $conditions = [
             ['status',"=",1],
@@ -55,8 +56,8 @@ class AuthController extends Controller
                 'average'   =>  $answer
             ];
         }
-        // $rating = json_encode($rating);
-        // dd($rating);
+        $rating = json_encode($rating);
+        dd($rating);
         return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system]);
     }
 

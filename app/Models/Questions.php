@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +90,10 @@ class Questions extends Model
     }
 
     public function pdf($results,$type){
+            // $img = url('../../../public/files/img/AGC_TRANSPARENT.png');
+            // $type = pathinfo($img,PATHINFO_EXTENSION);
+            // $data = file_get_contents($img);
+            // $base64 = 'data:image/'.$type.';base64'.base64_encode($data);
 
             $data = [];
 
@@ -99,14 +104,16 @@ class Questions extends Model
             array_push($data, $grpData);
 
             $report_title = "Questions Masterfile";
-
             $reportData = [
                 'data'  =>  $data,
                 'webpage_title' =>  "Questions Report",
                 'report_title'  =>  $report_title,
                 'table_headers' =>  ['No.','Title'],
-                'table_body'    =>  ['title']
+                'table_body'    =>  ['title'],
+                // 'img'           =>  $base64
             ];
+
+            // dd($reportData['img']);
 
             return $reportData;
     }
@@ -122,8 +129,9 @@ class Questions extends Model
                 $row->title
             ];
         }
-        $filename = "Questions Masterfile" . date('Y-m-d H-i-sA').'.csv';
-
+        $filename = "Questions_Masterfile"."-". date('Y-m-d').'.csv';
+        // dd($questions);
+        
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="'.$filename.'"');
         
@@ -132,9 +140,16 @@ class Questions extends Model
         if ($f === false) {
             die('Error opening the file ' .$filename);
         }
-        
-        foreach ($questions as $row) {
-            fputcsv($f, $row, ',');
+
+        if(empty($questions[1])){
+            $arr = [
+                "No data to show"
+            ];
+            fputcsv($f, $arr);
+        } else {
+            foreach ($questions as $row) {
+                fputcsv($f, $row, ',');
+            }
         }
         
         fclose($f);

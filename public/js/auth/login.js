@@ -19,10 +19,10 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(e){
-                    window.location.href = "/";
+                    window.location.href = '/dashboard';
                 },
-                error: function(e){
-
+                error: function(error){
+                    toastRWithTime("Wrong username or password","error");
                 }
             });
         });

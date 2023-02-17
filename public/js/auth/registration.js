@@ -22,8 +22,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(e){
-                    window.location.href = "/";
-                    // alert(e);
+                    // window.location.href = '/dashboard';
+                    alert(e);
                 },
                 error: function(error){
                     console.log(error);
