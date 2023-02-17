@@ -17,7 +17,7 @@
                 width: 100%;
                 
             }
-            thead{
+            thead .data{
                 background-color: #222831;
                 color: #FFD369;
             }
@@ -46,10 +46,22 @@
         <p class="page">Page <?php $PAGE_NUM ?></p>
     </div>
     <div>
-        <div class="center-aligned">
-            <div>
-                <label for=""><strong>{{ $report_title }}</strong></label>
-            </div>
+        <div class="row" style="width:100%">
+            <table>
+                <thead>
+                    <th colspan="1" style="width: 30%;">
+                        <img src="{{public_path('files/img/AGC_TRANSPARENT.png')}}" alt="">
+                    </th>
+                    <th colspan="4" style="width: 40%;">
+                        <div>
+                            <label for="" style="font-size: 1.5rem"><strong>{{ $report_title }}</strong></label>
+                        </div>
+                    </th>
+                    <th style="width:30%;">
+
+                    </th>
+                </thead>
+            </table>
         </div>
 
         <div>
@@ -58,7 +70,7 @@
                 <em><small>Total: {{$row->total}}</small></em>
                 @if(!empty($row->total))
                     <table>
-                        <thead>
+                        <thead class="data">
                             @foreach ($table_headers as $header)
                                     <th> {{ $header }} </th>
                                 @endforeach

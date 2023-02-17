@@ -22,7 +22,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(e){
-                    window.location.href = "/";
+                    window.location.href = '/dashboard';
                     // alert(e);
                 },
                 error: function(error){

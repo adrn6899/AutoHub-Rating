@@ -107,4 +107,39 @@ class System extends Model
         return $reportData;
     }
 
+    public function csv($results){
+        $systems = [];
+        $systems[] = ['No.','Title'];
+        $inc = 0;
+        foreach($results as $row){
+            $systems[] = [
+                $inc+=1,
+                $row->title
+            ];
+        }
+        $filename = "Systems_Masterfile"."-". date('Y-m-d').'.csv';
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        
+        $f = fopen('php://output', 'wb');
+        
+        if ($f === false) {
+            die('Error opening the file ' .$filename);
+        }
+
+        if(empty($questions[1])){
+            $arr = [
+                "No data to show"
+            ];
+            fputcsv($f, $arr);
+        } else {
+            foreach ($systems as $row) {
+                fputcsv($f, $row, ',');
+            }
+        }        
+        
+        fclose($f);    
+    }
+
 }

@@ -116,7 +116,7 @@ class Template extends Model
                 $row->title
             ];
         }
-        $filename = "Templates Masterfile" . date('Y-m-d H-i-sA').'.csv';
+        $filename = "Templates_Masterfile." . date('Y-m-d H-i-sA').'.csv';
 
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="'.$filename.'"');
@@ -126,9 +126,16 @@ class Template extends Model
         if ($f === false) {
             die('Error opening the file ' .$filename);
         }
-        
-        foreach ($templates as $row) {
-            fputcsv($f, $row, ',');
+
+        if(empty($questions[1])){
+            $arr = [
+                "No data to show"
+            ];
+            fputcsv($f, $arr);
+        } else {
+            foreach ($templates as $row) {
+                fputcsv($f, $row, ',');
+            }
         }
         
         fclose($f);
