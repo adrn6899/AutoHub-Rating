@@ -57,7 +57,6 @@ class AuthController extends Controller
             ];
         }
         $rating = json_encode($rating);
-        dd($rating);
         return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system]);
     }
 

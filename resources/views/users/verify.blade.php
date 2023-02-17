@@ -58,7 +58,6 @@
         var t_id = {!!json_encode($t_id)!!};
     </script>
     <script src="{{asset('js/rater.min.js')}}"></script>
-    {{-- <script src="{{asset('js/jquery.star-rating.js')}}"></script> --}}
     <script src="{{ asset('js/verify.js') }}"></script>
 </body>
 </html>

@@ -32,10 +32,8 @@
     function SubmitReview(){
         $('#submitReview').on('click', function(e){
             e.preventDefault();
-            // console.log(starsArr);
-            // starsArr.filter(function(e){
+            alert();
 
-            // });
             var formData = new FormData();
 
             formData.append('t_id',t_id);
@@ -53,11 +51,10 @@
                 },
                 success: function(success){
                   toastRWithTime(success.message,"success");
-                  questionnaireList.draw(false);
                 },
                 error: function(error){
                   console.log(error);
-                  // toastRWithTime(error)
+                  toastRWithTime(error);
                 }
               });
         });
@@ -65,9 +62,6 @@
 
     $(function(){
         createAnswerField();
-        $('#submitReview').on('click', function(e){
-            e.preventDefault();
-            SubmitReview();
-        });
+        SubmitReview();
     });
 })();
