@@ -68,7 +68,7 @@ Route::group(['middleware'  =>  'auth'],function(){
 
 });
 
-Route::get('signin',function(){
+Route::get('/',function(){
     if(Auth::check()){
         return redirect()->route('admin.dashboard');
     } else {

@@ -255,6 +255,7 @@ class AuthController extends Controller
         }
 
     }
+    
     public function tmpReport(Request $request){
         // dd($request->all());
         $array_data['type'] = $request->type;
