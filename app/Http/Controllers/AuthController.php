@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\System;
 use App\Models\Answer;
 use App\Models\Auth as ModelsAuth;
+use App\Models\Questionnaire;
 use App\Models\Questions;
 use App\Models\Template;
 use Illuminate\Support\Facades\DB;
@@ -41,21 +42,31 @@ class AuthController extends Controller
         $system = $this->auth->getSystems();
         
         $rating = [];
-
+        $res = [];
         $conditions = [
             ['status',"=",1],
             ['active',"=",1]
         ];
         $systems = System::select('id')->where($conditions)->get();
+        // dd($systems);
         foreach($systems as $row){
+            $questions = Questions::select('id')->where('id',$row['id'])->get();
+            $res['q_id'][] = [
+                $questions
+            ];
+        }
+        // dd($res);
+        foreach($res['q_id'] as $row => $key){
+            // dd($key[0][0]->id);
             // $avg = Answer::
-            $answer = DB::table('answers')->where('qst_id',$row['id'])->avg('rating');
+            $answer = DB::table('answers')->where('qst_id',$key[0][0]->id)->avg('rating');
             // $answer = DB::table('answers')->select('s_id')->where('qst_id',$row['id'])->get();
             $rating['average'][] = [
-                'id'    =>  $row['id'],
+                'id'    =>  $key[0][0]->id,
                 'average'   =>  $answer
             ];
         }
+        dd($rating);
         $rating = json_encode($rating);
         return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system]);
     }

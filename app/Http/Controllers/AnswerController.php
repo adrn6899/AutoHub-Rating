@@ -32,15 +32,21 @@ class AnswerController extends Controller
                 ['active',1]
             ];
             $check = Link::where($conditions)->get();
+            // dd($check[0]);
             if(!empty($check[0])){
                 $questionnaire = Questionnaire::SELECT('id','q_id')->where($conditions2)->get();
+                // foreach($questionnaire[0]->q_id as $row){
+                    //     dd($row);
+                    // }
+                    // dd(json_decode($questionnaire[0]->q_id));
+                $questionnaire = array_map('intval',json_decode($questionnaire[0]->q_id));
                 $system_title = System::select('system_name')->where('id',"=",$url[5])->get();
                 foreach($questionnaire as $row){
                     // dd($row);
-                    $questions = Questions::select('title')->where('id',$row->q_id)->get();
+                    $questions = Questions::select('title')->where('id',$row)->get();
                     $questionsArr['questions'][] = [
                         'title' => $questions[0]->title,
-                        'qst_id'    =>  $row->id
+                        'qst_id'    =>  $row
                     ];
                     // $questionsArr['questions']['qst_id'] = $row->id;
                 }
@@ -73,14 +79,27 @@ class AnswerController extends Controller
         }
         $result = array_values($result); 
         
+        $qst = [];
+        $ans = [];
+
+        // dd($result);
         foreach($result as $row){
+            $qsts = $row[0];
+            $qst[] = $qsts;
+        }
+        foreach($result as $row){
+            $ansr = $row[1];
+            $ans[] = $ansr;
+        }
+
+        // foreach($result as $row){
             Answer::insert([
                 'user_id'   =>  Auth::user()->id,
                 'tmpt_id'   =>  $request->t_id,
-                'qst_id'    =>  $row[0],
-                'rating'    =>  $row[1]
+                'qst_id'    =>  json_encode($qst),
+                'rating'    =>  json_encode($ans)
             ]);
-        }
+        // }
 
         return response()->json(["message"=>"success"],200);
     }

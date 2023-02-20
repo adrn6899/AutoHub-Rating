@@ -11,9 +11,10 @@
             <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h4>Please Select Template Name:</h4>
+                            <h4>Template Name:</h4>
                             <div class="input-group input-group-lg mb-3">
-                                <select class="form-select form-select-lg" name="t_id" id="template_name" placeholder="Template Name"></select>
+                                <input type="text" class="form-control" name="template_name" id="template_name" placeholder="Template Name">
+                                {{-- <select class="form-select form-select-lg" name="t_id" id="template_name" placeholder="Template Name"></select> --}}
                             </div>
                             <h4>Please Select System:</h4>
                             <div class="input-group input-group-lg">
