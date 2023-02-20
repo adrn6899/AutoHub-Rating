@@ -8,12 +8,12 @@
     </div>
     <div class="col">
         <div class="card bg-warning" style="height:150px">
-            {{$templates}}
+            <p style="font-size: 4rem">{{$templates}}</p>
         </div>
     </div>
     <div class="col">
         <div class="card bg-danger" style="height:150px">
-            <p style="font-size: 5rem">{{$systems}}</p>
+            <p style="font-size: 4rem">{{$systems}}</p>
         </div>
     </div>
     <div class="col">

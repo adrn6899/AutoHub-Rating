@@ -18,9 +18,9 @@ CREATE SCHEMA IF NOT EXISTS `autohub_rating_system` DEFAULT CHARACTER SET utf8mb
 USE `autohub_rating_system` ;
 
 -- -----------------------------------------------------
--- Table `questions`
+-- Table `autohub_rating_system`.`questions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `questions` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`questions` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NULL DEFAULT NULL,
   `status` VARCHAR(45) NULL DEFAULT NULL,
@@ -29,14 +29,14 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `updated_at` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `templates`
+-- Table `autohub_rating_system`.`templates`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `templates` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`templates` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NULL DEFAULT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -45,14 +45,14 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `status` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `answers`
+-- Table `autohub_rating_system`.`answers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `answers` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`answers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `tmpt_id` INT NOT NULL,
@@ -66,19 +66,19 @@ CREATE TABLE IF NOT EXISTS `answers` (
   INDEX `t_id_idx` (`tmpt_id` ASC) VISIBLE,
   CONSTRAINT `qst_id`
     FOREIGN KEY (`qst_id`)
-    REFERENCES `questions` (`id`),
+    REFERENCES `autohub_rating_system`.`questions` (`id`),
   CONSTRAINT `tmpt_id`
     FOREIGN KEY (`tmpt_id`)
-    REFERENCES `templates` (`id`))
+    REFERENCES `autohub_rating_system`.`templates` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `failed_jobs`
+-- Table `autohub_rating_system`.`failed_jobs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`failed_jobs` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` VARCHAR(255) NOT NULL,
   `connection` TEXT NOT NULL,
@@ -94,9 +94,9 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `systems`
+-- Table `autohub_rating_system`.`systems`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `systems` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`systems` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `system_name` VARCHAR(45) NULL DEFAULT NULL,
   `created_at` DATETIME NULL DEFAULT NULL,
@@ -105,14 +105,14 @@ CREATE TABLE IF NOT EXISTS `systems` (
   `status` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `links`
+-- Table `autohub_rating_system`.`links`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `links` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`links` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `sys_id` INT NOT NULL,
   `tmp_id` INT NOT NULL,
@@ -126,19 +126,19 @@ CREATE TABLE IF NOT EXISTS `links` (
   INDEX `tmp_id_idx` (`tmp_id` ASC) VISIBLE,
   CONSTRAINT `sys_id`
     FOREIGN KEY (`sys_id`)
-    REFERENCES `systems` (`id`),
+    REFERENCES `autohub_rating_system`.`systems` (`id`),
   CONSTRAINT `tmp_id`
     FOREIGN KEY (`tmp_id`)
-    REFERENCES `templates` (`id`))
+    REFERENCES `autohub_rating_system`.`templates` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `migrations`
+-- Table `autohub_rating_system`.`migrations`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `migrations` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`migrations` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `migration` VARCHAR(255) NOT NULL,
   `batch` INT NOT NULL,
@@ -149,9 +149,9 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `password_resets`
+-- Table `autohub_rating_system`.`password_resets`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `password_resets` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`password_resets` (
   `email` VARCHAR(255) NOT NULL,
   `token` VARCHAR(255) NOT NULL,
   `created_at` TIMESTAMP NULL DEFAULT NULL,
@@ -162,9 +162,9 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `personal_access_tokens`
+-- Table `autohub_rating_system`.`personal_access_tokens`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`personal_access_tokens` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `tokenable_type` VARCHAR(255) NOT NULL,
   `tokenable_id` BIGINT UNSIGNED NOT NULL,
@@ -184,40 +184,36 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `questionnaires`
+-- Table `autohub_rating_system`.`questionnaires`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `questionnaires` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`questionnaires` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `s_id` INT NOT NULL,
   `t_id` INT NOT NULL,
-  `q_id` INT NOT NULL,
+  `q_id` VARCHAR(455) NOT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NULL DEFAULT NULL,
   `status` VARCHAR(45) NULL DEFAULT NULL,
   `active` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `s_id` (`s_id` ASC, `t_id` ASC, `q_id` ASC) VISIBLE,
+  UNIQUE INDEX `s_id` (`s_id` ASC, `t_id` ASC) VISIBLE,
   INDEX `system_id_idx` (`s_id` ASC) VISIBLE,
   INDEX `t_id_idx` (`t_id` ASC) VISIBLE,
-  INDEX `q_id_idx` (`q_id` ASC) VISIBLE,
-  CONSTRAINT `q_id`
-    FOREIGN KEY (`q_id`)
-    REFERENCES `questions` (`id`),
   CONSTRAINT `s_id`
     FOREIGN KEY (`s_id`)
-    REFERENCES `systems` (`id`),
+    REFERENCES `autohub_rating_system`.`systems` (`id`),
   CONSTRAINT `t_id`
     FOREIGN KEY (`t_id`)
-    REFERENCES `templates` (`id`))
+    REFERENCES `autohub_rating_system`.`templates` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `users`
+-- Table `autohub_rating_system`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `autohub_rating_system`.`users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
@@ -230,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `users_email_unique` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
 

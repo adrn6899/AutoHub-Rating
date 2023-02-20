@@ -54,36 +54,36 @@
           // replace('questionnaires');
         });
 
-        $('#template_name').select2({
-            // theme: 'classic',
-            allowClear: true,
-            language: {
-                noResults: function () {
-                return "Select";
-                },
-            },
-            escapeMarkup: function (markup) {
-                return markup;
-            },
-            placeholder: "Select template",
-            ajax: {
-                url:"/templates/select2",
-                dataType: 'json',
-                delay: 250,
-                data: function (data) {
-                    return {
-                      search: data.term,
-                      limit: 15,
-                    };
-                  },
-                  processResults: function (response) {
-                    return {
-                      results: response.results,
-                    };
-                  },
-                  cache: true,
-            }
-        });
+        // $('#template_name').select2({
+        //     // theme: 'classic',
+        //     allowClear: true,
+        //     language: {
+        //         noResults: function () {
+        //         return "Select";
+        //         },
+        //     },
+        //     escapeMarkup: function (markup) {
+        //         return markup;
+        //     },
+        //     placeholder: "Select template",
+        //     ajax: {
+        //         url:"/templates/select2",
+        //         dataType: 'json',
+        //         delay: 250,
+        //         data: function (data) {
+        //             return {
+        //               search: data.term,
+        //               limit: 15,
+        //             };
+        //           },
+        //           processResults: function (response) {
+        //             return {
+        //               results: response.results,
+        //             };
+        //           },
+        //           cache: true,
+        //     }
+        // });
 
         $('#system_name').select2({
             // theme: 'classic',

@@ -114,39 +114,52 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->post());
         $url = $request->url();
         $base_url = explode("/",$url);
         
         if($request->t_id == "null"){
-            return response()->json(["message"=>"Please choose a template"],402);
+            return response()->json(["message"=>"Please provide a template name"],402);
         }
         if($request->s_id == "null"){
             return response()->json(["message"=>"Please choose a system"],402);
         }
+        if(empty($request->questionArr)){
+            return response()->json(["message"=>"No questions selected"],402);
+        }
+
+        $template = Template::create([
+            "title" =>  $request->t_id,
+            "active"    =>  1,
+            "status"    =>  1
+        ]);
+        // dd($template->id);
             
             $questions = explode(",",$request->questionArr);
-    
+            // dd($questions);
             $check = Questionnaire::select('id')
             ->where('s_id',"=",$request->s_id)
-            ->orWhere('t_id',"=",$request->t_id)
+            ->orWhere('t_id',"=",$template->id)
             ->get();
-            if(empty($check[0])){   
-                foreach($questions as $item){
+            // dd($check);
+            if(empty($check[0])){
+                // dd("going here");
+                // dd($template->id);   
+                // foreach($questions as $item){
                     DB::table('questionnaires')
                     ->insert([
                         's_id'  =>  $request->s_id,
-                        't_id'  =>  $request->t_id,
-                        'q_id'  =>  $item,
+                        't_id'  =>  $template->id,
+                        'q_id'  =>  json_encode($questions),
                         'status'    =>  1,
                         'active'    =>  1
                     ]);
-                }    
+                    // dd("done");
+                // }    
                 
                 $link = new Link;
                 $link->sys_id = $request->s_id;
-                $link->tmp_id = $request->t_id;
-                $link->link = "/search/s/".$request->s_id."/tid/".$request->t_id;
+                $link->tmp_id = $template->id;
+                $link->link = "/search/s/".$request->s_id."/tid/".$template->id;
                 $link->active = 1;
                 $link->status = 1;
                 $link->save();
@@ -197,6 +210,8 @@ class QuestionnaireController extends Controller
             ['status',"=",1],
             ['active',"=",1]
         ])->get();
+        // dd($result);
+        $result[0]->q_id = array_map('intval',json_decode($result[0]->q_id));
         $link = Link::select('link')->where([
             ['tmp_id',"=",$request->t_id],
             ['sys_id',"=",$request->s_id],
@@ -221,27 +236,39 @@ class QuestionnaireController extends Controller
         // dd($request->all());
         $question = explode(",",$request->questionArr);
         $result = Questionnaire::where([
-            ['t_id',"=",$request->t_id],
-            ['s_id',"=",$request->s_id]
-            ])->update([
-            'status'    =>  null,
-            'active'    =>  null
-            ]);
-        
-        // $res = Questionnaire::upsert([
-
-        // ]);
-        foreach($question as $row){
-            Questionnaire::upsert([
-                [
-                    't_id'  =>  $request->t_id,
-                    's_id'  =>  $request->s_id,
-                    'q_id'  =>  $row,
-                    'status'    =>  1,
-                    'active'    =>  1
-                ]
-            ],['t_id','s_id','q_id'],['status','active']);
-        }
+                ['t_id',"=",$request->t_id],
+                ['s_id',"=",$request->s_id]
+                ])->get();
+                // dd($result[0]->id);
+        // $result = Questionnaire::where([
+        //     ['t_id',"=",$request->t_id],
+        //     ['s_id',"=",$request->s_id]
+        //     ])->update([
+        //     'status'    =>  null,
+        //     'active'    =>  null
+        //     ]);
+        $questionnaire = Questionnaire::findOrFail($result[0]->id);
+        $questionnaire->q_id = json_encode($question);
+        $questionnaire->save();
+        // Questionnaire::upsert([
+        //     'id'    =>  $result[0]->id,
+        //     't_id'  =>  $request->t_id,
+        //     's_id'  =>  $request->s_id,
+        //     'q_id'  =>  json_encode($question),
+        //     'status'    =>  1,
+        //     'active'    =>  1
+        // ],['id','t_id','s_id'],['q_id','status','active']);
+        // foreach($question as $row){
+        //     Questionnaire::upsert([
+        //         [
+        //             't_id'  =>  $request->t_id,
+        //             's_id'  =>  $request->s_id,
+        //             'q_id'  =>  $row,
+        //             'status'    =>  1,
+        //             'active'    =>  1
+        //         ]
+        //     ],['t_id','s_id','q_id'],['status','active']);
+        // }
 
         return response()->json(["message"=>"success"],200);
 
