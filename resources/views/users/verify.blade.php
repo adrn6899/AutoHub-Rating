@@ -48,7 +48,15 @@
 
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary" type="submit" style="float: right" id="submitReview">Submit</button>
+                <div class="row">
+                    <div class="col">
+                        {{-- <label for="comment">Comment: </label> --}}
+                        <textarea class="mt-1" name="comment" id="comment" cols="50" rows="1" placeholder="Comment Here ..."></textarea>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit" style="float: right" id="submitReview">Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
