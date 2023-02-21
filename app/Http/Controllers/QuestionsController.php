@@ -22,6 +22,10 @@ class QuestionsController extends Controller
         return view('admin.questions.questions');
     }
 
+    public function getQs($val){
+        return Questions::select('title')->where('id',$val)->get();
+    }
+
     public function fetchall(Request $request){
         $array_data['search_keyword']   =   $request->search['value'];
         if(empty($request->search_type)){

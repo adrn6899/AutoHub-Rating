@@ -10,7 +10,7 @@ class Template extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title','q_id'];
 
     public function getTemplateQuery(){
         return "SELECT %s

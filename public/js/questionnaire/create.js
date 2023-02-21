@@ -2,26 +2,19 @@
 
   "use strict";
 
-    var search_type_filter = [];
-    var questionnaireList = null;
-    var id = null;
-    var url = null;
-    var questionArr = [];
-    var stringVal;
-
     function submitForm(){
       $('#submitForm').on('click',function(e){
         e.preventDefault();
-        questionArr = [];
-        $(this).attr('disabled',true);
-        $('input[type="checkbox"]:checked').each(function(){
-            questionArr.push(this.value);
-        });
+        // questionArr = [];
+        // $(this).attr('disabled',true);
+        // $('input[type="checkbox"]:checked').each(function(){
+        //     questionArr.push(this.value);
+        // });
         var t_id = $('#template_name').val();
         var sys_id = $('#system_name').val();
 
         var formData = new FormData();
-        formData.append('questionArr',questionArr);
+        // formData.append('questionArr',questionArr);
         formData.append('t_id',t_id);
         formData.append('s_id',sys_id);
         $.ajax({
@@ -54,36 +47,36 @@
           // replace('questionnaires');
         });
 
-        // $('#template_name').select2({
-        //     // theme: 'classic',
-        //     allowClear: true,
-        //     language: {
-        //         noResults: function () {
-        //         return "Select";
-        //         },
-        //     },
-        //     escapeMarkup: function (markup) {
-        //         return markup;
-        //     },
-        //     placeholder: "Select template",
-        //     ajax: {
-        //         url:"/templates/select2",
-        //         dataType: 'json',
-        //         delay: 250,
-        //         data: function (data) {
-        //             return {
-        //               search: data.term,
-        //               limit: 15,
-        //             };
-        //           },
-        //           processResults: function (response) {
-        //             return {
-        //               results: response.results,
-        //             };
-        //           },
-        //           cache: true,
-        //     }
-        // });
+        $('#template_name').select2({
+            // theme: 'classic',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                return "Select";
+                },
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            placeholder: "Select template",
+            ajax: {
+                url:"/templates/select2",
+                dataType: 'json',
+                delay: 250,
+                data: function (data) {
+                    return {
+                      search: data.term,
+                      limit: 15,
+                    };
+                  },
+                  processResults: function (response) {
+                    return {
+                      results: response.results,
+                    };
+                  },
+                  cache: true,
+            }
+        });
 
         $('#system_name').select2({
             // theme: 'classic',
@@ -115,19 +108,37 @@
                   cache: true,
             }
         });
-        $('input[type="checkbox"]').change(function(){
-            questionArr = [];
-        });
-        $('#clear_selection').on('click', function(e){
-          e.preventDefault();
-          $('input[type="checkbox"]').each(function(){
-            this.checked = false;
-          });
-          toastRWithTime("Selection Cleared","info");
-        });
+        // $('input[type="checkbox"]').change(function(){
+        //     questionArr = [];
+        // });
+        // $('#clear_selection').on('click', function(e){
+        //   e.preventDefault();
+        //   $('input[type="checkbox"]').each(function(){
+        //     this.checked = false;
+        //   });
+        //   toastRWithTime("Selection Cleared","info");
+        // });
 
         $('#cancel_action').on('click', function(e){
           window.location.href = "/questionnaires";
+        });
+
+        $('#template_name').on('change', function(){
+          $.ajax({
+            type:"GET",
+            url:"/questionnaires/getQs",
+            data:{id:$(this).val()},
+            dataType: 'json',
+            success: function(success){
+              $('.questions-list').find('p').remove();
+              $.each(success.questions, function(key,value){
+                $('.questions-list').append(`<p>`+ value[0] +`</p>`);
+              });
+            },
+            error: function(error){
+              console.log(error);
+            }
+          });
         });
     });
 })();

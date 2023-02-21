@@ -38,6 +38,7 @@
 
             formData.append('t_id',t_id);
             formData.append('stars',JSON.stringify(starsArr));
+            formData.append('comment',$('#comment').val());
 
             $.ajax({
                 type: "POST",

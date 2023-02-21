@@ -97,7 +97,8 @@ class AnswerController extends Controller
                 'user_id'   =>  Auth::user()->id,
                 'tmpt_id'   =>  $request->t_id,
                 'qst_id'    =>  json_encode($qst),
-                'rating'    =>  json_encode($ans)
+                'rating'    =>  json_encode($ans),
+                'comment'   =>  $request->comment
             ]);
         // }
 

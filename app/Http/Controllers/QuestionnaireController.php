@@ -29,6 +29,29 @@ class QuestionnaireController extends Controller
         return view('admin.questionnaires.index');
     }
 
+    public function getQs(Request $request){
+        // $array = [];
+        $id = $request->id;
+        $tmp = Template::select('q_id')->where('id',$id)->get();
+        // dd($tmp[0]->q_id);
+        if(!empty($tmp[0]->q_id)){
+            $q_id = array_map('intval',json_decode($tmp[0]->q_id));
+            foreach($q_id as $row){
+                $result = (new QuestionsController)->getQs($row);
+                // if(){
+    
+                // }
+                // dd($result[0]->title);
+                $array['questions'][] = [
+                    $result[0]->title
+                ];
+            }
+            // dd($array);
+            return response()->json($array);
+        }
+
+    }
+
     public function fetchall(Request $request){
         $array_data['search_keyword']   =   $request->search['value'];
         if(empty($request->search_type)){
@@ -99,11 +122,11 @@ class QuestionnaireController extends Controller
      */
     public function create()
     {
-        $questions = Questions::where([
-            ['active',"=",1],
-            ['status',"=",1]
-        ])->get();
-        return view('admin.questionnaires.create',compact('questions'));
+        // $questions = Questions::where([
+        //     ['active',"=",1],
+        //     ['status',"=",1]
+        // ])->get();
+        return view('admin.questionnaires.create');
     }
 
     /**
