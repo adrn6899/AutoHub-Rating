@@ -245,5 +245,10 @@
           $('#templateModalTitle').text("CREATE");
           $('[name="edit_id"]').remove();
         });
+
+        $('#t_create').on('click', function(e){
+          e.preventDefault();
+          window.location.href = "/templates/create";
+        });
     });
 })();

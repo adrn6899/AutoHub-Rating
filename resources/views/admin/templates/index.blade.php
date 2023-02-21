@@ -28,7 +28,7 @@
                 </div>
                 <div class="col">
                     <button class="btn btn-primary btn-add btn-md mt-3" id="reload_list"><i class="bi bi-arrow-clockwise" style="font-size: 1rem; font-weight:bolder;"></i> Reload</button>
-                    <button class="btn btn-primary btn-add btn-md mt-3" id="t_create" data-bs-toggle="modal" data-bs-target="#templateModal"><i class="bi bi-plus-lg"></i> Create</button>
+                    <button class="btn btn-primary btn-add btn-md mt-3" id="t_create"><i class="bi bi-plus-lg"></i> Create</button>
                 </div>
             </div>
             <div class="admin-body-container">
@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-@include('admin.templates.create')
+{{-- @include('admin.templates.create') --}}
 @endsection
 @section('javascript')
 <script src="{{asset('js/template/template.js')}}"></script>

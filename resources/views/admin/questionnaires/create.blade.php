@@ -13,8 +13,8 @@
                         <div class="col">
                             <h4>Template Name:</h4>
                             <div class="input-group input-group-lg mb-3">
-                                <input type="text" class="form-control" name="template_name" id="template_name" placeholder="Template Name">
-                                {{-- <select class="form-select form-select-lg" name="t_id" id="template_name" placeholder="Template Name"></select> --}}
+                                {{-- <input type="text" class="form-control" name="template_name" id="template_name" placeholder="Template Name"> --}}
+                                <select class="form-select form-select-lg" name="t_id" id="template_name" placeholder="Template Name"></select>
                             </div>
                             <h4>Please Select System:</h4>
                             <div class="input-group input-group-lg">
@@ -22,21 +22,14 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="row">
-                                <div class="col"><h3>Question List</h3></div>
-                                <div class="col">
-                                    <button class="btn btn-sm btn-danger" id="clear_selection" style="float: right">
-                                        Clear Selection
-                                    </button>
-                                </div>
-                            </div>
+                            <h4>Questions List</h4>
                             <div class="questions-list overflow-y-scroll" style="height: 350px">
-                                @foreach ($questions as $item)
+                                {{-- @foreach ($questions as $item)
                                     <div class="form-check">
                                         <input class="form-check-input mt-1" type="checkbox" name="{{$item->title}}" id="{{$item->title}}" value="{{$item->id}}">
                                         <label class="form-check-label" for="{{$item->title}}" style="font-size: 1rem">{{$item->title}}</label>
                                     </div>
-                                @endforeach
+                                @endforeach --}}
                             </div>
                         </div>
                     </div>

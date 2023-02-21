@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Questions;
 use App\Models\Template;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,8 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        //
+        $questions = Questions::get()->all();
+        return view('admin.templates.create',compact('questions'));
     }
 
     public function fetchall(Request $request){
@@ -100,8 +102,13 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+
+        $questions = explode(",",$request->questionArr);
+
         $result = $this->template;
         $result->title = $request->title;
+        $result->q_id  =  json_encode($questions);
         $result->active = 1;
         $result->status = 1;
         $result->save();
