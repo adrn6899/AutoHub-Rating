@@ -22,7 +22,7 @@ class Questionnaire extends Model
             `qst`.`s_id` = `sys`.`id`
         WHERE
             1 AND `qst`.`status` = 1
-        GROUP BY `tmp`.`id`
+        -- GROUP BY `tmp`.`id`
         %s
         %s
         %s
@@ -32,12 +32,14 @@ class Questionnaire extends Model
 
     public function getQuestionnaires($array_data){
         // dd($array_data);
-        $fields = " ANY_VALUE(`tmp`.`id`) AS `tmp_id`,
-        ANY_VALUE(`tmp`.`title`) AS `title`,
-        ANY_VALUE(`qst`.`id`) AS `id`,
-        ANY_VALUE(`sys`.`id`) AS `sys_id`,
-        ANY_VALUE(`sys`.`system_name`) AS `system_name` ";
-        // ANY_VALUE(`qst`.`id`),
+        $fields = " 
+        `tmp`.`id` as `tmp_id`,
+        `tmp`.`title` AS `title`,
+        `sys`.`id` as `sys_id`,
+        `sys`.`system_name` as `system_name` ";
+        // ANY_VALUE(`tmp`.`id`) AS `tmp_id`,
+        // ANY_VALUE(`tmp`.`title`) AS `title`,
+        // ANY_VALUE(`qst`.`id`) AS `id`,
         // ANY_VALUE(`sys`.`id`) AS `sys_id`,
         // ANY_VALUE(`sys`.`system_name`) AS `system_name` ";
         $query = sprintf(
@@ -52,7 +54,8 @@ class Questionnaire extends Model
     }
 
     public function getQuestionnairesCount($array_data){
-        $fields = " tmp.id ";
+        // $fields = " tmp.id ";
+        $fields = " COUNT(1) as Count ";
         $query = sprintf(
             $this->getQuestionnaireQuery(),
             $fields,
@@ -62,11 +65,13 @@ class Questionnaire extends Model
             ''
         );
         //dd($query);
-        return DB::select("SELECT COUNT(1) as Count FROM (".$query.") foo");
+        // return DB::select("SELECT COUNT(1) as Count FROM (".$query.") foo");
+        return DB::select($query);
     }
 
     public function getQuestionnairesFilteredCount($array_data){
-        $fields = " tmp.id ";
+        // $fields = " tmp.id ";
+        $fields = " COUNT(1) as FilteredCount ";
         $query = sprintf(
             $this->getQuestionnaireQuery(),
             $fields,
@@ -75,6 +80,6 @@ class Questionnaire extends Model
             '',
             ''
         );
-        return DB::select("SELECT COUNT(1) as FilteredCount FROM (".$query.") bar");
+        return DB::select($query);
     }
 }

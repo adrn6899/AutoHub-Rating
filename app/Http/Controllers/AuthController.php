@@ -21,7 +21,7 @@ use PDF;
 
 class AuthController extends Controller
 {
-    private $auth,$quest,$tmp,$sys;
+    private $auth,$quest,$tmp,$sys,$qst;
     /**
      * Display a listing of the resource.
      *
@@ -33,6 +33,7 @@ class AuthController extends Controller
         $this->quest = new Questions;
         $this->tmp = new Template;
         $this->sys = new System;
+        $this->qst = new Questionnaire;
     }
 
     public function dashBoard(){
@@ -40,6 +41,7 @@ class AuthController extends Controller
         $questions = $this->auth->getQuestions();
         $templates = $this->auth->getTemplates();
         $system = $this->auth->getSystems();
+        $qst = $this->auth->getQuestionnaires();
         
         $rating = [];
         $res = [];
@@ -47,28 +49,18 @@ class AuthController extends Controller
             ['status',"=",1],
             ['active',"=",1]
         ];
-        $systems = System::select('id')->where($conditions)->get();
-        // dd($systems);
-        foreach($systems as $row){
-            $questions = Questions::select('id')->where('id',$row['id'])->get();
-            $res['q_id'][] = [
-                $questions
-            ];
-        }
-        // dd($res);
-        foreach($res['q_id'] as $row => $key){
-            // dd($key[0][0]->id);
-            // $avg = Answer::
-            $answer = DB::table('answers')->where('qst_id',$key[0][0]->id)->avg('rating');
-            // $answer = DB::table('answers')->select('s_id')->where('qst_id',$row['id'])->get();
-            $rating['average'][] = [
-                'id'    =>  $key[0][0]->id,
-                'average'   =>  $answer
-            ];
-        }
-        dd($rating);
-        $rating = json_encode($rating);
-        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system]);
+        
+        $averages = DB::table('answers')
+        ->select('tmpt_id','syst_id',DB::raw('AVG(JSON_EXTRACT(rating, "$[*]")) as average_rating'))
+        ->groupBy('syst_id','tmpt_id')
+        ->get();
+
+        // $averages->each(function($average){
+
+        // })
+        dd($averages);
+        
+        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system, 'qst'=>$qst]);
     }
 
     /**

@@ -120,14 +120,14 @@
           });
         
         var cols = [
-            {
-                title: "ID",
-                data: 'tmp_id',
-                className: 'align-middle p-1 dt-left',
-                orderable: true,
-                width: "5%",
-                // visible: false
-            },
+            // {
+            //     title: "ID",
+            //     data: 'tmp_id',
+            //     className: 'align-middle p-1 dt-left',
+            //     orderable: true,
+            //     width: "5%",
+            //     // visible: false
+            // },
             // {
             //   title: "ID",
             //   data: 'count',

@@ -32,11 +32,12 @@
     function SubmitReview(){
         $('#submitReview').on('click', function(e){
             e.preventDefault();
-            alert();
+            // alert();
 
             var formData = new FormData();
 
             formData.append('t_id',t_id);
+            formData.append('s_id',s_id);
             formData.append('stars',JSON.stringify(starsArr));
             formData.append('comment',$('#comment').val());
 

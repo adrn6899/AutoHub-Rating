@@ -18,7 +18,7 @@
     </div>
     <div class="col">
         <div class="card bg-info" style="height:150px">
-
+            <p style="font-size: 4rem">{{$qst}}</p>
         </div>
     </div>
 </div>

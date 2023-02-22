@@ -146,22 +146,22 @@ class QuestionnaireController extends Controller
         if($request->s_id == "null"){
             return response()->json(["message"=>"Please choose a system"],402);
         }
-        if(empty($request->questionArr)){
-            return response()->json(["message"=>"No questions selected"],402);
-        }
+        // if(empty($request->questionArr)){
+        //     return response()->json(["message"=>"No questions selected"],402);
+        // }
 
-        $template = Template::create([
-            "title" =>  $request->t_id,
-            "active"    =>  1,
-            "status"    =>  1
-        ]);
+        // $template = Template::create([
+        //     "title" =>  $request->t_id,
+        //     "active"    =>  1,
+        //     "status"    =>  1
+        // ]);
         // dd($template->id);
             
-            $questions = explode(",",$request->questionArr);
+            // $questions = explode(",",$request->questionArr);
             // dd($questions);
             $check = Questionnaire::select('id')
-            ->where('s_id',"=",$request->s_id)
-            ->orWhere('t_id',"=",$template->id)
+            ->where([['s_id',"=",$request->s_id],['t_id',"=",$request->t_id]])
+            // ->orWhere()
             ->get();
             // dd($check);
             if(empty($check[0])){
@@ -171,8 +171,7 @@ class QuestionnaireController extends Controller
                     DB::table('questionnaires')
                     ->insert([
                         's_id'  =>  $request->s_id,
-                        't_id'  =>  $template->id,
-                        'q_id'  =>  json_encode($questions),
+                        't_id'  =>  $request->t_id,
                         'status'    =>  1,
                         'active'    =>  1
                     ]);
@@ -181,8 +180,8 @@ class QuestionnaireController extends Controller
                 
                 $link = new Link;
                 $link->sys_id = $request->s_id;
-                $link->tmp_id = $template->id;
-                $link->link = "/search/s/".$request->s_id."/tid/".$template->id;
+                $link->tmp_id = $request->t_id;
+                $link->link = "/search/s/".$request->s_id."/tid/".$request->t_id;
                 $link->active = 1;
                 $link->status = 1;
                 $link->save();
@@ -220,29 +219,30 @@ class QuestionnaireController extends Controller
     }
 
     public function getQuestions(Request $request){
-        $questions = Questions::get()->all();
-        $t_name = Template::select('title')
+        $q_title = [];
+        // $questions = Questions::get()->all();
+        $t_name = Template::select('title','q_id')
         ->where('id',"=",$request->t_id)
         ->get();
         $s_name = System::select('system_name')
         ->where('id',"=",$request->s_id)
         ->get();
-        $result = Questionnaire::where([
-            ['t_id',"=",$request->t_id],
-            ['s_id',"=",$request->s_id],
-            ['status',"=",1],
-            ['active',"=",1]
-        ])->get();
-        // dd($result);
-        $result[0]->q_id = array_map('intval',json_decode($result[0]->q_id));
+        $questions = array_map('intval',json_decode($t_name[0]->q_id));
+        foreach($questions as $row){
+            $q = Questions::select('title')->where('id',$row)->get();
+            $q_title[] = [
+                $q[0]->title,
+            ];
+        }
         $link = Link::select('link')->where([
             ['tmp_id',"=",$request->t_id],
             ['sys_id',"=",$request->s_id],
         ])->get();
 
-        return response()->json(["result"=>$result,
-        "questions"=>$questions,
-        "template"=>$t_name,
+        return response()->json([
+        // "result"=>$result,
+        "questions"=>$q_title,
+        "template"=>$t_name[0]->title,
         "system"=>$s_name,
         "link"=>$link]);
     }

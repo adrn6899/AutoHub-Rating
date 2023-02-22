@@ -7,10 +7,12 @@
     <title>Ratings</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{asset('js/rater.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/toastRWithTime.js') }}"></script>
-    <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/verify.js') }}"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
@@ -51,21 +53,21 @@
                 <div class="row">
                     <div class="col">
                         {{-- <label for="comment">Comment: </label> --}}
-                        <textarea class="mt-1" name="comment" id="comment" cols="50" rows="1" placeholder="Comment Here ..."></textarea>
+                        <textarea class="mt-1" name="comment" id="comment" cols="50" rows="2" placeholder="Comment Here ..."></textarea>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary" type="submit" style="float: right" id="submitReview">Submit</button>
+                        <button class="btn btn-primary" type="submit" style="float: right; margin-top:1rem;" id="submitReview">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/jquery.js') }}"></script>
+    {{-- <script src="{{ asset('js/toastRWithTime.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/jquery.js') }}"></script> --}}
     <script>
         var questions = {!!json_encode($questionsArr)!!};
         var t_id = {!!json_encode($t_id)!!};
+        var s_id = {!!json_encode($s_id)!!};
     </script>
-    <script src="{{asset('js/rater.min.js')}}"></script>
-    <script src="{{ asset('js/verify.js') }}"></script>
 </body>
 </html>
