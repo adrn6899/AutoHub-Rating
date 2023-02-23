@@ -7,6 +7,7 @@ use App\Models\Questionnaire;
 use App\Models\Questions;
 use App\Models\Answer;
 use App\Models\System;
+use App\Models\Template;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -21,6 +22,7 @@ class AnswerController extends Controller
             $questionsArr = [];
             $url = $request->url();
             $url = explode("/",$url);
+            // dd($url);
             $conditions = [
                 ['sys_id',$url[5]],
                 ['tmp_id',$url[7]]
@@ -32,23 +34,16 @@ class AnswerController extends Controller
                 ['active',1]
             ];
             $check = Link::where($conditions)->get();
-            // dd($check[0]);
             if(!empty($check[0])){
-                $questionnaire = Questionnaire::SELECT('id','q_id')->where($conditions2)->get();
-                // foreach($questionnaire[0]->q_id as $row){
-                    //     dd($row);
-                    // }
-                    // dd(json_decode($questionnaire[0]->q_id));
-                $questionnaire = array_map('intval',json_decode($questionnaire[0]->q_id));
+                $questions = Template::select('q_id')->where('id',$url[7])->get();
+                $questionnaire = array_map('intval',json_decode($questions[0]->q_id));
                 $system_title = System::select('system_name')->where('id',"=",$url[5])->get();
                 foreach($questionnaire as $row){
-                    // dd($row);
                     $questions = Questions::select('title')->where('id',$row)->get();
                     $questionsArr['questions'][] = [
                         'title' => $questions[0]->title,
                         'qst_id'    =>  $row
                     ];
-                    // $questionsArr['questions']['qst_id'] = $row->id;
                 }
                 $s_id = $url[5];
                 $t_id = $url[7];
@@ -96,6 +91,7 @@ class AnswerController extends Controller
             Answer::insert([
                 'user_id'   =>  Auth::user()->id,
                 'tmpt_id'   =>  $request->t_id,
+                'syst_id'   =>  $request->s_id,
                 'qst_id'    =>  json_encode($qst),
                 'rating'    =>  json_encode($ans),
                 'comment'   =>  $request->comment
@@ -145,19 +141,27 @@ class AnswerController extends Controller
         if($response['status'] == 0){
             dd("no user");
         } else {
-            $user = User::upsert([
-                
-                    'name'  =>  $response['u_fname']." ".$response['u_lname'],
-                    'email' =>  $response['email'],
-                    'password'  =>  bcrypt($response['u_password']),
-                    'type'  =>  "ratee"
-                ],['password'],['name','email']);
-            // dd($user);
-            $login = User::findOrFail($user);
-            Auth::login($login);
+            $user = User::select('id')->where([['name',"=",$response['u_fname']." ".$response['u_lname']],
+            ['email',"=",$response['email']]])->first();
+
+            if(empty($user)){
+                $user = User::create([
+                    
+                        'name'  =>  $response['u_fname']." ".$response['u_lname'],
+                        'email' =>  $response['email'],
+                        'password'  =>  bcrypt($response['u_password']),
+                        'type'  =>  "ratee"
+                    ]);
+                    Auth::login($user);
+            } else {
+                // dd($user);
+                Auth::login($user);
+            }
             $rdr = explode("/",session('url.intended'));
             $link = "/".$rdr[3]."/".$rdr[4]."/".$rdr[5]."/".$rdr[6]."/".$rdr[7];
             return response()->json($link);
+            // dd($user);
+            // $login = User::findOrFail($user);
 
         }
         return response()->json(["message"=>"data not valid"],403);

@@ -67,6 +67,8 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::get('get/templates_masterfile',[AuthController::class, 'tmpReport'])->name('report.tmp');
     Route::get('systems_masterfile',[AuthController::class, 'sysDashboard'])->name('dashboard.sys');
     Route::get('get/systems_masterfile',[AuthController::class, 'sysReport'])->name('report.sys');
+    
+    Route::get('default',[AuthController::class, 'default'])->name('dashboard.default');
 
 });
 

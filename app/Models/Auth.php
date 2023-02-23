@@ -22,7 +22,7 @@ class Auth extends Model
     }
 
     public function getQuestionnaires(){
-        
+        return count(Questionnaire::all());
     }
 
     public function reports($array_data){

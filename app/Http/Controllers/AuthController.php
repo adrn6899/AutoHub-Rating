@@ -21,7 +21,7 @@ use PDF;
 
 class AuthController extends Controller
 {
-    private $auth,$quest,$tmp,$sys;
+    private $auth,$quest,$tmp,$sys,$qst;
     /**
      * Display a listing of the resource.
      *
@@ -33,6 +33,7 @@ class AuthController extends Controller
         $this->quest = new Questions;
         $this->tmp = new Template;
         $this->sys = new System;
+        $this->qst = new Questionnaire;
     }
 
     public function dashBoard(){
@@ -40,6 +41,7 @@ class AuthController extends Controller
         $questions = $this->auth->getQuestions();
         $templates = $this->auth->getTemplates();
         $system = $this->auth->getSystems();
+        $qst = $this->auth->getQuestionnaires();
         
         $rating = [];
         $res = [];
@@ -47,28 +49,51 @@ class AuthController extends Controller
             ['status',"=",1],
             ['active',"=",1]
         ];
-        $systems = System::select('id')->where($conditions)->get();
-        // dd($systems);
-        foreach($systems as $row){
-            $questions = Questions::select('id')->where('id',$row['id'])->get();
-            $res['q_id'][] = [
-                $questions
+
+        // dd($topThreePerGroup);
+        
+        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system, 'qst'=>$qst]);
+    }
+
+    public function default(){
+        $averages = DB::table('answers')
+        ->select('tmpt_id','syst_id',DB::raw('AVG(JSON_EXTRACT(rating, "$[0]")) as average_rating'))
+        ->groupBy('syst_id','tmpt_id')
+        ->get();
+
+        $data = [];
+
+        foreach($averages as $row){
+            $templateTitle = Template::select('title')->where('id',$row->tmpt_id)->first();
+            $systemTitle = System::select('system_name')->where('id',$row->syst_id)->first();
+
+            $data['data'][] = [
+                "template" => $templateTitle->title,
+                "system" => $systemTitle->system_name,
+                "average" => $row->average_rating
             ];
+
         }
-        // dd($res);
-        foreach($res['q_id'] as $row => $key){
-            // dd($key[0][0]->id);
-            // $avg = Answer::
-            $answer = DB::table('answers')->where('qst_id',$key[0][0]->id)->avg('rating');
-            // $answer = DB::table('answers')->select('s_id')->where('qst_id',$row['id'])->get();
-            $rating['average'][] = [
-                'id'    =>  $key[0][0]->id,
-                'average'   =>  $answer
-            ];
+        // $averages->each(function($average){
+
+        // })
+        // $topThree = collect($data['data'])
+        // ->sortByDesc('average')
+        // ->take(3)
+        // ->shuffle()
+        // ->toArray();
+
+        $groups = collect($data['data'])->groupBy('template');
+        // dd($groups);
+        $topThreePerGroup = collect();
+        foreach ($groups as $template => $group) {
+            $topThree = $group->sortByDesc('average')->take(5)->shuffle();
+            $topThreePerGroup = $topThreePerGroup->merge($topThree);
         }
-        dd($rating);
-        $rating = json_encode($rating);
-        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system]);
+
+        $topThreePerGroup = $topThreePerGroup->toArray();
+
+        return response()->json($topThreePerGroup);
     }
 
     /**
