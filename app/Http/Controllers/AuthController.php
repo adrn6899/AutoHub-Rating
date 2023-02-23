@@ -49,18 +49,51 @@ class AuthController extends Controller
             ['status',"=",1],
             ['active',"=",1]
         ];
+
+        // dd($topThreePerGroup);
         
+        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system, 'qst'=>$qst]);
+    }
+
+    public function default(){
         $averages = DB::table('answers')
-        ->select('tmpt_id','syst_id',DB::raw('AVG(JSON_EXTRACT(rating, "$[*]")) as average_rating'))
+        ->select('tmpt_id','syst_id',DB::raw('AVG(JSON_EXTRACT(rating, "$[0]")) as average_rating'))
         ->groupBy('syst_id','tmpt_id')
         ->get();
 
+        $data = [];
+
+        foreach($averages as $row){
+            $templateTitle = Template::select('title')->where('id',$row->tmpt_id)->first();
+            $systemTitle = System::select('system_name')->where('id',$row->syst_id)->first();
+
+            $data['data'][] = [
+                "template" => $templateTitle->title,
+                "system" => $systemTitle->system_name,
+                "average" => $row->average_rating
+            ];
+
+        }
         // $averages->each(function($average){
 
         // })
-        dd($averages);
-        
-        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system, 'qst'=>$qst]);
+        // $topThree = collect($data['data'])
+        // ->sortByDesc('average')
+        // ->take(3)
+        // ->shuffle()
+        // ->toArray();
+
+        $groups = collect($data['data'])->groupBy('template');
+        // dd($groups);
+        $topThreePerGroup = collect();
+        foreach ($groups as $template => $group) {
+            $topThree = $group->sortByDesc('average')->take(5)->shuffle();
+            $topThreePerGroup = $topThreePerGroup->merge($topThree);
+        }
+
+        $topThreePerGroup = $topThreePerGroup->toArray();
+
+        return response()->json($topThreePerGroup);
     }
 
     /**

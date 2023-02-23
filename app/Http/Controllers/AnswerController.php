@@ -141,19 +141,27 @@ class AnswerController extends Controller
         if($response['status'] == 0){
             dd("no user");
         } else {
-            $user = User::upsert([
-                
-                    'name'  =>  $response['u_fname']." ".$response['u_lname'],
-                    'email' =>  $response['email'],
-                    'password'  =>  bcrypt($response['u_password']),
-                    'type'  =>  "ratee"
-                ],['password'],['name','email']);
-            // dd($user);
-            $login = User::findOrFail($user);
-            Auth::login($login);
+            $user = User::select('id')->where([['name',"=",$response['u_fname']." ".$response['u_lname']],
+            ['email',"=",$response['email']]])->first();
+
+            if(empty($user)){
+                $user = User::create([
+                    
+                        'name'  =>  $response['u_fname']." ".$response['u_lname'],
+                        'email' =>  $response['email'],
+                        'password'  =>  bcrypt($response['u_password']),
+                        'type'  =>  "ratee"
+                    ]);
+                    Auth::login($user);
+            } else {
+                // dd($user);
+                Auth::login($user);
+            }
             $rdr = explode("/",session('url.intended'));
             $link = "/".$rdr[3]."/".$rdr[4]."/".$rdr[5]."/".$rdr[6]."/".$rdr[7];
             return response()->json($link);
+            // dd($user);
+            // $login = User::findOrFail($user);
 
         }
         return response()->json(["message"=>"data not valid"],403);
