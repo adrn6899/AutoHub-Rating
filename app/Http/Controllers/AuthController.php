@@ -74,26 +74,25 @@ class AuthController extends Controller
             ];
 
         }
-        // $averages->each(function($average){
-
-        // })
-        // $topThree = collect($data['data'])
-        // ->sortByDesc('average')
-        // ->take(3)
-        // ->shuffle()
-        // ->toArray();
 
         $groups = collect($data['data'])->groupBy('template');
         // dd($groups);
-        $topThreePerGroup = collect();
+        // $topThreePerGroup = collect();
+        // foreach ($groups as $template => $group) {
+        //     $topThree = $group->sortByDesc('average')->take(5)->shuffle();
+        //     $topThreePerGroup = $topThreePerGroup->merge($topThree);
+        // }
+
+        // $topThreePerGroup = $topThreePerGroup->toArray();
+
+        $topFivePerTemplate = [];
         foreach ($groups as $template => $group) {
-            $topThree = $group->sortByDesc('average')->take(5)->shuffle();
-            $topThreePerGroup = $topThreePerGroup->merge($topThree);
+        $topFive = $group->sortByDesc('average')->take(5)->shuffle()->toArray();
+        $topFivePerTemplate[$template] = $topFive;
         }
 
-        $topThreePerGroup = $topThreePerGroup->toArray();
-
-        return response()->json($topThreePerGroup);
+        // dd($topThreePerGroup);
+        return response()->json($topFivePerTemplate);
     }
 
     /**

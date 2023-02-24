@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="col">
+    {{-- <div class="col">
         <div class="row mb-2">
             <div class="col">
                 <div class="card bg-success" style="height:100px">
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>    
-    </div>
+    </div> --}}
 </div>
 <div class="row mt-2">
 </div>
