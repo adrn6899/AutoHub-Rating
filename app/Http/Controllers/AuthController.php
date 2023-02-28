@@ -263,8 +263,23 @@ class AuthController extends Controller
 
     public function qstReport(Request $request){
 
+        $array_data['type'] = "";
         $array_data['search'] = "";
         $array_data['where'] = "";
+
+        if(!empty($from) && !empty($to)){
+            $from = Carbon::parse($request->from_date);
+            $to = Carbon::parse($request->to_date);
+            $fromdate = $from->toDateString();
+            $todate = $to->toDateString();
+            $array_data['where'] .= " AND DATE(`created_at`) BETWEEN '$fromdate' AND '$todate' ";
+        }
+
+        $results = $this->qst->reports($array_data);
+
+        $response = $this->qst->pdf($results,'view');
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('layouts.reports.questionnaires');
 
     }
     public function qstnReport(Request $request){

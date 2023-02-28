@@ -82,4 +82,45 @@ class Questionnaire extends Model
         );
         return DB::select($query);
     }
+
+    public function getQuestionnairesQuery(){
+        return "SELECT %s
+        FROM questionnaires 
+        WHERE 1
+        AND `status` = 1
+        AND active = 1
+        %s
+        ";
+    }
+
+    public function reports($array_data){
+        $fields = " * ";
+        $query = sprintf(
+            $this->getQuestionnairesQuery(),
+            $fields,
+            $array_data['where'],
+        );
+        // dd($query);
+        return DB::select($query);
+    }
+
+    public function pdf($results, $type){
+        $data = [];
+        $grpData = new \stdClass();
+
+        $grpData->list = $results;
+        $grpData->total = sizeOf($results);
+        array_push($data, $grpData);
+
+        $report_title = "Questionnaires Masterfile";
+        $reportData = [
+            'data'  =>  $data,
+            'webpage_title' =>  "Questions Report",
+            'report_title'  =>  $report_title,
+            'table_headers' =>  [''],
+            'table_body'    =>  ['']
+        ];
+
+        return $reportData;
+    }
 }
