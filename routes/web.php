@@ -69,6 +69,7 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::get('get/systems_masterfile',[AuthController::class, 'sysReport'])->name('report.sys');
     
     Route::get('default',[AuthController::class, 'default'])->name('dashboard.default');
+    Route::get('getTopFive',[AuthController::class, 'show'])->name('dashboard.show');
 
 });
 

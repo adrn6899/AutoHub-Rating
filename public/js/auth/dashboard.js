@@ -5,127 +5,102 @@
     var templates = [];
     var average = [];
     var systems = [];
+    var myChart;
+    var id;
 
     function createChart(responseData){
         const ctx = document.getElementById('myChart').getContext('2d');
-        const labels = [responseData['template']];
-        var datasets = [];
 
-        $.each(responseData,(group,index)=>{
-            $.each(index,(key,value)=>{
-                // console.log(key);
-                datasets.push({
-                    label: index[key].system,
-                    backgroundColor:"red",
-                    data:index[key].average
-                });
-            });
-        });
-        console.log(datasets);
-       new Chart(ctx, {
-            type: 'bar',
+        var labels = [];
+        var values = [];
+
+        for (var i = 0; i < responseData['result'].length; i++) {
+            // console.log(responseData[i]);
+            // console.log("true");
+            
+            labels.push(responseData['result'][i].system);
+            values.push(responseData['result'][i].average);
+        }
+
+        if(myChart){
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: "bar",
             data: {
-                labels:labels,
-                datasets:datasets,
+                labels: labels,
+                datasets: [
+                {
+                    label: responseData['result'][0].template,
+                    data: values,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1
+                }
+                ]
             },
-            options:{
-                scales:{
-                    y:{
-                        beginAtZero:true,
+            options: {
+                scales: {
+                y:{
+                        beginAtZero: true
                     }
                 }
             }
         });
+
     }
 
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    function getDefault(){
+    function ajax(id){
         $.ajax({
             type:"GET",
-            url:"/default",
-            data: null,
-            success: function(data){
-                var groupedData = {};
-        $.each(data, function(index, item) {
-            var system = item.system;
-            var template = item.template;
-            var value = item.value;
-            if (!groupedData[system]) {
-                groupedData[system] = {};
-            }
-            if (!groupedData[system][template]) {
-                groupedData[system][template] = [];
-            }
-            groupedData[system][template].push(value);
-        });
-
-        var averagedData = {};
-        $.each(groupedData, function(system, templates) {
-            averagedData[system] = {};
-            $.each(templates, function(template, values) {
-                var sum = 0;
-                $.each(values, function(index, value) {
-                    sum += value;
-                });
-                var average = sum / values.length;
-                averagedData[system][template] = average;
-            });
-        });
-
-        // Create chart
-        var labels = Object.keys(averagedData[Object.keys(averagedData)[0]]);
-        var datasets = [];
-
-        $.each(averagedData, function(system, values) {
-            var data = [];
-            $.each(labels, function(index, label) {
-                data.push(values[label] || 0);
-            });
-
-            var color = getRandomColor();
-            var dataset = {
-                label: 'System ' + system,
-                data: data,
-                backgroundColor: color + '33',
-                borderColor: color,
-                borderWidth: 1
-            };
-            datasets.push(dataset);
-        });
-
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: datasets
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
+            url:"/getTopFive",
+            data:{id:id},
+            dataType: 'json',
+            success: function(success){
+              createChart(success);
             },
             error: function(error){
-
+              console.log(error);
             }
         });
     }
 
+
     $(function(e){
-        getDefault();
+        ajax(id);
+        $('#templates_select').select2({
+            // theme: 'classic',
+            allowClear: true,
+            language: {
+                noResults: function () {
+                return "Select";
+                },
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            placeholder: "Select template",
+            ajax: {
+                url:"/templates/select2",
+                dataType: 'json',
+                delay: 250,
+                data: function (data) {
+                    return {
+                      search: data.term,
+                      limit: 15,
+                    };
+                  },
+                  processResults: function (response) {
+                    return {
+                      results: response.results,
+                    };
+                  },
+                  cache: true,
+            }    
+        });
+        $('#templates_select').on('change',function(){
+            ajax($(this).val());
+        });
     });
 })();
