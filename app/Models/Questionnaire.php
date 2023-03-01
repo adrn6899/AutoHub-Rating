@@ -86,15 +86,17 @@ class Questionnaire extends Model
     public function getQuestionnairesQuery(){
         return "SELECT %s
         FROM questionnaires 
+        INNER JOIN templates ON questionnaires.t_id = templates.id
+        INNER JOIN systems ON questionnaires.s_id = systems.id
         WHERE 1
-        AND `status` = 1
-        AND active = 1
+        AND `questionnaires`.`status` = 1
+        AND questionnaires.active = 1
         %s
         ";
     }
 
     public function reports($array_data){
-        $fields = " * ";
+        $fields = " templates.title,systems.system_name,questionnaires.* ";
         $query = sprintf(
             $this->getQuestionnairesQuery(),
             $fields,
@@ -115,10 +117,10 @@ class Questionnaire extends Model
         $report_title = "Questionnaires Masterfile";
         $reportData = [
             'data'  =>  $data,
-            'webpage_title' =>  "Questions Report",
+            'webpage_title' =>  "Questionnaires Report",
             'report_title'  =>  $report_title,
-            'table_headers' =>  [''],
-            'table_body'    =>  ['']
+            'table_headers' =>  ['Template','System'],
+            'table_body'    =>  ['title','system_name']
         ];
 
         return $reportData;
