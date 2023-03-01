@@ -107,6 +107,7 @@ class Questionnaire extends Model
     }
 
     public function pdf($results, $type){
+        // dd($results);
         $data = [];
         $grpData = new \stdClass();
 
@@ -124,5 +125,9 @@ class Questionnaire extends Model
         ];
 
         return $reportData;
+    }
+
+    public function csv($results){
+
     }
 }
