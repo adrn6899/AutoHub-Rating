@@ -11,7 +11,7 @@
     function createAnswerField(){
         $.each(questions.questions, function(key,value){
             $('.container-fluid', function(){
-                $('.q-list').append('<div class="rating-div" id="'+value.id+'"><label style="font-size:1.5rem;"  id="'+value.id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style="font-size: 5rem;"></div></div><hr class="dashed">');
+                $('.q-list2').append('<div class="rating-div" id="'+value.id+'"><label style="font-size:1.5rem;"  id="'+value.id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style="font-size: 5rem;"></div></div><hr class="dashed">');
                 $('.rating-'+key+'').rate(options);
                     $(this).on('change','.rating-'+key+'', function(e, data){
                         var name = "Arr"+value.qst;
@@ -28,7 +28,6 @@
     function SubmitReview(){
         $('#submitReview').on('click', function(e){
             e.preventDefault();
-            // alert();
 
             var formData = new FormData();
 

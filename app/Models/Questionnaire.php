@@ -120,7 +120,7 @@ class Questionnaire extends Model
             'data'  =>  $data,
             'webpage_title' =>  "Questionnaires Report",
             'report_title'  =>  $report_title,
-            'table_headers' =>  ['#','Template','System'],
+            'table_headers' =>  ['No.','Template','System'],
             'table_body'    =>  ['title','system_name']
         ];
 
@@ -128,6 +128,41 @@ class Questionnaire extends Model
     }
 
     public function csv($results){
+        $questionnaire = [];
+        $questionnaire[] = ['No.','Template','System'];
+        $inc = 0;
+        foreach($results as $row){
+            $questionnaire[] = [
+                $inc+=1,
+                $row->title,
+                $row->system_name
+            ];
+        }
+        $filename = "Questionnaire_Masterfile"."-".date('Y-m-d').'.csv';
 
+        $filename = "Questions_Masterfile"."-". date('Y-m-d').'.csv';
+        // dd($questions);
+        
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        
+        $f = fopen('php://output', 'wb');
+        
+        if ($f === false) {
+            die('Error opening the file ' .$filename);
+        }
+
+        if(empty($questionnaire[1])){
+            $arr = [
+                "No data to show"
+            ];
+            fputcsv($f,$arr);
+        } else {
+            foreach($questionnaire as $row){
+                fputcsv($f, $row, ',');
+            }
+        }
+
+        fclose($f);
     }
 }

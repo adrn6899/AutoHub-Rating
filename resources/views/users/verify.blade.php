@@ -55,7 +55,12 @@
             </div>
         </div>
         <div class="q-list" style="display:none">
-
+            <h1 class="mb-3">{{$system_title[0]->system_name}}</h1>
+            <div class="q-list2">
+                
+            </div>
+            <textarea class="mt-1" name="comment" id="comment" rows="5" placeholder="Comment Here ..." style="width: 100%"></textarea>
+            <button class="btn btn-success btn-lg mb-3" style="float: right" id="submitReview">Save</button>
         </div>        
     </div>
     <script>

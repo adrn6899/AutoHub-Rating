@@ -301,7 +301,7 @@ class AuthController extends Controller
         $array_data['search'] = "";
         $array_data['where'] = "";
         
-        if(!empty($from) && !empty($to)){
+        if(!empty($request->from_date) && !empty($request->to_date)){
             $from = Carbon::parse($request->from_date);
             $to = Carbon::parse($request->to_date);
             $fromdate = $from->toDateString();
@@ -335,7 +335,7 @@ class AuthController extends Controller
         $array_data['search'] = "";
         $array_data['where'] = "";
 
-        if(!empty($from) && !empty($to)){
+        if(!empty($request->from_date) && !empty($request->to_date)){
             $from = Carbon::parse($request->from_date);
             $to = Carbon::parse($request->to_date);
             $fromdate = $from->toDateString();
@@ -369,7 +369,7 @@ class AuthController extends Controller
         $array_data['search'] = "";
         $array_data['where'] = "";
 
-        if(!empty($from) && !empty($to)){
+        if(!empty($request->from_date) && !empty($request->to_date)){
             $from = Carbon::parse($request->from_date);
             $to = Carbon::parse($request->to_date);
             $fromdate = $from->toDateString();
