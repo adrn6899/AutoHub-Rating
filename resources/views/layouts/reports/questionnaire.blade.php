@@ -76,14 +76,14 @@
                                 @endforeach
                         </thead>
                         <tbody>
-                            {{-- @for($i = 0; $i < $row->total; $i++)
+                            @for($i = 0; $i < $row->total; $i++)
                                 <tr>
                                     <td style="width:15px;">{{$i+1}}</td>
                                     @foreach($table_body as $data)
                                         <td>{{$row->list[$i]->$data}}</td>
                                     @endforeach
                                 </tr>
-                            @endfor --}}
+                            @endfor
                         </tbody>
                     </table>
                 @else

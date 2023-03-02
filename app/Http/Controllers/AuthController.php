@@ -263,16 +263,17 @@ class AuthController extends Controller
 
     public function qstReport(Request $request){
 
-        $array_data['type'] = "";
+        $array_data['type'] = $request->type;
         $array_data['search'] = "";
         $array_data['where'] = "";
 
-        if(!empty($from) && !empty($to)){
+        if(!empty($request->from_date) && !empty($request->to_date)){
             $from = Carbon::parse($request->from_date);
             $to = Carbon::parse($request->to_date);
             $fromdate = $from->toDateString();
             $todate = $to->toDateString();
-            $array_data['where'] .= " AND DATE(`questionnaires.created_at`) BETWEEN '$fromdate' AND '$todate' ";
+
+            $array_data['where'] .= " AND DATE(`questionnaires`.`created_at`) BETWEEN '$fromdate' AND '$todate' ";
         }
 
         $results = $this->qst->reports($array_data);
@@ -287,7 +288,7 @@ class AuthController extends Controller
                 return $pdf->stream();
                 break;
             case('pdf'):
-                return $pdf->download("questions-masterfile.pdf");
+                return $pdf->download("questionnaires-masterfile.pdf");
                 break;
             case('csv'):
                 $this->qst->csv($results);

@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="row">
-                                <h6>QUESTIONS</h6>
+                                <p style="font-size:13px; font-weight:bolder">Questions</p>
                             </div>
                             <div class="row">
                                 <p style="font-size: 3rem">{{$questions}}</p>        
@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="row">
-                                <h6>Templates</h6>
+                                <p style="font-size:13px; font-weight:bolder">Templates</p>
                             </div>
                             <div class="row">
                                 <p style="font-size: 3rem">{{$templates}}</p>
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="row">
-                                <h6>Systems</h6>
+                                <p style="font-size:13px; font-weight:bolder">Systems</p>
                             </div>
                             <div class="row">
                                 <p style="font-size: 3rem">{{$systems}}</p>

@@ -90,13 +90,8 @@ class Questions extends Model
     }
 
     public function pdf($results,$type){
-            // $img = url('../../../public/files/img/AGC_TRANSPARENT.png');
-            // $type = pathinfo($img,PATHINFO_EXTENSION);
-            // $data = file_get_contents($img);
-            // $base64 = 'data:image/'.$type.';base64'.base64_encode($data);
 
             $data = [];
-
             $grpData = new \stdClass();
 
             $grpData->list = $results;
@@ -112,8 +107,6 @@ class Questions extends Model
                 'table_body'    =>  ['title'],
                 // 'img'           =>  $base64
             ];
-
-            // dd($reportData['img']);
 
             return $reportData;
     }

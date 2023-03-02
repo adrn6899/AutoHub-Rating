@@ -83,7 +83,7 @@ class Questionnaire extends Model
         return DB::select($query);
     }
 
-    public function getQuestionnairesQuery(){
+    public function getQuestionnairesReportQuery(){
         return "SELECT %s
         FROM questionnaires 
         INNER JOIN templates ON questionnaires.t_id = templates.id
@@ -98,7 +98,7 @@ class Questionnaire extends Model
     public function reports($array_data){
         $fields = " templates.title,systems.system_name,questionnaires.* ";
         $query = sprintf(
-            $this->getQuestionnairesQuery(),
+            $this->getQuestionnairesReportQuery(),
             $fields,
             $array_data['where'],
         );
@@ -120,7 +120,7 @@ class Questionnaire extends Model
             'data'  =>  $data,
             'webpage_title' =>  "Questionnaires Report",
             'report_title'  =>  $report_title,
-            'table_headers' =>  ['Template','System'],
+            'table_headers' =>  ['#','Template','System'],
             'table_body'    =>  ['title','system_name']
         ];
 
