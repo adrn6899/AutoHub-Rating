@@ -82,4 +82,87 @@ class Questionnaire extends Model
         );
         return DB::select($query);
     }
+
+    public function getQuestionnairesReportQuery(){
+        return "SELECT %s
+        FROM questionnaires 
+        INNER JOIN templates ON questionnaires.t_id = templates.id
+        INNER JOIN systems ON questionnaires.s_id = systems.id
+        WHERE 1
+        AND `questionnaires`.`status` = 1
+        AND questionnaires.active = 1
+        %s
+        ";
+    }
+
+    public function reports($array_data){
+        $fields = " templates.title,systems.system_name,questionnaires.* ";
+        $query = sprintf(
+            $this->getQuestionnairesReportQuery(),
+            $fields,
+            $array_data['where'],
+        );
+        // dd($query);
+        return DB::select($query);
+    }
+
+    public function pdf($results, $type){
+        // dd($results);
+        $data = [];
+        $grpData = new \stdClass();
+
+        $grpData->list = $results;
+        $grpData->total = sizeOf($results);
+        array_push($data, $grpData);
+
+        $report_title = "Questionnaires Masterfile";
+        $reportData = [
+            'data'  =>  $data,
+            'webpage_title' =>  "Questionnaires Report",
+            'report_title'  =>  $report_title,
+            'table_headers' =>  ['No.','Template','System'],
+            'table_body'    =>  ['title','system_name']
+        ];
+
+        return $reportData;
+    }
+
+    public function csv($results){
+        $questionnaire = [];
+        $questionnaire[] = ['No.','Template','System'];
+        $inc = 0;
+        foreach($results as $row){
+            $questionnaire[] = [
+                $inc+=1,
+                $row->title,
+                $row->system_name
+            ];
+        }
+        $filename = "Questionnaire_Masterfile"."-".date('Y-m-d').'.csv';
+
+        $filename = "Questions_Masterfile"."-". date('Y-m-d').'.csv';
+        // dd($questions);
+        
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
+        
+        $f = fopen('php://output', 'wb');
+        
+        if ($f === false) {
+            die('Error opening the file ' .$filename);
+        }
+
+        if(empty($questionnaire[1])){
+            $arr = [
+                "No data to show"
+            ];
+            fputcsv($f,$arr);
+        } else {
+            foreach($questionnaire as $row){
+                fputcsv($f, $row, ',');
+            }
+        }
+
+        fclose($f);
+    }
 }

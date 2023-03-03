@@ -40,5 +40,5 @@
 </div>
 <script>
 
-</script>ad
+</script>
 

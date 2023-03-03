@@ -41,29 +41,28 @@
 </head>
 <body>
     @include('navbar.sidenav')
-    <div class="container-fluid w-100" style="margin-top: 2%;">
-        <div class="card answers-card w-80" style="margin: 0 auto;">
-            <div class="card-header">
-                <h3>{{$system_title[0]->system_name}}</h3>
+    <div class="container-fluid" style="margin-top: 2%;">
+        <div class="card m-5 data-privacy">
+            <div class="form-input p-3">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, dicta doloribus. Recusandae impedit, commodi tenetur eius est consectetur ratione aliquam expedita dicta asperiores dignissimos eaque modi exercitationem pariatur fuga tempore.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, dicta doloribus. Recusandae impedit, commodi tenetur eius est consectetur ratione aliquam expedita dicta asperiores dignissimos eaque modi exercitationem pariatur fuga tempore.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, dicta doloribus. Recusandae impedit, commodi tenetur eius est consectetur ratione aliquam expedita dicta asperiores dignissimos eaque modi exercitationem pariatur fuga tempore.</p>
+                <input class="form-input" type="checkbox" name="data-privacy" id="data-privacy">    
+                <label class="form-label" for="data-privacy">I accept the terms and agreements</label>
             </div>
-            <div class="card-body overflow-y-scroll" style="height: 300px;">
-
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col">
-                        {{-- <label for="comment">Comment: </label> --}}
-                        <textarea class="mt-1" name="comment" id="comment" cols="50" rows="2" placeholder="Comment Here ..."></textarea>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-primary" type="submit" style="float: right; margin-top:1rem;" id="submitReview">Submit</button>
-                    </div>
-                </div>
+            <div>
+                <button class="btn btn-success m-2" style="float:right" id="proceed_rating">Proceed</button>
             </div>
         </div>
+        <div class="q-list" style="display:none">
+            <h1 class="mb-3">{{$system_title[0]->system_name}}</h1>
+            <div class="q-list2">
+                
+            </div>
+            <textarea class="mt-1" name="comment" id="comment" rows="5" placeholder="Comment Here ..." style="width: 100%"></textarea>
+            <button class="btn btn-success btn-lg mb-3" style="float: right" id="submitReview">Save</button>
+        </div>        
     </div>
-    {{-- <script src="{{ asset('js/toastRWithTime.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/jquery.js') }}"></script> --}}
     <script>
         var questions = {!!json_encode($questionsArr)!!};
         var t_id = {!!json_encode($t_id)!!};
