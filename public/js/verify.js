@@ -51,12 +51,12 @@
                 },
                 error: function(error){
                   console.log(error);
-                  toastRWithTime(error);
+                  toastRWithTime("Duplicate entry","error");
                 }
               });
         });
     }
-
+    2974
     $(function(){
         createAnswerField();
         SubmitReview();
@@ -66,7 +66,7 @@
                 $('.data-privacy').hide();
                 $('.q-list').show();
             }else{
-                alert("agree first");
+                toastRWithTime('Please agree to the terms and agreements first','error');
             }
         });
     });
