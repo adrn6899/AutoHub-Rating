@@ -5,7 +5,7 @@
     // var Arr = [];
     var options = {
         max_value: 5,
-        step_size: 1,
+        step_size: .5,
     }    
 
     function createAnswerField(){
