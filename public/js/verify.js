@@ -48,11 +48,10 @@
                 Swal.fire({
                     title: 'Loading...',
                     allowOutsideClick: false,
-                    onBeforeOpen: () => {
+                    didOpen: () => {
                       Swal.showLoading()
                     }
                 });
-
 
                 $.ajax({
                     type: "POST",

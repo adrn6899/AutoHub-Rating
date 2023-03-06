@@ -11,29 +11,31 @@
             $(this).on("click", function () {
               var row = $(this).closest("tr");
               id = templateList.row(row).data().id;
-              var formData = new FormData();
-              formData.append("id",id);
-              $.ajax({
-                type: "POST",
-                  url: "/templates/get",
-                  dataType: 'json',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  },
-                  success: function(result){
-                    console.log(result);
-                    $('#templateName').val(result.title);
-                    $('#templateModal').append(`<input type="hidden" name="edit_id" value="`+result.id+`">`);
-                    $('#templateModalTitle').text("EDIT");
-                    $('#templateModal').modal('show');
-                  },
-                  error: function(error){
+
+              window.location.href = "/templates/" + id;
+              // var formData = new FormData();
+              // formData.append("id",id);
+              // $.ajax({
+              //   type: "POST",
+              //     url: "/templates/get",
+              //     dataType: 'json',
+              //     data: formData,
+              //     processData: false,
+              //     contentType: false,
+              //     headers: {
+              //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              //     },
+              //     success: function(result){
+              //       console.log(result);
+              //       $('#templateName').val(result.title);
+              //       $('#templateModal').append(`<input type="hidden" name="edit_id" value="`+result.id+`">`);
+              //       $('#templateModalTitle').text("EDIT");
+              //       $('#templateModal').modal('show');
+              //     },
+              //     error: function(error){
     
-                  }
-              });
+              //     }
+              // });
             });
           });
     }
@@ -234,16 +236,6 @@
 
         $('#reload_list').on('click', function(e){
             templateList.draw(false);
-        });
-
-        $('#templateModal').on('shown.bs.modal', function(e){
-          $('#templateName').focus();
-        });
-
-        $('#templateModal').on('hidden.bs.modal', function(e){
-          $('#templateName').val(' ');
-          $('#templateModalTitle').text("CREATE");
-          $('[name="edit_id"]').remove();
         });
 
         $('#t_create').on('click', function(e){

@@ -77,10 +77,10 @@ class QuestionnaireController extends Controller
         // } else {
             switch ($array_data['search_type']) {
                 case "ID":
-                    $array_data['search'] = " AND `tmp_id` = {$array_data['search_keyword']} ";
+                    $array_data['search'] = " AND `q_id` = {$array_data['search_keyword']} ";
                     break;
                 case "Title":
-                    $array_data['search'] = " AND ANY_VALUE(`tmp`.`title`) LIKE '%{$array_data['search_keyword']}%' ";
+                    $array_data['search'] = " AND `title` LIKE '%{$array_data['search_keyword']}%' ";
                     break;
             }
         }
@@ -100,7 +100,7 @@ class QuestionnaireController extends Controller
         foreach($results as $row){
             // dd($row);
             $result['data'][] = array(
-                // "count" =>  $count+=1,
+                "q_id" =>  $row->q_id,
                 "tmp_id"    =>  $row->tmp_id,
                 "title"  =>  $row->title,
                 "sys_id"    =>  $row->sys_id,

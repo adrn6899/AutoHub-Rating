@@ -5,21 +5,15 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Table `templates`
+-- Schema mydb
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `templates` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(45) NULL DEFAULT NULL,
-  `q_id` VARCHAR(999) NULL,
-  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NULL DEFAULT NULL,
-  `active` VARCHAR(45) NULL DEFAULT NULL,
-  `status` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb3;
+-- -----------------------------------------------------
+-- Schema autohub_rating_system
+-- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- Schema autohub_rating_system
+-- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Table `systems`
@@ -33,7 +27,22 @@ CREATE TABLE IF NOT EXISTS `systems` (
   `status` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `templates`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `templates` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(45) NULL DEFAULT NULL,
+  `q_id` VARCHAR(999) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  `active` VARCHAR(45) NULL DEFAULT NULL,
+  `status` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -45,25 +54,22 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `user_id` INT NOT NULL,
   `tmpt_id` INT NOT NULL,
   `qst_id` VARCHAR(455) NOT NULL,
-  `syst_id` INT NULL,
+  `syst_id` INT NULL DEFAULT NULL,
   `rating` VARCHAR(455) NOT NULL,
-  `comment` VARCHAR(255) NULL,
+  `comment` VARCHAR(255) NULL DEFAULT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `user_id` (`user_id` ASC, `qst_id` ASC) VISIBLE,
+  UNIQUE INDEX `user_id` (`user_id` ASC, `tmpt_id` ASC, `syst_id` ASC) VISIBLE,
   INDEX `t_id_idx` (`tmpt_id` ASC) VISIBLE,
   INDEX `syst_id_idx` (`syst_id` ASC) VISIBLE,
-  CONSTRAINT `tmpt_id`
-    FOREIGN KEY (`tmpt_id`)
-    REFERENCES `templates` (`id`),
   CONSTRAINT `syst_id`
     FOREIGN KEY (`syst_id`)
-    REFERENCES `systems` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `systems` (`id`),
+  CONSTRAINT `tmpt_id`
+    FOREIGN KEY (`tmpt_id`)
+    REFERENCES `templates` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -107,7 +113,6 @@ CREATE TABLE IF NOT EXISTS `links` (
     FOREIGN KEY (`tmp_id`)
     REFERENCES `templates` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -181,7 +186,6 @@ CREATE TABLE IF NOT EXISTS `questionnaires` (
     FOREIGN KEY (`t_id`)
     REFERENCES `templates` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -190,14 +194,13 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `questions` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(45) NULL DEFAULT NULL,
+  `title` VARCHAR(255) NULL DEFAULT NULL,
   `status` VARCHAR(45) NULL DEFAULT NULL,
   `active` VARCHAR(45) NULL DEFAULT NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -217,7 +220,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `users_email_unique` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
 
