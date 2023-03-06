@@ -50,7 +50,8 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::get('templates/fetchall',[TemplateController::class,'fetchall'])->name('templates.fetch');
     Route::get('/templates/create',[TemplateController::class,'create'])->name('templates.create');
     Route::post('templates/store',[TemplateController::class,'store'])->name('templates.store');
-    Route::post('templates/get',[TemplateController::class, 'edit'])->name('templates.get');
+    // Route::post('templates/get',[TemplateController::class, 'edit'])->name('templates.get');
+    Route::get('templates/{id}',[TemplateController::class,'edit'])->name('templates.edit');
     Route::post('templates/update',[TemplateController::class, 'update'])->name('templates.update');
     Route::post('templates/destroy',[TemplateController::class, 'destroy'])->name('templates.destroy');
     Route::get('templates/select2',[TemplateController::class,'select2fetchAll'])->name('templates.select2');

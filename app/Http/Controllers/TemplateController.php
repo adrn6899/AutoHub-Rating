@@ -146,11 +146,11 @@ class TemplateController extends Controller
      * @param  \App\Models\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $result = Template::findOrFail($request->id);
-
-        return response()->json($result);
+        $template = Template::findOrFail($id);
+        $questions = Questions::select('id','title')->get();
+        return view('admin.templates.edit',compact('template','questions'));
     }
 
     /**
@@ -162,9 +162,12 @@ class TemplateController extends Controller
      */
     public function update(Request $request)
     {
+        // dd($request->all());
+        $questions = explode(",",$request->questionArr);
         $result = Template::where('id', $request->id)
         ->update([
-            'title' =>  $request->title
+            'title' =>  $request->title,
+            'q_id'  =>  json_encode($questions)
         ]);
 
         return response()->json(["message"=>"success", "result"=>$result],200);
