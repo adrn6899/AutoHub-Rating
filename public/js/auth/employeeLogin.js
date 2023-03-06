@@ -1,3 +1,4 @@
+
 (function(e){
     "use strict";
 
@@ -23,8 +24,10 @@
                     window.location.href = success;
                 },
                 error: function(error){
-                //   console.log(error);
-                  // toastRWithTime(error)
+                    Swal.fire({
+                        title: "Error",
+                        text: "No employee on this ID"
+                    });
                 }
             });
         });

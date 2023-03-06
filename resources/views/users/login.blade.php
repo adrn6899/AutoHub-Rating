@@ -31,5 +31,6 @@
     </div>
 @endsection
 @section('javascript')
+<script src="{{asset('js/swal.js')}}"></script>
 <script src="{{asset('js/auth/employeeLogin.js')}}"></script>
 @endsection
