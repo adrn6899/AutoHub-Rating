@@ -136,10 +136,10 @@ class AnswerController extends Controller
         // $err2 = curl_error($ch2);  //if you need
         // curl_close ($ch2);
         // $response2 = json_decode($op2,true);
-            // dd($response);
-            
+        
         if($response['status'] == 0){
-            dd("no user");
+            // dd($response['message']);
+            return response()->json(["message"=>"no user"],403);
         } else {
             $user = User::select('id')->where([['name',"=",$response['u_fname']." ".$response['u_lname']],
             ['email',"=",$response['email']]])->first();

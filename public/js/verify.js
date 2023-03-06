@@ -41,36 +41,51 @@
                 Swal.fire({
                     title: 'Error!',
                     text: 'Please rate',
-                    // icon: 'error',
-                    // confirmButtonText: 'Cool'
                 });
                 return;
-            }
-            $.ajax({
-                type: "POST",
-                url: "/response",
-                dataType: 'json',
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(success){
-                //   toastRWithTime(success.message,"success");
+            } else {
+
                 Swal.fire({
-                    title: 'Success!',
-                    text: 'success',
+                    title: 'Loading...',
+                    allowOutsideClick: false,
+                    onBeforeOpen: () => {
+                      Swal.showLoading()
+                    }
                 });
-                },
-                error: function(error){
-                //   console.log(error);
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'duplicate entry'
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/response",
+                    dataType: 'json',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        console.log("loading");
+                        if (!Swal.isLoading()) {
+                            Swal.showLoading();
+                          }
+                    },
+                    success: function(success){
+                        Swal.close();
+                        Swal.fire({
+                        title: 'Success!',
+                        text: 'success',
+                    });
+                    },
+                    error: function(error){
+                        Swal.close();
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'duplicate entry'
+                        });
+                    }
                   });
-                }
-              });
+            }
         });
     }
     2974
