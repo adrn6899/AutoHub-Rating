@@ -42,7 +42,7 @@
 <body>
     @include('navbar.sidenav')
     <div class="container-fluid" style="margin-top: 2%;">
-        {{-- <div class="card m-5 data-privacy">
+        <div class="card m-5 data-privacy">
             <div class="form-input p-3">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, dicta doloribus. Recusandae impedit, commodi tenetur eius est consectetur ratione aliquam expedita dicta asperiores dignissimos eaque modi exercitationem pariatur fuga tempore.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, dicta doloribus. Recusandae impedit, commodi tenetur eius est consectetur ratione aliquam expedita dicta asperiores dignissimos eaque modi exercitationem pariatur fuga tempore.</p>
@@ -53,8 +53,8 @@
             <div>
                 <button class="btn btn-success m-2" style="float:right" id="proceed_rating">Proceed</button>
             </div>
-        </div> --}}
-        <div class="q-list col-md-12" style="display">
+        </div>
+        <div class="q-list col-md-12" style="display:none">
             <h1 class="mb-3">{{$system_title[0]->system_name}}</h1>
             <div class="q-list2">
                 
