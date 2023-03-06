@@ -6,7 +6,7 @@
             starIconFull: 'fa-solid fa-star',
             starColorEmpty: 'lightgray',
             starColorFull: '#FFC107',
-            starsSize: 2, // em
+            starsSize: 5, // em
             stars: 5,
             showInfo: true,
             titles: ["very bad", "bad", "medium", "good", "very good"],
