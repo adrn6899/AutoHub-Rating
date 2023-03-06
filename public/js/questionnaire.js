@@ -120,22 +120,14 @@
           });
         
         var cols = [
-            // {
-            //     title: "ID",
-            //     data: 'tmp_id',
-            //     className: 'align-middle p-1 dt-left',
-            //     orderable: true,
-            //     width: "5%",
-            //     // visible: false
-            // },
-            // {
-            //   title: "ID",
-            //   data: 'count',
-            //   className: 'align-middle p-1 dt-left',
-            //   orderable: true,
-            //   width: "5%",
-              
-            // },
+            {
+                title: "ID",
+                data: 'q_id',
+                className: 'align-middle p-1 dt-left',
+                orderable: true,
+                width: "5%",
+                // visible: false
+            },
             {
                 title: "Title",
                 data: 'title',
@@ -180,7 +172,7 @@
                 initActionRemove();
                 initActionUpdate();
             },
-            order: [[0, "asc"]],
+            order: [[0, "desc"]],
             retrieve: true,
             columns: cols,
             paging: true,

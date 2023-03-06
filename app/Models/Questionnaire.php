@@ -33,6 +33,7 @@ class Questionnaire extends Model
     public function getQuestionnaires($array_data){
         // dd($array_data);
         $fields = " 
+        `qst`.`id` as `q_id`,
         `tmp`.`id` as `tmp_id`,
         `tmp`.`title` AS `title`,
         `sys`.`id` as `sys_id`,
