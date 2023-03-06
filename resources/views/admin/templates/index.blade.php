@@ -4,7 +4,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="row">
-                <div class="col" >
+                <div class="col-md-8">
                     <div class="input-group search_input">
                         <div class="input-group-append cursor">
                             <div class="input-group-text  px-1 border  form-control-sm">
@@ -26,7 +26,7 @@
                         </div> --}}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-4">
                     <button class="btn btn-primary btn-add btn-md mt-3" id="reload_list"><i class="bi bi-arrow-clockwise" style="font-size: 1rem; font-weight:bolder;"></i> Reload</button>
                     <button class="btn btn-primary btn-add btn-md mt-3" id="t_create"><i class="bi bi-plus-lg"></i> Create</button>
                 </div>

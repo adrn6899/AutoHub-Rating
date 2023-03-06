@@ -36,7 +36,6 @@
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   },
                   success: function(result){
-                    $('#templateModal').modal('hide');
                     toastRWithTime("success","success");
                   },
                   error: function(error){
