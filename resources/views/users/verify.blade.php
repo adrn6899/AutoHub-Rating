@@ -54,7 +54,7 @@
                 <button class="btn btn-success m-2" style="float:right" id="proceed_rating">Proceed</button>
             </div>
         </div>
-        <div class="q-list" style="display:none">
+        <div class="q-list col-md-12" style="display:none">
             <h1 class="mb-3">{{$system_title[0]->system_name}}</h1>
             <div class="q-list2">
                 
