@@ -1,3 +1,4 @@
+
 (function(e){
     "use strict";
 
@@ -36,6 +37,15 @@
             formData.append('stars',JSON.stringify(starsArr));
             formData.append('comment',$('#comment').val());
 
+            if(starsArr.length === 0){
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please rate',
+                    // icon: 'error',
+                    // confirmButtonText: 'Cool'
+                });
+                return;
+            }
             $.ajax({
                 type: "POST",
                 url: "/response",
@@ -47,11 +57,18 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(success){
-                  toastRWithTime(success.message,"success");
+                //   toastRWithTime(success.message,"success");
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'success',
+                });
                 },
                 error: function(error){
-                  console.log(error);
-                  toastRWithTime("Duplicate entry","error");
+                //   console.log(error);
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'duplicate entry'
+                  });
                 }
               });
         });
