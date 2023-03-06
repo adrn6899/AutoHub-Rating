@@ -5,13 +5,13 @@
     // var Arr = [];
     var options = {
         max_value: 5,
-        step_size: .5,
+        step_size: 1,
     }    
 
     function createAnswerField(){
         $.each(questions.questions, function(key,value){
             $('.container-fluid', function(){
-                $('.q-list2').append('<div class="rating-div" id="'+value.id+'"><label style="font-size:1.5rem;"  id="'+value.id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style="font-size: 5rem;"></div></div><hr class="dashed">');
+                $('.q-list2').append('<div class="rating-div" id="'+value.id+'"><label style="font-size:1.5rem;"  id="'+value.id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style="font-size: 4rem;"></div></div><hr class="dashed">');
                 $('.rating-'+key+'').rate(options);
                     $(this).on('change','.rating-'+key+'', function(e, data){
                         var name = "Arr"+value.qst;
