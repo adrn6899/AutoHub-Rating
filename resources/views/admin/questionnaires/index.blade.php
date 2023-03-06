@@ -26,7 +26,7 @@
                         </div> --}}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-4">
                     <button class="btn btn-primary btn-add btn-md mt-3" id="reload_list"><i class="bi bi-arrow-clockwise" style="font-size: 1rem; font-weight:bolder;"></i> Reload</button>
                     <button class="btn btn-primary btn-add btn-md mt-3" href="#" id="create_questionnaire"><i class="bi bi-plus-lg"></i> Create</button>
                 </div>

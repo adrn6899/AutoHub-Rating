@@ -42,7 +42,7 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::get('questionnaires/fetchall',[QuestionnaireController::class,'fetchall'])->name('questionnaires.fetch');
     Route::get('questionnaires/create',[QuestionnaireController::class,'create'])->name('questionnaires.create');
     Route::post('questionnaires/store',[QuestionnaireController::class,'store'])->name('questionnaires.store');
-    Route::get('questionnaires/edit/{tmp_id}/{sys_id}',[QuestionnaireController::class,'edit'])->name('questionnaires.edit');
+    Route::get('questionnaires/view/{tmp_id}/{sys_id}',[QuestionnaireController::class,'edit'])->name('questionnaires.edit');
     Route::post('questionnaires/destroy',[QuestionnaireController::class,'destroy'])->name('questionnaires.destroy');
     Route::post('questionnaires/update',[QuestionnaireController::class,'update'])->name('questionnaires.update');
     Route::post('questionnaires/getQuestions',[QuestionnaireController::class,'getQuestions'])->name('questionnaires.getQuestions');

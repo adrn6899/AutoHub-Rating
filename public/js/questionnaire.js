@@ -20,7 +20,7 @@
           id = questionnaireList.row(row).data().tmp_id;
           sys_id = questionnaireList.row(row).data().sys_id;
 
-          window.location.href = "questionnaires/edit/" + id + "/" + sys_id;
+          window.location.href = "/questionnaires/view/" + id + "/" + sys_id;
           // console.log(sys_id);
         });
       });
@@ -159,7 +159,7 @@
                 render: function (data, type, row, meta) {
                   return `
                            <div class="row justify-content-center">
-                                   <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit"><i class="bi bi-pencil"></i>&nbsp;Edit</a> 
+                                   <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit"><i class="bi bi-eye"></i>&nbsp;View</a> 
                                    <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-danger btn-icon" title="Remove"><i class="bi bi-trash"></i>&nbsp;Remove</a>
                            </div>
                            `;
