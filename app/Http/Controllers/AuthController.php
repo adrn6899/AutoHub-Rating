@@ -395,4 +395,19 @@ class AuthController extends Controller
                 break;
         }
     }
+
+    public function fetchTMP(){
+        $template = Template::all();
+        // dd($template);
+
+        $data['results'] = [];
+        foreach($template as $row){
+            $data['results'][] = [
+                "id" => $row->id,
+                "text"   =>   $row->title
+            ];
+        }
+
+        return response()->json($data);
+    }
 }

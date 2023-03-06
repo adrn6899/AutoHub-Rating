@@ -82,7 +82,7 @@
             },
             placeholder: "Select template",
             ajax: {
-                url:"/templates/select2",
+                url:"/fetchTmp",
                 dataType: 'json',
                 delay: 250,
                 data: function (data) {
