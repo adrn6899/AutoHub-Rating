@@ -21,7 +21,6 @@
           sys_id = questionnaireList.row(row).data().sys_id;
 
           window.location.href = "/questionnaires/view/" + id + "/" + sys_id;
-          // console.log(sys_id);
         });
       });
     }
@@ -54,11 +53,8 @@
             },
             error: function(error){
               console.log(error);
-              // toastRWithTime(error)
             }
           });
-          // window.location.href = "questionnaires/destroy/" + id + "/" + sys_id;
-          // console.log(sys_id);
         });
       });
     }
