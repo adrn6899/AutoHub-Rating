@@ -37,10 +37,10 @@
             formData.append('stars',JSON.stringify(starsArr));
             formData.append('comment',$('#comment').val());
 
-            if(starsArr.length === 0){
+            if(starsArr.length !== questions.questions.length){
                 Swal.fire({
                     title: 'Error!',
-                    text: 'Please rate',
+                    text: 'Please rate every question',
                 });
                 return;
             } else {
