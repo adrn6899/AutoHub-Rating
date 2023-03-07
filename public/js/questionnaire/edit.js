@@ -91,17 +91,20 @@
         $('#copy_link').on('click', function(e){
             e.preventDefault();
 
-            var copyText = document.getElementById("edit_link");
+            var copyText = $('#edit_link');
             copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            navigator.clipboard
-            .writeText(copyText.value)
-            .then(() => {
-                toastRWithTime("text successfully copied","success");
-            })
-            .catch(() => {
-                toastRWithTime("something went wrong","error");
-            });
+            document.execCommand('copy');
+            // var copyText = document.getElementById("edit_link");
+            // copyText.select();
+            // copyText.setSelectionRange(0, 99999);
+            // navigator.clipboard
+            // .writeText(copyText.value)
+            // .then(() => {
+            //     toastRWithTime("text successfully copied","success");
+            // })
+            // .catch(() => {
+            //     toastRWithTime("something went wrong","error");
+            // });
         });
 
         $('#cancelAction').on('click', function(e){
