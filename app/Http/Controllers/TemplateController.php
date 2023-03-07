@@ -117,7 +117,9 @@ class TemplateController extends Controller
     }
 
     public function select2fetchAll(){
-        $template = Template::select('id','title')->get();
+        $template = Template::all();
+        dd($template);
+        // select('id','title')->get();
         $data['results'] = [];
         foreach($template as $row){
             $data['results'][] = [
@@ -127,6 +129,11 @@ class TemplateController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function fetchTemplate(){
+        $template = Template::all();
+        dd($template);
     }
 
     /**
