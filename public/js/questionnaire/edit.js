@@ -90,10 +90,17 @@
 
         $('#copy_link').on('click', function(e){
             e.preventDefault();
-
-            var copyText = $('#edit_link');
-            copyText.select();
-            document.execCommand('copy');
+            console.log($);
+            try {
+                var copyText = $("#edit_link");
+                var textToCopy = copyText.val();
+                navigator.clipboard.writeText(textToCopy);
+                toastRWithTime("text successfully copied","success");
+            } catch (error) {
+                console.log(error);
+                toastRWithTime("something went wrong","error");
+            }
+            
             // var copyText = document.getElementById("edit_link");
             // copyText.select();
             // copyText.setSelectionRange(0, 99999);
