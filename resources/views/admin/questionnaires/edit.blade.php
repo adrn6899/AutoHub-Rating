@@ -45,11 +45,11 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col">
-                            <button type="button" class="btn btn-danger btn-lg float-start" id="cancelAction">Cancel</button>
+                            <button type="button" class="btn btn-danger btn-lg float-start" id="cancelAction">Back</button>
                         </div>
-                        <div class="col">
+                        {{-- <div class="col">
                             <button type="submit" class="btn btn-success btn-lg float-end" id="submitForm">Submit</button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
