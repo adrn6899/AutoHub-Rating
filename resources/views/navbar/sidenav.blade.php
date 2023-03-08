@@ -10,21 +10,26 @@
             </div>
             <div class="col-4">
                 <div class="row" style="width: 100%">
-                    <div style="width:40%">
+                    <div style="width:80%">
 
                     </div>
-                    <div  style="width:60%; float:right">
-                        <div class="dropdown mt-1 justify-content-end">
+                    <div  style="width:20%; float:right">
+                        <div class="dropdown dropstart mt-1 justify-content-start">
                             <a href="#" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;color:#ffff; margin-left: 20%;">
                                 Hi {{Auth::user()->name}}! &nbsp;<i class="bi bi-caret-down-fill" style="font-size:.5rem"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li>
+                                    <form method="POST" action="{{url('/customLogout')}}">
+                                        @csrf
+                                        <button class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
                             </ul>
                         </div> 
                     </div>
@@ -56,7 +61,7 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="{{url('templates')}}"><i class="bi bi-list-nested" style="font-size: 1.5rem"></i> Templates</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle  text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Dropdown
                         </a>
@@ -70,12 +75,12 @@
                             </li>
                             <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
-                <form class="d-flex mt-3" role="search">
+                {{-- <form class="d-flex mt-3" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>

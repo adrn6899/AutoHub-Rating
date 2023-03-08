@@ -221,14 +221,16 @@ class AuthController extends Controller
     public function register(Request $request){
 
         $validator = Validator::make($request->all(),[
-            'name'  =>  'required',
+            'f_name'  =>  'required',
+            'l_name'    =>  'required',
             'email' =>  'required|email|unique:App\Models\User,email',
             'password'  =>  'required|confirmed|min:8',
         ]);
 
         if ($validator->passes()) {
             $user = new User();
-            $user->name = $request->name;
+            $user->f_name = $request->f_name;
+            $user->l_name = $request->l_name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->type = "admin";
@@ -239,6 +241,16 @@ class AuthController extends Controller
             return response()->json(["message"=>"success"],200);
         }
         return response()->json(["message"=>$validator->errors()],500);
+    }
+
+    public function customLogout(Request $request){
+        $user = Auth::user();
+        // dd($user);
+        if($user){
+            Auth::logout($user);
+
+            return redirect('/');
+        }
     }
 
     public function reportDashboard(){

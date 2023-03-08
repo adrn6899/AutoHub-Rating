@@ -9,21 +9,34 @@
                     </div>
                     <div class="card-body">
                         <div class="input-group input-group-lg mb-3">
-                            <input class="form-control border-0 border-bottom" type="text" name="name" id="register_name" placeholder="user name">
+                            <div class="input-group-prepend input-group-lg custom-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
+                            </div>
+                            <input class="form-control" type="text" name="f_name" id="register_fname" placeholder="user first name">
                         </div>
                         <div class="input-group input-group-lg mb-3">
-                            <input class="form-control border-0 border-bottom" type="email" name="email" id="register_email" placeholder="email">
+                            <div class="input-group-prepend input-group-lg custom-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                            </div>
+                            <input class="form-control" type="text" name="l_name" id="register_lname" placeholder="user last name">
                         </div>
                         <div class="input-group input-group-lg mb-3">
-                            <input class="form-control @error('password') is-invalid @enderror border-0 border-bottom" type="password" name="password" id="register_password" placeholder="password">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="input-group-prepend input-group-lg custom-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at"></i></span>
+                            </div>
+                            <input class="form-control" type="email" name="email" id="register_email" placeholder="email">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <div class="input-group-prepend input-group-lg custom-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock"></i></span>
+                            </div>
+                            <input class="form-control" type="password" name="password" id="register_password" placeholder="password">
                         </div>
                         <div class="input-group input-group-lg">
-                            <input class="form-control border-0 border-bottom" type="password" name="password_confirmation" id="register_confirm_password" placeholder="confirm password">
+                            <div class="input-group-prepend input-group-lg custom-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock-fill"></i></span>
+                            </div>
+                            <input class="form-control" type="password" name="password_confirmation" id="register_confirm_password" placeholder="confirm password">
                         </div>
                     </div>
                     <div class="card-footer">
