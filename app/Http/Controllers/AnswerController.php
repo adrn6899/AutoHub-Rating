@@ -141,13 +141,14 @@ class AnswerController extends Controller
             // dd($response['message']);
             return response()->json(["message"=>"no user"],403);
         } else {
-            $user = User::select('id')->where([['name',"=",$response['u_fname']." ".$response['u_lname']],
+            $user = User::select('id')->where([['f_name',"=",$response['u_fname']],['l_name',"=",$response['u_lname']],
             ['email',"=",$response['email']]])->first();
 
             if(empty($user)){
                 $user = User::create([
                     
-                        'name'  =>  $response['u_fname']." ".$response['u_lname'],
+                        'f_name'  =>  $response['u_fname'],
+                        'l_name' => $response['u_lname'],
                         'email' =>  $response['email'],
                         'password'  =>  bcrypt($response['u_password']),
                         'type'  =>  "ratee"

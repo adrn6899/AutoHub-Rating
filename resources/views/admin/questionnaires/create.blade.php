@@ -47,3 +47,4 @@
     <script src="{{asset('js/questionnaire/create.js')}}"></script>
     <script src="{{asset('js/select2.min.js')}}"></script>
 @endsection
+

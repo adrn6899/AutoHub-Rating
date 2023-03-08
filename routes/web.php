@@ -73,6 +73,7 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::get('default',[AuthController::class, 'default'])->name('dashboard.default');
     Route::get('getTopFive',[AuthController::class, 'show'])->name('dashboard.show');
 
+    Route::any('customLogout',[AuthController::class, 'customLogout'])->name('customLogout');
 });
 
 Route::get('/',function(){

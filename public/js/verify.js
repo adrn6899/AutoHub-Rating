@@ -26,6 +26,27 @@
         });
     }
 
+    function automaticLogout(){
+        $.ajax({
+            type: "POST",
+            url: "/customLogout",
+            dataType: 'json',
+            data: null,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(result){
+              toastRWithTime("success","success");
+              window.location.reload();
+            },
+            error: function(error){
+
+            }
+        });
+    }
+
     function SubmitReview(){
         $('#submitReview').on('click', function(e){
             e.preventDefault();
@@ -75,6 +96,8 @@
                         title: 'Success!',
                         text: 'success',
                     });
+                    automaticLogout();
+                    window.location.reload();
                     },
                     error: function(error){
                         Swal.close();
