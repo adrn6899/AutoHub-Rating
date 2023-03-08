@@ -10,13 +10,13 @@
             </div>
             <div class="col-4">
                 <div class="row" style="width: 100%">
-                    <div style="width:80%">
+                    <div style="width:50%">
 
                     </div>
-                    <div  style="width:20%; float:right">
-                        <div class="dropdown dropstart mt-1 justify-content-start">
+                    <div  style="width:50%; float:right">
+                        <div class="dropdown mt-1 justify-content-start">
                             <a href="#" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;color:#ffff; margin-left: 20%;">
-                                Hi {{Auth::user()->name}}! &nbsp;<i class="bi bi-caret-down-fill" style="font-size:.5rem"></i>
+                                Hi {{Auth::user()->f_name}}! &nbsp;<i class="bi bi-caret-down-fill" style="font-size:.5rem"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>

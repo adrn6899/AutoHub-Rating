@@ -33,21 +33,32 @@ class AnswerController extends Controller
                 ['status',1],
                 ['active',1]
             ];
+            $conditions3 = [
+                ['user_id',Auth::user()->id],
+                ['tmpt_id',$url[7]],
+                ['syst_id',$url[5]]
+            ];
             $check = Link::where($conditions)->get();
+            $checkIfAlreadyResponded = Answer::where($conditions3)->first();
+            // dd($checkIfAlreadyResponded);
             if(!empty($check[0])){
-                $questions = Template::select('q_id')->where('id',$url[7])->get();
-                $questionnaire = array_map('intval',json_decode($questions[0]->q_id));
-                $system_title = System::select('system_name')->where('id',"=",$url[5])->get();
-                foreach($questionnaire as $row){
-                    $questions = Questions::select('title')->where('id',$row)->get();
-                    $questionsArr['questions'][] = [
-                        'title' => $questions[0]->title,
-                        'qst_id'    =>  $row
-                    ];
+                if(!$checkIfAlreadyResponded){
+                    $questions = Template::select('q_id')->where('id',$url[7])->get();
+                    $questionnaire = array_map('intval',json_decode($questions[0]->q_id));
+                    $system_title = System::select('system_name')->where('id',"=",$url[5])->get();
+                    foreach($questionnaire as $row){
+                        $questions = Questions::select('title')->where('id',$row)->get();
+                        $questionsArr['questions'][] = [
+                            'title' => $questions[0]->title,
+                            'qst_id'    =>  $row
+                        ];
+                    }
+                    $s_id = $url[5];
+                    $t_id = $url[7];
+                    return view('users.verify',compact('questionsArr','t_id','s_id','system_title'));
+                } else {
+                    return view()->make('error.error',['error' => '<center><h1>You responded already!</h1></center>']);
                 }
-                $s_id = $url[5];
-                $t_id = $url[7];
-                return view('users.verify',compact('questionsArr','t_id','s_id','system_title'));
             }
             else {
                 abort(404);
