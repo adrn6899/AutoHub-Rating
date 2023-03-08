@@ -8,10 +8,16 @@
                 </div>
                 <div class="card-body">
                     <div class="input-group input-group-lg mb-3">
-                        <input class="form-control" type="text" name="" id="user_name_login" placeholder="user name">
+                        <div class="input-group-prepend input-group-lg custom-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
+                        </div>
+                        <input class="form-control" type="text" name="" id="user_name_login" placeholder="Username">
                     </div>
                     <div class="input-group input-group-lg">
-                        <input class="form-control" type="password" name="" id="user_name_password" placeholder="user name">
+                        <div class="input-group-prepend input-group-lg custom-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock"></i></span>
+                        </div>
+                        <input class="form-control" type="password" name="" id="user_name_password" placeholder="Password">
                     </div>
                 </div>
                 <div class="card-footer">
