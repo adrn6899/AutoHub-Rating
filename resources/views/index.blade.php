@@ -2,16 +2,14 @@
 @section('css')
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.modified.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    
     <style>
         .floating-icon {
-          position: absolute;
-          /* top: -20px; */
+          /* position: absolute;
           right: 5px;
-          /* background-color: white; */
-          /* width: 100%;
-          height: 100%; */
           border-radius: 50%;
-          padding: 15px;
+          padding: 15px; */
         }
       </style>
 @endsection
@@ -32,105 +30,44 @@
     <div class="col">
         <div class="row">
             <div class="col">
-                <div class="row mb-2">
-                    <div class="col">
-                        <div class="card bg-success" style="height:155px">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="floating-icon">
-                                        <i class="bi bi-question-circle" style="font-size: 2rem"></i>
-                                    </span>
-                                    <div class="row">
-                                        <p style="font-size:13px; font-weight:bolder">Questions</p>
-                                    </div>
-                                    <div class="row">
-                                        <center>
-                                            <p style="font-size: 3rem">{{$questions}}</p>        
-                                        </center>
-                                    </div>
-                                </div>
-                                {{-- <div class="col"> --}}
-                                {{-- </div> --}}
-                            </div>
-                        </div>
+                <div class="card dashboard-card bg-success">
+                    <div class="header">
+                        Questions
                     </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col">
-                        <div class="card bg-warning" style="height:155px">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="floating-icon">
-                                        <i class="bi bi-list-nested" style="font-size: 2rem"></i>
-                                    </span>
-                                    <div class="row">
-                                        <p style="font-size:13px; font-weight:bolder">Templates</p>
-                                    </div>
-                                    <div class="row">
-                                        <center>
-                                            <p style="font-size: 3rem">{{$templates}}</p>
-                                        </center>
-                                    </div>
-                                </div>
-                                {{-- <div class="col"> --}}
-                                {{-- </div> --}}
-                            </div>
-                        </div>
-                    </div>
+                    <p style="font-size: 3rem">{{$questions}}</p>
                 </div>
             </div>
             <div class="col">
-                <div class="row mb-2">
-                    <div class="col">
-                        <div class="card bg-danger" style="height:155px">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="floating-icon">
-                                        <i class="bi bi-gear" style="font-size: 2rem"></i>
-                                    </span>
-                                    <div class="row">
-                                        <p style="font-size:13px; font-weight:bolder">Systems</p>
-                                    </div>
-                                    <div class="row">
-                                        <center>
-                                            <p style="font-size: 3rem">{{$systems}}</p>
-                                        </center>
-                                    </div>
-                                </div>
-                                {{-- <div class="col">
-                                </div> --}}
-                            </div>
-                        </div>
+                <div class="card dashboard-card bg-warning">
+                    <div class="header">
+                        Templates
                     </div>
+                    <p style="font-size: 3rem">{{$templates}}</p>
                 </div>
-                <div class="row mb-2">
-                    <div class="col">
-                        <div class="card bg-info" style="height:155px">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="floating-icon">
-                                        <i class="bi bi-ui-checks" style="font-size: 2rem"></i>
-                                    </span>
-                                    <div class="row">
-                                        <p style="font-size:13px; font-weight:bolder">Questionnaires</p>
-                                    </div>
-                                    <div class="row">
-                                        <center>
-                                            <p style="font-size: 3rem">{{$qst}}</p>
-                                        </center>
-                                    </div>
-                                </div>
-                                {{-- <div class="col">
-                                </div> --}}
-                            </div>
-                        </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card dashboard-card bg-danger">
+                    <div class="header">
+                        Systems
                     </div>
-                </div>    
+                    <p style="font-size: 3rem">{{$systems}}</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card dashboard-card bg-info">
+                    <div class="header">
+                        Questionnaires
+                    </div>
+                    <p style="font-size: 3rem">{{$qst}}</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div class="row mt-2">
+
 </div>
 @endsection
 @section('javascript')

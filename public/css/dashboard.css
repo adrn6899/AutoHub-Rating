@@ -1,0 +1,7 @@
+.dashboard-card{
+    padding: 0 10px;
+    color: white;
+}
+.dashboard-card > .header{
+    font-weight: bolder;
+}
