@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.layout')
 @section('css')
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.modified.css') }}" rel="stylesheet">
@@ -20,7 +20,7 @@
     <div class="col-md-8">
         <div class="col">
             <div class="card" style="height:wrap-content">
-                <div class="form-control">
+                <div class="form-control" style="height:65px">
                     <select class="form-control form-select" name="templates_select" id="templates_select">
                         
                     </select>

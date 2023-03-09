@@ -13,7 +13,7 @@
                     <div style="width:50%">
 
                     </div>
-                    <div  style="width:50%; float:right">
+                    <div style="width:30%; float:right">
                         <div class="dropdown mt-1 justify-content-start">
                             <a href="#" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;color:#ffff; margin-left: 20%;">
                                 Hi {{Auth::user()->f_name}}! &nbsp;<i class="bi bi-caret-down-fill" style="font-size:.5rem"></i>
@@ -61,26 +61,7 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="{{url('templates')}}"><i class="bi bi-list-nested" style="font-size: 1.5rem"></i> Templates</a>
                     </li>
-                    {{-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle  text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-black" href="{{url('questionnaires')}}">Questionnaires</a></li>
-                            <li><a class="dropdown-item text-black" href="{{url('questions')}}">Questions</a></li>
-                            <li><a class="dropdown-item text-black" href="{{url('systems')}}">Systems</a></li>
-                            <li><a class="dropdown-item text-black" href="{{url('templates')}}">Templates</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
-                        </ul>
-                    </li> --}}
                 </ul>
-                {{-- <form class="d-flex mt-3" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> --}}
             </div>
         </div>
     </div>
