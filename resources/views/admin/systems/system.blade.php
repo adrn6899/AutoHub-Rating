@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-4">
                 <button class="btn btn-primary btn-add btn-md" style="float:right" id="reload_list"><i class="fa fa-refresh" aria-hidden="true"></i> Reload</button>
-                <button class="btn btn-primary btn-add btn-md mr-2" style="float:right" data-bs-toggle="modal" data-bs-target="#systemModal"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
+                <button class="btn btn-primary btn-add btn-md mr-2" style="float:right" data-toggle="modal" data-target="#systemModal"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
             </div>
         </div>
         <div class="card p-3">

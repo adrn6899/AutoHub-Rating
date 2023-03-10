@@ -1,4 +1,5 @@
-@extends('layouts.master')
+@extends('layouts.layout')
+{{-- @extends('layouts.master') --}}
 @section('css')
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.modified.css') }}" rel="stylesheet">
@@ -36,7 +37,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-danger btn-lg float-start" id="cancel_action">Cancel</button>
-                    <button type="submit" class="btn btn-success btn-lg float-end" id="submitForm">Submit</button>
+                    <button type="submit" class="btn btn-success btn-lg float-end" style="float: right" id="submitForm">Submit</button>
                 </div>
             </div>
         </form>
