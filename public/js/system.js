@@ -195,8 +195,8 @@
                   render: function (data, type, row, meta) {
                     return `
                              <div class="row justify-content-center">
-                                     <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit"><i class="bi bi-pencil"></i>&nbsp;Edit</a> 
-                                     <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-danger btn-icon" title="Remove"><i class="bi bi-trash"></i>&nbsp;Remove</a>
+                                     <a data-action-update style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-primary btn-icon" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Edit</a> 
+                                     <a data-action-remove style="cursor:pointer; width: fit-content;" class="m-1 btn btn-sm btn-danger btn-icon" title="Remove"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Remove</a>
                              </div>
                              `;
                   },

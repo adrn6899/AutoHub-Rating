@@ -6,7 +6,7 @@
     </h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
-                <a href="#"><span class="fa fa-home"></span> Home</a>
+                <a href="/"><span class="fa fa-home"></span> Home</a>
             </li>
             <li>
                 <a href="{{url('reports')}}"><span class="fa fa-newspaper-o"></span> Reports</a>

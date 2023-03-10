@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.layout')
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 @endsection
@@ -29,7 +29,7 @@
             </ul>
         </div>
         <div class="col-md-10" style="max-width: 100%; max-height:100%">
-            <iframe name="reports_display" id="reports_display" src="#" class="w-100" style="height:500px">
+            <iframe name="reports_display" id="reports_display" src="#" class="w-100" style="height:300px; background-color:inherit">
                 
             </iframe>
         </div>
