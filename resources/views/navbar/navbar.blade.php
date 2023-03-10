@@ -6,19 +6,22 @@
     </h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
-            <a href="#"><span class="fa fa-home"></span> Home</a>
+                <a href="#"><span class="fa fa-home"></span> Home</a>
             </li>
             <li>
-            <a href="#"><span class="fa fa-user"></span> About</a>
+                <a href="{{url('reports')}}"><span class="fa fa-newspaper-o"></span> Reports</a>
             </li>
             <li>
-            <a href="#"><span class="fa fa-sticky-note"></span> Blog</a>
+                <a href="{{url('questionnaires')}}"><span class="fa fa-folder-open-o"></span> Questionnaires</a>
             </li>
             <li>
-            <a href="#"><span class="fa fa-cogs"></span> Services</a>
+                <a href="{{url('questions')}}"><span class="fa fa-question"></span> Questions</a>
             </li>
             <li>
-            <a href="#"><span class="fa fa-paper-plane"></span> Contacts</a>
+                <a href="{{url('systems')}}"><span class="fa fa-cogs"></span> Systems</a>
+            </li>
+            <li>
+                <a href="{{url('templates')}}"><span class="fa fa-file-text-o"></span> Templates</a>
             </li>
         </ul>
     <div class="footer">

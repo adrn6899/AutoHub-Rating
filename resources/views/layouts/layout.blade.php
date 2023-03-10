@@ -233,16 +233,35 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
+                              <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item active">
+                              <a class="nav-link" href="#">About</a>
+                            </li>
+                            <li class="nav-item active">
+                              <a class="nav-link" href="#">Portfolio</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="#">Portfolio</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                              <div class="btn-group nav-link">
+                                <button class="btn btn-outline-light btn-sm" type="button" style="color: black; margin-top: -3px">
+                                  {{Auth::user()->f_name}}
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-light dropdown-toggle dropdown-toggle-split" style="color: black" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="#">Action</a>
+                                  <a class="dropdown-item" href="#">Another action</a>
+                                  <a class="dropdown-item" href="#">Something else here</a>
+                                  <div class="dropdown-divider"></div>
+                                  {{-- <a class="dropdown-item" href="#"> --}}
+                                    <form method="POST" action="{{url('/customLogout')}}">
+                                      @csrf
+                                      <button class="dropdown-item" style="text-align:left">Logout</button>
+                                    </form>
+                                  {{-- </a> --}}
+                                </div>
+                              </div>
                             </li>
                         </ul>
                     </div>

@@ -5,7 +5,7 @@
           <h1 class="modal-title fs-5" id="questionModalTitle">
             Create
           </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
         <div class="modal-body">
           <div class="mb-3">
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="question_save">Save</button>
         </div>
       </div>
