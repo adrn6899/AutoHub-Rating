@@ -12,7 +12,7 @@
     function createAnswerField(){
         $.each(questions.questions, function(key,value){
             $('.container-fluid', function(){
-                $('.q-list2').append('<div class="rating-div col-md-8" id="'+value.id+'"><label style="font-size:1.5rem;"  id="'+value.id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style="font-size: 4.5rem;"></div></div><hr class="dashed">');
+                $('.q-list2').append('<div class="rating-div col-md-8" id="rating'+value.qst_id+'"><label style="font-size:1.5rem;"  id="'+value.qst_id+'">'+value.title+'</label></br><div class="rating-'+key+' starsRating" style="font-size: 4.5rem;"></div></div><hr class="dashed">');
                 $('.rating-'+key+'').rate(options);
                     $(this).on('change','.rating-'+key+'', function(e, data){
                         var name = "Arr"+value.qst;
