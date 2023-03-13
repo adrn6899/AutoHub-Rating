@@ -318,7 +318,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
+                            {{-- <li class="nav-item active">
                               <a class="nav-link" href="#">Home</a>
                             </li>
                             <li class="nav-item active">
@@ -326,7 +326,7 @@
                             </li>
                             <li class="nav-item active">
                               <a class="nav-link" href="#">Portfolio</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                               <div class="btn-group dropstart nav-link">
                                 <button class="btn btn-outline-light btn-sm" type="button" style="color: black; margin-top: -3px">
@@ -368,7 +368,8 @@
             </div>
             <div class="q-list col-md-12" style="display:none">
                 <center>
-                    <h1 class="mb-3">You are evaluating {{$system_title[0]->system_name}}</h1>
+                    <h4>You are evaluating</h4> 
+                    <h1 class="mb-3">{{$system_title[0]->system_name}}</h1>
                 </center>
                 <hr>
                 <div class="q-list2">
