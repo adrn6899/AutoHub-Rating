@@ -132,7 +132,9 @@
             success: function(success){
               $('.questions-list').find('p').remove();
               $.each(success.questions, function(key,value){
-                $('.questions-list').append(`<p>`+ value[0] +`</p>`);
+                $('.questions-list', function(e){
+                  $('.questions-list').append(`<li>`+ value[0] +`</li>`);
+                });
               });
             },
             error: function(error){
