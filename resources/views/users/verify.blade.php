@@ -370,7 +370,7 @@
                 <center>
                     <h1 class="mb-3">You are evaluating {{$system_title[0]->system_name}}</h1>
                 </center>
-                <hr class="dashed">
+                <hr>
                 <div class="q-list2">
                     
                 </div>
