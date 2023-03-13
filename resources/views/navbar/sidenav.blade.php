@@ -14,7 +14,7 @@
 
                     </div>
                     <div style="width:30%; float:right">
-                        <div class="dropdown mt-1 justify-content-start">
+                        <div class="dropdown-menu dropstart mt-1 justify-content-start">
                             <a href="#" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;color:#ffff; margin-left: 20%;">
                                 Hi {{Auth::user()->f_name}}! &nbsp;<i class="bi bi-caret-down-fill" style="font-size:.5rem"></i>
                             </a>
@@ -44,7 +44,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav font-justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="#"><i class="bi bi-house-door" style="font-size: 1.5rem"></i> Home</a>
+                        <a class="nav-link text-white" aria-current="page" href="/"><i class="bi bi-house-door" style="font-size: 1.5rem"></i> Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="{{url('reports')}}"><i class="bi bi-folder2" style="font-size: 1.5rem"></i> Reports</a>

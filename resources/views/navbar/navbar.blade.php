@@ -1,6 +1,6 @@
 <nav id="sidebar" class="active bg-dark">
     <h1>
-        <a href="index.html" class="logo">    
+        <a href="/" class="logo">    
             <img class="img-fluid mx-auto" src="{{asset('files/img/AGC_TRANSPARENT.png')}}" alt="" style="filter:invert(1)">
         </a>
     </h1>
@@ -25,6 +25,9 @@
             </li>
         </ul>
     <div class="footer">
-
+        <p>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved. 
+            {{-- This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a> --}}
+        </p>
     </div>
 </nav>

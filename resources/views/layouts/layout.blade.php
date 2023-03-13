@@ -242,7 +242,7 @@
                               <a class="nav-link" href="#">Portfolio</a>
                             </li>
                             <li class="nav-item">
-                              <div class="btn-group nav-link">
+                              <div class="btn-group dropstart nav-link">
                                 <button class="btn btn-outline-light btn-sm" type="button" style="color: black; margin-top: -3px">
                                   {{Auth::user()->f_name}}
                                 </button>
@@ -250,9 +250,9 @@
                                   <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="#">Action</a>
+                                  {{-- <a class="dropdown-item" href="#">Action</a>
                                   <a class="dropdown-item" href="#">Another action</a>
-                                  <a class="dropdown-item" href="#">Something else here</a>
+                                  <a class="dropdown-item" href="#">Something else here</a> --}}
                                   <div class="dropdown-divider"></div>
                                   {{-- <a class="dropdown-item" href="#"> --}}
                                     <form method="POST" action="{{url('/customLogout')}}">
@@ -272,6 +272,9 @@
 
     </div>
     @yield('javascript')
+    {{-- <footer >
+      All rights reserved
+    </footer> --}}
     <script src="{{asset('js/layout/main.js')}}"></script>
 </body>
 </html>

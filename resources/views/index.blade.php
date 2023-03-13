@@ -27,9 +27,9 @@
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col-md-4 mt-1">
         <div class="row">
-            <div class="col">
+            <div class="col-md mb-1">
                 <div class="card dashboard-card bg-success">
                     <div class="header">
                         Questions
@@ -37,7 +37,7 @@
                     <p style="font-size: 3rem">{{$questions}}</p>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md">
                 <div class="card dashboard-card bg-warning">
                     <div class="header">
                         Templates
@@ -46,8 +46,8 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col">
+        <div class="row mt-1">
+            <div class="col-md mb-1">
                 <div class="card dashboard-card bg-danger">
                     <div class="header">
                         Systems
@@ -55,7 +55,7 @@
                     <p style="font-size: 3rem">{{$systems}}</p>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md">
                 <div class="card dashboard-card bg-info">
                     <div class="header">
                         Questionnaires

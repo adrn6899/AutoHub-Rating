@@ -29,7 +29,7 @@
             </ul>
         </div>
         <div class="col-md-10" style="max-width: 100%; max-height:100%">
-            <iframe name="reports_display" id="reports_display" src="#" class="w-100" style="height:300px; background-color:inherit">
+            <iframe name="reports_display" id="reports_display" src="#" class="w-100" style="height:400px; background-color:inherit">
                 
             </iframe>
         </div>

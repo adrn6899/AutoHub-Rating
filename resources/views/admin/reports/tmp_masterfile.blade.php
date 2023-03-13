@@ -2,7 +2,9 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <div class="tmp_masterfile" style="width: 98%; padding:10px">
-    <form class="qstForm" target="_blank" action="{{url('get/templates_masterfile')}}">
+    <center><h4>Templates Masterfile</h4></center>
+    <hr>
+    <form class="tmpForm" id="tmpForm" target="_blank" action="{{url('get/templates_masterfile')}}">
         <div class="row ml-3">
             <div class="col">
                 <div class="row mb-3">
@@ -38,6 +40,29 @@
         </div>
     </form>
 </div>
-<script>
+<script src="{{asset('js/swal.js')}}"></script>
+    <script>
+        const form = document.getElementById('tmpForm');
+        const rbt = document.getElementsByName('type');
 
-</script>
+        let radioButtonsChecked = false;
+
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            for (let i = 0; i < rbt.length; i++){
+                if(rbt[i].checked){
+                    radioButtonsChecked = true;
+                    break;
+                }
+            }
+            if(!radioButtonsChecked){
+                swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Kindly choose which type of report you want to generate',
+                });
+            } else {
+                form.submit();
+            }
+        });
+    </script>

@@ -6,11 +6,11 @@
             <div class="col-md-8">
                 <div class="input-group search_input">
                     <div class="input-group-append cursor">
-                        <div class="input-group-text  px-1 border  form-control-sm">
+                        <div class="input-group-text px-1 border form-control-sm">
                             <div class="tooltip-me" title="Filter by category">
                                 <button type="button" class="btn btn-sm dropdown-toggle"
-                                    data-bs-toggle="dropdown" style="border-end-end-radius: 0">
-                                    <i class="bi bi-search"></i>
+                                    data-toggle="dropdown" style="border-end-end-radius: 0">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
                                     <u>Search</u>
                                 </button>
                                 <ul class="dropdown-filter system-search-type dropdown-menu cursor">

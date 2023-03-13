@@ -10,5 +10,6 @@
             // console.log(data.node.li_attr.value);
             $('#reports_display').attr('src',data.node.li_attr.value);
         });
+        
     });
 })();
