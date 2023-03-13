@@ -25,12 +25,9 @@
                         <div class="col">
                             <h4>Questions List</h4>
                             <div class="questions-list overflow-y-scroll pre-scrollable" style="height: 350px !important">
-                                {{-- @foreach ($questions as $item)
-                                    <div class="form-check">
-                                        <input class="form-check-input mt-1" type="checkbox" name="{{$item->title}}" id="{{$item->title}}" value="{{$item->id}}">
-                                        <label class="form-check-label" for="{{$item->title}}" style="font-size: 1rem">{{$item->title}}</label>
-                                    </div>
-                                @endforeach --}}
+                                <ul class="questions-ul">
+
+                                </ul>
                             </div>
                         </div>
                     </div>
