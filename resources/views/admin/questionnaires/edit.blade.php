@@ -34,7 +34,7 @@
                                     </button>
                                 </div> --}}
                             </div>
-                            <div class="questions-list overflow-y-scroll" style="height: 350px">
+                            <div class="questions-list overflow-y-scroll pre-scrollable p-3" style="height: 350px">
                                <ul class="questions-ul">
 
                                </ul>
