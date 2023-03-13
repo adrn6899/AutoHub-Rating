@@ -94,7 +94,7 @@
                         Swal.close();
                         Swal.fire({
                         title: 'Success!',
-                        text: 'success',
+                        text: 'Thank you for your response',
                     });
                     automaticLogout();
                     window.location.href = "/userlogin";
