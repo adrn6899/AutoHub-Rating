@@ -9,8 +9,8 @@
                     <div class="input-group-append cursor">
                         <div class="input-group-text  px-1 border  form-control-sm questions_search">
                             <div class="tooltip-me" title="Filter by category">
-                                <button type="button" class="btn btn-sm dropdown-toggle p-3"
-                                    data-bs-toggle="dropdown" style="height:100px !important;">
+                                <button type="button" class="btn btn-sm dropdown-toggle"
+                                    data-toggle="dropdown" style="border-end-end-radius: 0;">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                     <u>Search</u>
                                 </button>
