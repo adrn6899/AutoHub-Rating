@@ -47,9 +47,9 @@
         $('#template_name').val(template.title);
         questions.forEach(function(item){
             if(qs.includes(item.id.toString())){
-                $('.questions-list').append(`<input class="form-check-input mt-1" type="checkbox" id="`+item.title+`" value="`+item.id+`" checked="">\n<label class="form-check-label" for="`+item.title+`" style="font-size: 1rem">`+item.title+`</label></br>`);
+                $('.questions-list').append(`<div class="form-check"><input class="form-check-input mt-1" type="checkbox" id="`+item.title+`" value="`+item.id+`" checked="">\n<label class="form-check-label" for="`+item.title+`" style="font-size: 1rem">`+item.title+`</label></div>`);
             } else {
-                $('.questions-list').append(`<input class="form-check-input mt-1" type="checkbox" id="`+item.title+`" value="`+item.id+`">\n<label class="form-check-label" for="`+item.title+`" style="font-size: 1rem">`+item.title+`</label></br>`);
+                $('.questions-list').append(`<div class="form-check"><input class="form-check-input mt-1" type="checkbox" id="`+item.title+`" value="`+item.id+`">\n<label class="form-check-label" for="`+item.title+`" style="font-size: 1rem">`+item.title+`</label></div>`);
             }
         });
 
