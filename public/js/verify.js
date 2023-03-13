@@ -39,7 +39,7 @@
             },
             success: function(result){
               toastRWithTime("success","success");
-              window.location.reload();
+              window.location.href = "/userlogin";
             },
             error: function(error){
 
@@ -97,7 +97,7 @@
                         text: 'success',
                     });
                     automaticLogout();
-                    window.location.reload();
+                    window.location.href = "/userlogin";
                     },
                     error: function(error){
                         Swal.close();

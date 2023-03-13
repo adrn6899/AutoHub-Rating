@@ -132,7 +132,7 @@
             success: function(success){
               $('.questions-list').find('p').remove();
               $.each(success.questions, function(key,value){
-                $('.questions-list', function(e){
+                $('.questions-list', function(){
                   $('.questions-ul').append(`<li>`+ value[0] +`</li>`);
                 });
               });
