@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.layout')
 @section('css')
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.modified.css') }}" rel="stylesheet">
@@ -22,7 +22,7 @@
                             <h4>Survey Link:</h4>
                             <div class="input-group input-group-lg mb-3">
                                 <input type="text" id="edit_link" class="form-control form-control-lg" disabled>
-                                <button class="btn btn-outline-secondary" type="button" id="copy_link"><i class="bi bi-clipboard"></i></button>
+                                <button class="btn btn-outline-secondary" type="button" id="copy_link"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="col">
