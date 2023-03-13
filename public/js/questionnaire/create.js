@@ -133,7 +133,7 @@
               $('.questions-list').find('p').remove();
               $.each(success.questions, function(key,value){
                 $('.questions-list', function(e){
-                  $('.questions-list').append(`<li>`+ value[0] +`</li>`);
+                  $('.questions-ul').append(`<li>`+ value[0] +`</li>`);
                 });
               });
             },
