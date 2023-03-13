@@ -22,7 +22,7 @@
               </button>
             </div>
           </div>
-          <div class="questions-list overflow-y-scroll" style="height: 300px">
+          <div class="questions-list overflow-y-scroll pre-scrollable">
 
           </div>
           <div class="card-footer">

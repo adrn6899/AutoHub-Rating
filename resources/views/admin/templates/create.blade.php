@@ -62,7 +62,7 @@
               </button>
             </div>
           </div>
-          <div class="questions-list overflow-y-scroll" style="height: 300px">
+          <div class="questions-list overflow-y-scroll pre-scrollable">
               @foreach ($questions as $item)
                   <div class="form-check">
                       <input class="form-check-input mt-1" type="checkbox" name="{{$item->title}}" id="{{$item->title}}" value="{{$item->id}}">
