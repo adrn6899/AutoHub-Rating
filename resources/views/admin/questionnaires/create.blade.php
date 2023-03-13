@@ -24,7 +24,7 @@
                         </div>
                         <div class="col">
                             <h4>Questions List</h4>
-                            <div class="questions-list overflow-y-scroll pre-scrollable" style="height: 350px !important">
+                            <div class="questions-list overflow-y-scroll pre-scrollable p-2" style="height: 350px !important">
                                 <ul class="questions-ul">
 
                                 </ul>
