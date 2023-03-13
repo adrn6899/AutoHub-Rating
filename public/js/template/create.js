@@ -37,6 +37,7 @@
                   },
                   success: function(result){
                     toastRWithTime("success","success");
+                    window.location.href = '/templates';
                   },
                   error: function(error){
     
