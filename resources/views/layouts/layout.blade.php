@@ -257,7 +257,7 @@
                                   {{-- <a class="dropdown-item" href="#"> --}}
                                     <form method="POST" action="{{url('/customLogout')}}">
                                       @csrf
-                                      <button class="dropdown-item" style="text-align:left">Logout</button>
+                                      <button class="dropdown-item" style="text-align:left">Logout<i class="fa fa-sign-out mt-1" aria-hidden="true" style="float:right"></i></button>
                                     </form>
                                   {{-- </a> --}}
                                 </div>

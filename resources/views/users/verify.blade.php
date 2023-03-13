@@ -343,7 +343,7 @@
                                   {{-- <a class="dropdown-item" href="#"> --}}
                                     <form method="POST" action="{{url('/customLogout')}}">
                                       @csrf
-                                      <button class="dropdown-item" style="text-align:left">Logout</button>
+                                      <button class="dropdown-item" style="text-align:left">Logout<i class="fa fa-sign-out mt-1" aria-hidden="true" style="float:right"></i></button>
                                     </form>
                                   {{-- </a> --}}
                                 </div>
@@ -372,7 +372,7 @@
                     <h1 class="mb-3">{{$system_title[0]->system_name}}</h1>
                 </center>
                 <hr>
-                <div class="q-list2">
+                <div class="q-list2 py-3">
                     
                 </div>
                 <textarea class="mt-1" name="comment" id="comment" rows="5" placeholder="Comment Here ..." style="width: 100%"></textarea>
