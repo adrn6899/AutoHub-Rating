@@ -57,7 +57,8 @@ Route::group(['middleware'  =>  'auth'],function(){
     Route::get('templates/select2',[TemplateController::class,'select2fetchAll'])->name('templates.select2');
     Route::get('questionnaires/getQs',[QuestionnaireController::class,'getQs'])->name('questionnaires.getqs');
     Route::get('reports', function(){
-        return view('admin.reports.index');
+        $page_title = "Reports";
+        return view('admin.reports.index')->with(['page_title' => $page_title]);
     });
     Route::get('blank',[AuthController::class, 'reportDashboard'])->name('dashboard.blank');
     Route::get('questionnaires_masterfile',[AuthController::class, 'qstDashboard'])->name('dashboard.qst');
