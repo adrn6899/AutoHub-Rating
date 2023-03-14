@@ -309,28 +309,13 @@
         <div id="content" class="p-4 p-md-5">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    {{-- <button type="button" id="sidebarCollapse" class="btn btn-dark">
-                        <i class="fa fa-bars"></i>
-                        <span class="sr-only">Toggle Menu</span>
-                    </button> --}}
+                        <img class="mx-auto" src="{{asset('files/img/AGC_TRANSPARENT.png')}}" alt="">
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-sort-desc" aria-hidden="true"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item me-auto">
-                                <img class="mx-auto" src="{{asset('files/img/AGC_TRANSPARENT.png')}}" alt="">
-                            </li>
-                            {{-- <li class="nav-item active">
-                              <a class="nav-link" href="#">Home</a>
-                            </li>
-                            <li class="nav-item active">
-                              <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item active">
-                              <a class="nav-link" href="#">Portfolio</a>
-                            </li> --}}
-                            <li class="nav-item ms-auto">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
                               <div class="btn-group dropstart nav-link">
                                 <button class="btn btn-outline-light btn-sm" type="button" style="color: black; margin-top: -3px">
                                   {{Auth::user()->f_name}}
@@ -338,7 +323,7 @@
                                 <button type="button" class="btn btn-sm btn-outline-light dropdown-toggle dropdown-toggle-split" style="color: black" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   <span class="sr-only">Toggle Dropdown</span>
                                 </button>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu" style="position:absolute;right:auto; min-width:8rem !important;">
                                   {{-- <a class="dropdown-item" href="#">Action</a>
                                   <a class="dropdown-item" href="#">Another action</a>
                                   <a class="dropdown-item" href="#">Something else here</a> --}}
