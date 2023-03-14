@@ -250,7 +250,7 @@
                                 <button type="button" class="btn btn-sm btn-outline-light dropdown-toggle dropdown-toggle-split" style="color: black" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   <span class="sr-only">Toggle Dropdown</span>
                                 </button>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu" style="position:absolute;right:auto;">
                                   {{-- <a class="dropdown-item" href="#">Action</a>
                                   <a class="dropdown-item" href="#">Another action</a>
                                   <a class="dropdown-item" href="#">Something else here</a> --}}
