@@ -19,7 +19,9 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        return view('admin.questions.questions');
+        $page_title = "Questions";
+
+        return view('admin.questions.questions')->with(['page_title' => $page_title]);
     }
 
     public function getQs($val){

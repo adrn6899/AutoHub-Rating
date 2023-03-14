@@ -219,29 +219,26 @@
 <body>
     @yield('css')
     <div class="wrapper d-flex align-items-stretch">
-        @include('navbar.navbar')
+      @if(Auth::user())
+        @include('navbar.navbar')        
+      @endif
         
         <div id="content" class="p-md-3">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            @if(Auth::user())
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn btn-dark">
                         <i class="fa fa-bars"></i>
                         <span class="sr-only">Toggle Menu</span>
                     </button>
+                    <div class="page-title ml-3">
+                      <h4 class="mt-2">{{$page_title}}</h4>
+                    </div>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-sort-desc" aria-hidden="true"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            {{-- <li class="nav-item active">
-                              <a class="nav-link" href="#">Home</a>
-                            </li>
-                            <li class="nav-item active">
-                              <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item active">
-                              <a class="nav-link" href="#">Portfolio</a>
-                            </li> --}}
                             <li class="nav-item">
                               <div class="btn-group dropstart nav-link">
                                 <button class="btn btn-outline-light btn-sm" type="button" style="color: black; margin-top: -3px">
@@ -251,23 +248,19 @@
                                   <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu" style="position:absolute;right:auto; min-width:8rem !important;">
-                                  {{-- <a class="dropdown-item" href="#">Action</a>
-                                  <a class="dropdown-item" href="#">Another action</a>
-                                  <a class="dropdown-item" href="#">Something else here</a> --}}
                                   <div class="dropdown-divider"></div>
-                                  {{-- <a class="dropdown-item" href="#"> --}}
                                     <form method="POST" action="{{url('/customLogout')}}">
                                       @csrf
                                       <button class="dropdown-item" style="text-align:left">Logout<i class="fa fa-sign-out mt-1" aria-hidden="true" style="float:right"></i></button>
                                     </form>
-                                  {{-- </a> --}}
                                 </div>
                               </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </nav>
+              </nav>
+            @endif
         
             @yield('content')
 

@@ -100,3 +100,9 @@ Route::get('userlogin',function(){
     return view('users.login');
 })->name('users.login');
 Route::post('employeeLogin',[AnswerController::class,'employeeLogin'])->name('employee.login');
+Route::get('/thankyou', function(){
+    return view()->make('message.message',['message' => '<center>
+    <h1>Thank you for your response!</h1></br>
+    <h6>This will help us identify which areas to improve</h6>
+    </center>']);
+});

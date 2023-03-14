@@ -137,7 +137,7 @@
                 // visible: false
             },
             {
-                title: "Title",
+                title: "Template Title",
                 data: 'title',
                 className: 'align-middle p-1 dt-left',
                 orderable: true,
@@ -152,7 +152,7 @@
               visible: false
             },
             {
-                title: "System",
+                title: "System Name",
                 data: 'system',
                 className: 'align-middle p-1 dt-left',
                 orderable: true,

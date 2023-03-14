@@ -20,7 +20,8 @@ class SystemController extends Controller
 
     public function index()
     {
-        return view('admin.systems.system');
+        $page_title = "Systems";
+        return view('admin.systems.system')->with(['page_title' => $page_title]);
     }
 
     public function fetchall(Request $request){
