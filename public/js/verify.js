@@ -97,7 +97,7 @@
                         text: 'Thank you for your response',
                     });
                     automaticLogout();
-                    window.location.href = "/userlogin";
+                    window.location.href = "/thankyou";
                     },
                     error: function(error){
                         Swal.close();

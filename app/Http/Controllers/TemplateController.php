@@ -21,7 +21,8 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return view('admin.templates.index');
+        $page_title = "Templates";
+        return view('admin.templates.index')->with(['page_title' => $page_title]);
     }
 
     /**
@@ -32,7 +33,8 @@ class TemplateController extends Controller
     public function create()
     {
         $questions = Questions::get()->all();
-        return view('admin.templates.create',compact('questions'));
+        $page_title = "Create Template";
+        return view('admin.templates.create',compact('questions'))->with(['page_title' => $page_title]);
     }
 
     public function fetchall(Request $request){
@@ -157,7 +159,8 @@ class TemplateController extends Controller
     {
         $template = Template::findOrFail($id);
         $questions = Questions::select('id','title')->get();
-        return view('admin.templates.edit',compact('template','questions'));
+        $page_title = "Edit Template";
+        return view('admin.templates.edit',compact('template','questions'))->with(['page_title' => $page_title]);
     }
 
     /**

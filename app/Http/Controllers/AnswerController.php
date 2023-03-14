@@ -57,7 +57,7 @@ class AnswerController extends Controller
                     $t_id = $url[7];
                     return view('users.verify',compact('questionsArr','t_id','s_id','system_title'));
                 } else {
-                    return view()->make('error.error',['error' => '<center><h1>You responded already!</h1></center>']);
+                    return view()->make('message.message',['message' => '<center><h1>You responded already!</h1></center>']);
                 }
             }
             else {

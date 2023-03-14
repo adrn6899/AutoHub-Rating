@@ -26,7 +26,9 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        return view('admin.questionnaires.index');
+        $page_title = "Questionnaires";
+
+        return view('admin.questionnaires.index')->with(['page_title' => $page_title]);
     }
 
     public function getQs(Request $request){
@@ -126,7 +128,8 @@ class QuestionnaireController extends Controller
         //     ['active',"=",1],
         //     ['status',"=",1]
         // ])->get();
-        return view('admin.questionnaires.create');
+        $page_title = "Create Questionnaire";
+        return view('admin.questionnaires.create')->with(['page_title' => $page_title]);
     }
 
     /**
@@ -215,7 +218,8 @@ class QuestionnaireController extends Controller
      */
     public function edit($tmp_id,$sys_id)
     {   
-        return view('admin.questionnaires.edit',compact('tmp_id','sys_id'));
+        $page_title = "Questionnaire View";
+        return view('admin.questionnaires.edit',compact('tmp_id','sys_id'))->with(['page_title' => $page_title]);
     }
 
     public function getQuestions(Request $request){

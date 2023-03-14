@@ -50,9 +50,11 @@ class AuthController extends Controller
             ['active',"=",1]
         ];
 
+        $page_title = "Dashboard";
+
         // dd($topThreePerGroup);
         
-        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system, 'qst'=>$qst]);
+        return view('index')->with(['questions'=>$questions,'templates'=>$templates,'systems'=>$system, 'qst'=>$qst, 'page_title' => $page_title]);
     }
 
     public function default(){
