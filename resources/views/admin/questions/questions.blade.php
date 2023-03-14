@@ -8,7 +8,7 @@
                     <div class="input-group-append cursor">
                         <div class="input-group-text  px-1 border  form-control-sm questions_search">
                             <div class="tooltip-me" title="Filter by category">
-                                <button type="button" class="btn btn-md dropdown-toggle"
+                                <button type="button" class="btn btn-sm dropdown-toggle"
                                     data-toggle="dropdown" id="questions_search">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                     <u>Search</u>
