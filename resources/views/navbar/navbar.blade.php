@@ -9,13 +9,13 @@
                 <a href="/"><span class="fa fa-home"></span> Home</a>
             </li>
             <li>
-                <a href="{{url('reports')}}"><span class="fa fa-newspaper-o"></span> Reports</a>
-            </li>
-            <li>
                 <a href="{{url('questionnaires')}}"><span class="fa fa-folder-open-o"></span> Questionnaires</a>
             </li>
             <li>
                 <a href="{{url('questions')}}"><span class="fa fa-question"></span> Questions</a>
+            </li>
+            <li>
+                <a href="{{url('reports')}}"><span class="fa fa-newspaper-o"></span> Reports</a>
             </li>
             <li>
                 <a href="{{url('systems')}}"><span class="fa fa-cogs"></span> Systems</a>
