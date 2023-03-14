@@ -142,6 +142,9 @@
                 className: 'align-middle p-1 dt-left',
                 orderable: true,
                 width: "40%",
+                render: function(data, type, row){
+                  return row.title + " " + "("+ row.q_count +" questions)";
+                }
             },
             {
               title: "System",

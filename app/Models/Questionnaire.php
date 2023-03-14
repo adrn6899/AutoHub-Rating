@@ -36,6 +36,7 @@ class Questionnaire extends Model
         `qst`.`id` as `q_id`,
         `tmp`.`id` as `tmp_id`,
         `tmp`.`title` AS `title`,
+        JSON_LENGTH(`tmp`.`q_id`) as `q_count`,
         `sys`.`id` as `sys_id`,
         `sys`.`system_name` as `system_name` ";
         // ANY_VALUE(`tmp`.`id`) AS `tmp_id`,
@@ -51,6 +52,7 @@ class Questionnaire extends Model
             $array_data['sort'],
             $array_data['offset_limit']
         );
+        // dd($query);
         return DB::select($query);
     }
 

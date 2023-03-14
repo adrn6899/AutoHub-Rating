@@ -104,6 +104,7 @@ class QuestionnaireController extends Controller
             $result['data'][] = array(
                 "q_id" =>  $row->q_id,
                 "tmp_id"    =>  $row->tmp_id,
+                "q_count"   =>  $row->q_count,
                 "title"  =>  $row->title,
                 "sys_id"    =>  $row->sys_id,
                 "system"    =>$row->system_name
