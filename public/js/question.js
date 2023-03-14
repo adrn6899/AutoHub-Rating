@@ -57,24 +57,37 @@
             id = questionList.row(row).data().id;
 
             // alert(id);
-            var formData = new FormData();
-            formData.append("id",id);
-            $.ajax({
-              type: "POST",
-                url: "/questions/destroy",
-                dataType: 'json',
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(result){
-                  questionList.draw(false);
-                },
-                error: function(error){
-  
-                }
+            Swal.fire({
+              title: 'Do you wish to remove it?',
+              showDenyButton: true,
+              confirmButtonText: 'Yes',
+              denyButtonText: `Cancel`,
+            }).then((result) => {
+              var formData = new FormData();
+              formData.append("id",id);
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                $.ajax({
+                  type: "POST",
+                    url: "/questions/destroy",
+                    dataType: 'json',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(result){
+                      toastRWithTime("success",'success');
+                      questionList.draw(false);
+                    },
+                    error: function(error){
+      
+                    }
+                });
+              } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+              }
             });
           });
         });
