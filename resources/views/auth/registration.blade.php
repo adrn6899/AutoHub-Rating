@@ -12,31 +12,31 @@
                             <div class="input-group-prepend input-group-lg custom-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
                             </div>
-                            <input class="form-control" type="text" name="f_name" id="register_fname" placeholder="user first name">
+                            <input class="form-control" type="text" name="f_name" id="register_fname" placeholder="First Name">
                         </div>
                         <div class="input-group input-group-lg mb-3">
                             <div class="input-group-prepend input-group-lg custom-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
                             </div>
-                            <input class="form-control" type="text" name="l_name" id="register_lname" placeholder="user last name">
+                            <input class="form-control" type="text" name="l_name" id="register_lname" placeholder="Last Name">
                         </div>
                         <div class="input-group input-group-lg mb-3">
                             <div class="input-group-prepend input-group-lg custom-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at"></i></span>
                             </div>
-                            <input class="form-control" type="email" name="email" id="register_email" placeholder="email">
+                            <input class="form-control" type="email" name="email" id="register_email" placeholder="Email">
                         </div>
                         <div class="input-group input-group-lg mb-3">
                             <div class="input-group-prepend input-group-lg custom-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock"></i></span>
                             </div>
-                            <input class="form-control" type="password" name="password" id="register_password" placeholder="password">
+                            <input class="form-control" type="password" name="password" id="register_password" placeholder="Password">
                         </div>
                         <div class="input-group input-group-lg">
                             <div class="input-group-prepend input-group-lg custom-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock-fill"></i></span>
                             </div>
-                            <input class="form-control" type="password" name="password_confirmation" id="register_confirm_password" placeholder="confirm password">
+                            <input class="form-control" type="password" name="password_confirmation" id="register_confirm_password" placeholder="Confirm Password">
                         </div>
                     </div>
                 </form>
