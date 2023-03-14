@@ -39,7 +39,7 @@
                     success: function(result){
                       $('#questionName').val(result.title);
                       $('#questionModal').append(`<input type="hidden" name="edit_id" value="`+result.id+`">`);
-                      $('#questionModalTitle').text("EDIT");
+                      $('#questionModalTitle').text("Edit Question");
                       $('#questionModal').modal('show');
                     },
                     error: function(error){
@@ -182,7 +182,7 @@
                 width: "5%",
             },
             {
-                title: "Name",
+                title: "Question",
                 data: 'title',
                 className: 'align-middle p-1 dt-left',
                 orderable: true,
@@ -253,7 +253,7 @@
 
         $('#questionModal').on('hidden.bs.modal', function(e){
             $('#questionName').val(' ');
-            $('#questionModalTitle').text("CREATE");
+            $('#questionModalTitle').text("Create New Question");
             $('[name="edit_id"]').remove();
           });
     });
