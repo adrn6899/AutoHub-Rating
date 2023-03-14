@@ -23,10 +23,12 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col">
-
+                            <p class="text-center">
+                                <a href="/signup">Dont have an account? Register</a>
+                            </p>
                         </div>
                         <div class="col align-content-end">
-                            <button class="btn btn-success btn-xs" id="login-btn" style="float: right">
+                            <button class="btn btn-success btn-xs mt-3" id="login-btn" style="float: right">
                                 Login
                             </button>
                         </div>

@@ -220,7 +220,7 @@
     <div class="wrapper d-flex align-items-stretch">
         @include('navbar.navbar')
         
-        <div id="content" class="p-4 p-md-5">
+        <div id="content" class="p-md-3">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn btn-dark">
@@ -232,7 +232,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
+                            {{-- <li class="nav-item active">
                               <a class="nav-link" href="#">Home</a>
                             </li>
                             <li class="nav-item active">
@@ -240,7 +240,7 @@
                             </li>
                             <li class="nav-item active">
                               <a class="nav-link" href="#">Portfolio</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                               <div class="btn-group dropstart nav-link">
                                 <button class="btn btn-outline-light btn-sm" type="button" style="color: black; margin-top: -3px">
