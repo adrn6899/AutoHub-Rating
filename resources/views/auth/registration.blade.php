@@ -39,20 +39,22 @@
                             <input class="form-control" type="password" name="password_confirmation" id="register_confirm_password" placeholder="confirm password">
                         </div>
                     </div>
+                </form>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col">
-    
+                                <button type="button" class="btn btn-danger btn-xs" id="cancel-btn" style="float: left">
+                                    Cancel
+                                </button>
                             </div>
                             <div class="col align-content-end">
-                                <button class="btn btn-success btn-xs" id="register-btn" style="float: right">
+                                <button type="submit" class="btn btn-success btn-xs" id="register-btn" style="float: right">
                                     Login
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 @endsection

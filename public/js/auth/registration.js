@@ -2,7 +2,11 @@
     "use strict";
 
     $(function(){
+        $('#cancel-btn').on('click', function(e){
+            window.location.href = "/";
+        });
         $('.register_user').submit(function(e){
+            e.preventDefault();
             e.preventDefault();
             var formData = new FormData(this);
 

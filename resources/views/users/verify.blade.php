@@ -317,7 +317,10 @@
                         <i class="fa fa-sort-desc" aria-hidden="true"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item me-auto">
+                                <img class="mx-auto" src="{{asset('files/img/AGC_TRANSPARENT.png')}}" alt="">
+                            </li>
                             {{-- <li class="nav-item active">
                               <a class="nav-link" href="#">Home</a>
                             </li>
@@ -327,7 +330,7 @@
                             <li class="nav-item active">
                               <a class="nav-link" href="#">Portfolio</a>
                             </li> --}}
-                            <li class="nav-item">
+                            <li class="nav-item ms-auto">
                               <div class="btn-group dropstart nav-link">
                                 <button class="btn btn-outline-light btn-sm" type="button" style="color: black; margin-top: -3px">
                                   {{Auth::user()->f_name}}
